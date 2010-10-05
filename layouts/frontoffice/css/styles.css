@@ -1,0 +1,37 @@
+/*
+* STRUCTURE CSS
+* Centurion UI - CSS-JS Framework
+* Copyright (c) 2009
+* Dual licensed under the MIT (MIT-LICENSE.txt) and GPL (GPL-LICENSE.txt) licenses.
+*/
+
+
+/* ---------------------------------------------------------------------------------------------------------------------
+IMPORTS */
+
+@import url(../../../cui/themes/default/css/reset.css);
+@import url(../../../cui/themes/default/css/components.css);
+
+
+/* ---------------------------------------------------------------------------------------------------------------------
+BASICS */
+
+html {                      }
+body {                      margin:20px; }
+
+h1 {                        }
+h2 {                        }
+
+a img {                     border:none; margin:0; padding:0;}
+a {                         text-deocration:underline; color:#5b5b5b; }
+a:hover {                   text-decoration:none; color:#5b5b5b; }
+a.no-transform {            text-deocration:underline; color:#5b5b5b; }
+a.no-transform :hover {     text-decoration:none; color:#5b5b5b; }
+
+p {                         margin-bottom:20px; }
+
+.icon {                     display:block; width:16px; height:16px; 
+                            background:url('../images/sprite.png') no-repeat; }
+
+header, nav, section, 
+aside, footer {             display:block } 

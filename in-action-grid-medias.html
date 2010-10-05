@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Centurion UI > CRUD > Grid</title>
+<link type="text/css" media="all" rel="stylesheet" href="layouts/backoffice/styles.css" />
+<script type="text/javascript" src="cui/libs/jquery.js"></script>
+<script type="text/javascript" src="cui/jquery.CUI.js"></script>
+<script type="text/javascript" src="layouts/backoffice/js/all.js"></script>
+<!--[if IE]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+<script>
+    $(function() {
+        $(".grid").CUI('grid');
+        $(".datepicker").CUI('datepicker');
+    });
+    
+    function delete() {
+        //...
+    }
+    function publish() {
+        //...
+    }
+    function unpublish() {
+        //...
+    }
+    function switcher() {
+        //...
+    }
+</script>
+</head>
+
+<body>
+
+<header class="h">
+    <h1>Centurion - Back Office</h1>
+      
+    <nav>
+        <ul class="main">
+            <li class="active"><a href="#" class="hover">Contents</a></li>
+            <li><a href="#">Users</a></li>
+            <li><a href="#">Pages</a></li>
+            <li class="selecter"><a href="#"><span class="icon arrow"></span>Settings</a>
+			    <ul>
+                    <li><a href="#">Translation</a></li>
+                    <li><a href="#">United Kingdom</a></li>
+                </ul></li>
+            <li class="selecter"><a href="#"><span class="icon arrow"></span>Sites</a>
+			    <ul>
+                    <li><a href="#">French</a></li>
+                    <li><a href="#">United Kingdom</a></li>
+                </ul>
+            </li>
+        </ul>
+		
+		<span class="user">
+			<span class="icon"></span>
+			Robert Octave, <a href="#">Log out</a> &nbsp;|&nbsp; <a href="#">View website</a>
+		</span>
+    </nav>
+    
+    <form class="search">
+        <div>
+            <input type="text" class="q" name="q" placeholder="Search" value="Search" />
+            <input type="image" class="icon valid" name="valid" value="Valid" src="layouts/backoffice/images/px.png" />
+        </div>
+    </form>
+</header>
+
+<section>
+    <nav>	
+		<ul class="contents">
+            <li class="first"><a href="#">Rating</a></li>
+            <li><a href="#">Genre</a></li>
+            <li><a href="#">Platform</a></li>
+            <li><a href="#">Games</a>
+                <ul>
+                    <li class="active"><a href="#">Release by Website</a></li>
+                    <li><a href="#">Release</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Familly</a></li>
+            <li><a href="#">Developer</a></li>
+            <li><a href="#">Distributor</a></li>
+            <li><a href="#">Publisher</a></li>
+            <li><a href="#">Retailer</a></li>
+		</ul>
+    </nav>
+
+    <header class="sh">
+        <div class="ui-button-big">
+            <a href="#" class="ui-button ui-button-bg-white ui-button-text-red ui-button-text-only">
+                <span class="ui-button-text">Add a new game</span>
+            </a>   
+        </div>
+        <h1>Manage games</h1>
+	</header>
+	
+    <aside>
+        <form action="#" method="get" id="grid-filter-form">
+            <div class="box grid-filter">
+                <h2>Filters</h2>
+                <div class="filter">
+                    <h3><span class="ui-icon ui-icon-triangle-1-s"></span>Filter by name</h3>
+                    <div class="in">
+                        <input name="name" value="" type="text" class="text">
+                    </div>
+                </div>
+                
+                <div class="filter">
+                    <h3><span class="ui-icon ui-icon-triangle-1-s"></span>Filter by status</h3>
+                    <div class="in">
+                        <input name="status" value="0" type="radio">All<br>
+                        <input name="status" value="1" type="radio">Offline<br>
+                        <input name="status" value="2" type="radio">Online<br>
+                    </div>
+                </div>
+                
+                <div class="filter">
+                    <h3><span class="ui-icon ui-icon-triangle-1-s"></span>Filter by genre</h3>
+                    <div class="in">
+                        <input name="genre[]" value="0" type="checkbox">Adventure<br>
+                        <input name="genre[]" value="1" type="checkbox">Educationnal<br>
+                        <input name="genre[]" value="2" type="checkbox">Fighting<br>
+                        <input name="genre[]" value="3" type="checkbox">Other<br>
+                        <input name="genre[]" value="4" type="checkbox">Puzzle<br>
+                        <input name="genre[]" value="5" type="checkbox">Racing<br>
+                        <input name="genre[]" value="6" type="checkbox">RPG<br>
+                        <input name="genre[]" value="7" type="checkbox">Simulation<br>
+                        <input name="genre[]" value="8" type="checkbox">Sports<br>
+                        <input name="genre[]" value="9" type="checkbox">Strategy<br>
+                    </div>
+                </div>
+                <div class="filter">
+                    <h3><span class="ui-icon ui-icon-triangle-1-s"></span>Filter by date</h3>
+                    <div class="in">
+                        <div>
+                            <label>From</label>
+                            <input name="date_from" class="text datepicker" value="" type="text">
+                        </div>
+                        <div>
+                            <label>To</label>
+                            <input name="date_to" class="text datepicker" value="" type="text">
+                        </div>
+                    </div>
+                </div>
+                <div class="submit ui-button-tiny-squared">
+                    <input type="submit" value="Send filter" class="ui-button" role="button" aria-disabled="false">
+                </div>
+             </div>
+         </form>
+     </aside>	
+	
+	<section>
+	    <form action="" method="post" id="grid-action-form">
+            <div class="toolbar toolbar-top">
+                <div class="pager">
+                    <span class="infos"><strong>1-10</strong> of <strong>816</strong></span>
+                    <a class="next"href="#">Next</a>
+                    <a class="last"href="#">Last</a>  
+                </div>
+               
+                <div class="select ui-button-tiny-squared">
+                    Select: <a href="#" class="select-all">All</a>, <a href="#" class="select-none">None</a> &nbsp;&nbsp;
+                    
+                    <span id="repeat" class="ui-buttonset">
+                        <input type="radio" name="deltete" class="ui-helper-hidden-accessible ajax">
+                        <label for="repeat0" class="ui-button ui-button-text-only ui-corner-left" aria-pressed="true" 
+                        role="button" aria-disabled="false">
+                            <span class="ui-button-text">Delete</span>
+                        </label>
+                        <input type="radio" name="repeat" class="ui-helper-hidden-accessible ajax">
+                        <label for="repeat1" aria-pressed="false" class="ui-button ui-button-text-only" role="button" 
+                        aria-disabled="false">
+                            <span class="ui-button-text">Publish</span>
+                        </label>
+                        <input type="radio" name="unpublish" class="ui-helper-hidden-accessible ajax">
+                        <label for="repeat1" aria-pressed="false" class="ui-button ui-button-text-only" role="button" 
+                        aria-disabled="false">
+                            <span class="ui-button-text">Unpublish</span>
+                        </label>
+                        <input type="radio" name="repeat" class="ui-helper-hidden-accessible">
+                        <label for="repeat1" aria-pressed="false" class="ui-button ui-button-text-only" role="button" 
+                        aria-disabled="false">
+                            <span class="ui-button-text">Export</span>
+                        </label>
+                        <input type="radio" name="repeat" class="ui-helper-hidden-accessible">
+                        <label for="repeatall" aria-pressed="false" class="ui-button ui-button-icon-only ui-corner-right" 
+                        role="button" aria-disabled="false">
+                            <span class="ui-button-icon-primary ui-icon ui-icon-triangle-1-s"></span>
+                            <span class="ui-button-text">More</span>
+                        </label>
+                    </span>   
+                </div>
+            </div>
+            
+            <div class="grid medias">
+
+                <div class="row row-template">
+                    <div class="col col-picture"></div>
+                    <div class="col col-title"></div>
+                    <div class="col col-actions"></div>
+                </div>
+                
+                <div class="row">
+                    <div class="col col-picture">
+                        <img src="/layouts/backoffice/images/px.png" height="94" width="174" alt="" class="picture">
+                    </div>
+                    <div class="col col-title"><input type="checkbox" value="1" name="rowId-1"><a href="#" class="edit">Lorem ipsum dolor sit amet</a></div>
+                    <ul class="col actions">
+                        <li><a href="#" class="help" title="Edit"><span class="ui-icon ui-icon-pencil">Edit properties</span></a></li>
+                        <li><a href="#" class="help" title="Use as cover"><span class="ui-icon ui-icon-pin-s">Use as cover</span></a></li>
+                        <li><a onclick="return confirm('Are you sure? This operation can not be undone');" href="#" class="help" title="Delete"><span class="ui-icon ui-icon-close">Delete</span></a></li>
+                    </ul>
+                </div>
+                <div class="row">
+                    <div class="col col-picture">
+                        <img src="/layouts/backoffice/images/px.png" height="94" width="174" alt="" class="picture">
+                    </div>
+                    <div class="col col-title"><input type="checkbox" value="1" name="rowId-1"> <a href="#" class="edit">Lorem ipsum dolor sit amet</a></div>
+                    <ul class="col actions">
+                        <li><a href="#" class="help" title="Edit"><span class="ui-icon ui-icon-pencil">Edit properties</span></a></li>
+                        <li><a href="#" class="help" title="Use as cover"><span class="ui-icon ui-icon-pin-s">Use as cover</span></a></li>
+                        <li><a onclick="return confirm('Are you sure? This operation can not be undone');" href="#" class="help" title="Delete"><span class="ui-icon ui-icon-close">Delete</span></a></li>
+                    </ul>
+                </div>
+                <div class="row">
+                    <div class="col col-picture">
+                        <img src="/layouts/backoffice/images/px.png" height="94" width="174" alt="" class="picture">
+                    </div>
+                    <div class="col col-title"><input type="checkbox" value="1" name="rowId-1"> <a href="#" class="edit">Lorem ipsum dolor sit amet</a></div>
+                    <ul class="col actions">
+                        <li><a href="#" class="help" title="Edit"><span class="ui-icon ui-icon-pencil">Edit properties</span></a></li>
+                        <li><a href="#" class="help" title="Use as cover"><span class="ui-icon ui-icon-pin-s">Use as cover</span></a></li>
+                        <li><a onclick="return confirm('Are you sure? This operation can not be undone');" href="#" class="help" title="Delete"><span class="ui-icon ui-icon-close">Delete</span></a></li>
+                    </ul>
+                </div>
+                <div class="row">
+                    <div class="col col-picture">
+                        <img src="/layouts/backoffice/images/px.png" height="94" width="174" alt="" class="picture">
+                    </div>
+                    <div class="col col-title"><input type="checkbox" value="1" name="rowId-1"> <a href="#" class="edit">Lorem ipsum dolor sit amet</a></div>
+                    <ul class="col actions">
+                        <li><a href="#" class="help" title="Edit"><span class="ui-icon ui-icon-pencil">Edit properties</span></a></li>
+                        <li><a href="#" class="help" title="Use as cover"><span class="ui-icon ui-icon-pin-s">Use as cover</span></a></li>
+                        <li><a onclick="return confirm('Are you sure? This operation can not be undone');" href="#" class="help" title="Delete"><span class="ui-icon ui-icon-close">Delete</span></a></li>
+                    </ul>
+                </div>
+                <div class="row">
+                    <div class="col col-picture">
+                        <img src="/layouts/backoffice/images/px.png" height="94" width="174" alt="" class="picture">
+                    </div>
+                    <div class="col col-title"><input type="checkbox" value="1" name="rowId-1"> <a href="#" class="edit">Lorem ipsum dolor sit amet</a></div>
+                    <ul class="col actions">
+                        <li><a href="#" class="help" title="Edit"><span class="ui-icon ui-icon-pencil">Edit properties</span></a></li>
+                        <li><a href="#" class="help" title="Use as cover"><span class="ui-icon ui-icon-pin-s">Use as cover</span></a></li>
+                        <li><a onclick="return confirm('Are you sure? This operation can not be undone');" href="#" class="help" title="Delete"><span class="ui-icon ui-icon-close">Delete</span></a></li>
+                    </ul>
+                </div>
+                <div class="row">
+                    <div class="col col-picture">
+                        <img src="/layouts/backoffice/images/px.png" height="94" width="174" alt="" class="picture">
+                    </div>
+                    <div class="col col-title"><input type="checkbox" value="1" name="rowId-1"> <a href="#" class="edit">Lorem ipsum dolor sit amet</a></div>
+                    <ul class="col actions">
+                        <li><a href="#" class="help" title="Edit"><span class="ui-icon ui-icon-pencil">Edit properties</span></a></li>
+                        <li><a href="#" class="help" title="Use as cover"><span class="ui-icon ui-icon-pin-s">Use as cover</span></a></li>
+                        <li><a onclick="return confirm('Are you sure? This operation can not be undone');" href="#" class="help" title="Delete"><span class="ui-icon ui-icon-close">Delete</span></a></li>
+                    </ul>
+                </div>
+                <div class="row">
+                    <div class="col col-picture">
+                        <img src="/layouts/backoffice/images/px.png" height="94" width="174" alt="" class="picture">
+                    </div>
+                    <div class="col col-title"><input type="checkbox" value="1" name="rowId-1"> <a href="#" class="edit">Lorem ipsum dolor sit amet</a></div>
+                    <ul class="col actions">
+                        <li><a href="#" class="help" title="Edit"><span class="ui-icon ui-icon-pencil">Edit properties</span></a></li>
+                        <li><a href="#" class="help" title="Use as cover"><span class="ui-icon ui-icon-pin-s">Use as cover</span></a></li>
+                        <li><a onclick="return confirm('Are you sure? This operation can not be undone');" href="#" class="help" title="Delete"><span class="ui-icon ui-icon-close">Delete</span></a></li>
+                    </ul>
+                </div>
+                <div class="row">
+                    <div class="col col-picture">
+                        <img src="/layouts/backoffice/images/px.png" height="94" width="174" alt="" class="picture">
+                    </div>
+                    <div class="col col-title"><input type="checkbox" value="1" name="rowId-1"> <a href="#" class="edit">Lorem ipsum dolor sit amet</a></div>
+                    <ul class="col actions">
+                        <li><a href="#" class="help" title="Edit"><span class="ui-icon ui-icon-pencil">Edit properties</span></a></li>
+                        <li><a href="#" class="help" title="Use as cover"><span class="ui-icon ui-icon-pin-s">Use as cover</span></a></li>
+                        <li><a onclick="return confirm('Are you sure? This operation can not be undone');" href="#" class="help" title="Delete"><span class="ui-icon ui-icon-close">Delete</span></a></li>
+                    </ul>
+                </div>
+                <div class="row">
+                    <div class="col col-picture">
+                        <img src="/layouts/backoffice/images/px.png" height="94" width="174" alt="" class="picture">
+                    </div>
+                    <div class="col col-title"><input type="checkbox" value="1" name="rowId-1"> <a href="#" class="edit">Lorem ipsum dolor sit amet</a></div>
+                    <ul class="col actions">
+                        <li><a href="#" class="help" title="Edit"><span class="ui-icon ui-icon-pencil">Edit properties</span></a></li>
+                        <li><a href="#" class="help" title="Use as cover"><span class="ui-icon ui-icon-pin-s">Use as cover</span></a></li>
+                        <li><a onclick="return confirm('Are you sure? This operation can not be undone');" href="#" class="help" title="Delete"><span class="ui-icon ui-icon-close">Delete</span></a></li>
+                    </ul>
+                </div>
+                <div class="row">
+                    <div class="col col-picture">
+                        <img src="/layouts/backoffice/images/px.png" height="94" width="174" alt="" class="picture">
+                    </div>
+                    <div class="col col-title"><input type="checkbox" value="1" name="rowId-1"> <a href="#" class="edit">Lorem ipsum dolor sit amet</a></div>
+                    <ul class="col actions">
+                        <li><a href="#" class="help" title="Edit"><span class="ui-icon ui-icon-pencil">Edit properties</span></a></li>
+                        <li><a href="#" class="help" title="Use as cover"><span class="ui-icon ui-icon-pin-s">Use as cover</span></a></li>
+                        <li><a onclick="return confirm('Are you sure? This operation can not be undone');" href="#" class="help" title="Delete"><span class="ui-icon ui-icon-close">Delete</span></a></li>
+                    </ul>
+                </div>
+                <div class="row">
+                    <div class="col col-picture">
+                        <img src="/layouts/backoffice/images/px.png" height="94" width="174" alt="" class="picture">
+                    </div>
+                    <div class="col col-title"><input type="checkbox" value="1" name="rowId-1"> <a href="#" class="edit">Lorem ipsum dolor sit amet</a></div>
+                    <ul class="col actions">
+                        <li><a href="#" class="help" title="Edit"><span class="ui-icon ui-icon-pencil">Edit properties</span></a></li>
+                        <li><a href="#" class="help" title="Use as cover"><span class="ui-icon ui-icon-pin-s">Use as cover</span></a></li>
+                        <li><a onclick="return confirm('Are you sure? This operation can not be undone');" href="#" class="help" title="Delete"><span class="ui-icon ui-icon-close">Delete</span></a></li>
+                    </ul>
+                </div>
+                <div class="row">
+                    <div class="col col-picture">
+                        <img src="/layouts/backoffice/images/px.png" height="94" width="174" alt="" class="picture">
+                    </div>
+                    <div class="col col-title"><input type="checkbox" value="1" name="rowId-1"> <a href="#" class="edit">Lorem ipsum dolor sit amet</a></div>
+                    <ul class="col actions">
+                        <li><a href="#" class="help" title="Edit"><span class="ui-icon ui-icon-pencil">Edit properties</span></a></li>
+                        <li><a href="#" class="help" title="Use as cover"><span class="ui-icon ui-icon-pin-s">Use as cover</span></a></li>
+                        <li><a onclick="return confirm('Are you sure? This operation can not be undone');" href="#" class="help" title="Delete"><span class="ui-icon ui-icon-close">Delete</span></a></li>
+                    </ul>
+                </div>
+                <div class="row">
+                    <div class="col col-picture">
+                        <img src="/layouts/backoffice/images/px.png" height="94" width="174" alt="" class="picture">
+                    </div>
+                    <div class="col col-title"><input type="checkbox" value="1" name="rowId-1"> <a href="#" class="edit">Lorem ipsum dolor sit amet</a></div>
+                    <ul class="col actions">
+                        <li><a href="#" class="help" title="Edit"><span class="ui-icon ui-icon-pencil">Edit properties</span></a></li>
+                        <li><a href="#" class="help" title="Use as cover"><span class="ui-icon ui-icon-pin-s">Use as cover</span></a></li>
+                        <li><a onclick="return confirm('Are you sure? This operation can not be undone');" href="#" class="help" title="Delete"><span class="ui-icon ui-icon-close">Delete</span></a></li>
+                    </ul>
+                </div>
+                <div class="row">
+                    <div class="col col-picture">
+                        <img src="/layouts/backoffice/images/px.png" height="94" width="174" alt="" class="picture">
+                    </div>
+                    <div class="col col-title"><input type="checkbox" value="1" name="rowId-1"> <a href="#" class="edit">Lorem ipsum dolor sit amet</a></div>
+                    <ul class="col actions">
+                        <li><a href="#" class="help" title="Edit"><span class="ui-icon ui-icon-pencil">Edit properties</span></a></li>
+                        <li><a href="#" class="help" title="Use as cover"><span class="ui-icon ui-icon-pin-s">Use as cover</span></a></li>
+                        <li><a onclick="return confirm('Are you sure? This operation can not be undone');" href="#" class="help" title="Delete"><span class="ui-icon ui-icon-close">Delete</span></a></li>
+                    </ul>
+                </div>
+                <div class="row">
+                    <div class="col col-picture">
+                        <img src="/layouts/backoffice/images/px.png" height="94" width="174" alt="" class="picture">
+                    </div>
+                    <div class="col col-title"><input type="checkbox" value="1" name="rowId-1"> <a href="#" class="edit">Lorem ipsum dolor sit amet</a></div>
+                    <ul class="col actions">
+                        <li><a href="#" class="help" title="Edit"><span class="ui-icon ui-icon-pencil">Edit properties</span></a></li>
+                        <li><a href="#" class="help" title="Use as cover"><span class="ui-icon ui-icon-pin-s">Use as cover</span></a></li>
+                        <li><a onclick="return confirm('Are you sure? This operation can not be undone');" href="#" class="help" title="Delete"><span class="ui-icon ui-icon-close">Delete</span></a></li>
+                    </ul>
+                </div>
+
+                <div class="clear"></div>
+            </div>   
+    
+            <div class="toolbar toolbar-bottom">
+                <div class="pager">
+                    <span class="infos"><strong>1-10</strong> of <strong>816</strong></span>
+                    <a class="next"href="#">Next</a>
+                    <a class="last"href="#">Last</a>  
+                </div>
+    
+                <div class="select ui-button-tiny-squared">
+                    Select: <a href="#" rel="select-all">All</a>, <a href="#" rel="select-none">None</a> &nbsp;&nbsp;
+                    
+                    <span id="repeat" class="ui-buttonset">
+                        <input type="radio" name="repeat" class="ui-helper-hidden-accessible">
+                        <label for="repeat0" class="ui-button ui-button-text-only ui-corner-left" aria-pressed="true" role="button" aria-disabled="false">
+                            <span class="ui-button-text">Delete</span>
+                        </label>
+                        <input type="radio" name="repeat" class="ui-helper-hidden-accessible">
+                        <label for="repeat1" aria-pressed="false" class="ui-button ui-button-text-only" role="button" aria-disabled="false">
+                            <span class="ui-button-text">Publish</span>
+                        </label>
+                        <input type="radio" name="repeat" class="ui-helper-hidden-accessible">
+                        <label for="repeat1" aria-pressed="false" class="ui-button ui-button-text-only" role="button" aria-disabled="false">
+                            <span class="ui-button-text">Unpublish</span>
+                        </label>
+                        <input type="radio" name="repeat" class="ui-helper-hidden-accessible">
+                        <label for="repeatall" aria-pressed="false" class="ui-button ui-button-icon-only ui-corner-right" role="button" aria-disabled="false">
+                            <span class="ui-button-icon-primary ui-icon ui-icon-triangle-1-s"></span>
+                            <span class="ui-button-text">More</span>
+                        </label>
+                    </span>   
+                    
+                    <!-- 
+                    <select name="actions" class="select-actions"><option value="">Actions</option><option value="undefined">Delete</option></select>
+                    <input value="Confirm" class="save" type="submit" />-->
+                </div>
+            </div>
+        </form>
+        
+        <span class="grid-loading">Loading</span>
+        
+        <div class="clear"></div>
+	</section>
+	
+</section>
+
+<footer>© Centurion | Running version 0.232</footer>
+</body>
+</html>

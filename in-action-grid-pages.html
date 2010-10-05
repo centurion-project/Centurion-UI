@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Centurion UI > CRUD > Grid</title>
+<link type="text/css" media="all" rel="stylesheet" href="layouts/backoffice/styles.css" />
+<script type="text/javascript" src="cui/libs/jquery.js"></script>
+<script type="text/javascript" src="cui/jquery.CUI.js"></script>
+<script type="text/javascript" src="layouts/backoffice/js/all.js"></script>
+<!--[if IE]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+<script type="text/javascript">
+$(function() {
+    $(".jstree").CUI('tree', {
+        plugins : {
+            contextmenu : { 
+                items : {
+                    create : {
+                        label   : "Create into", 
+                        icon    : "create",
+                        visible : function (NODE, TREE_OBJ) { 
+                            if(NODE.length != 1) return 0; 
+                            return TREE_OBJ.check("creatable", NODE); 
+                        }, 
+                        action  : function (NODE, TREE_OBJ) { 
+                            TREE_OBJ.create(false, TREE_OBJ.get_node(NODE[0])); 
+                            NODE.find("a.clicked")
+                                .addClass("page hidden")
+                                .after('<div class="cells"><div class="online"><select selected="0" class="on-off" name="is_published-4" style="display: none;"><option value="0">Offline</option><option value="1">Online</option></select><span class="switch-0">0</span></div><div class="date">2010-01-12 17:05</div><div class="actions"><a href="/cms/admin-flatpage/new?flatpage_id=1">Translate</a>  | <a href="/cms/admin-flatpage/1">Edit</a>  | <a href="/cms/admin-flatpage/1" class="zf-actions-delete">Delete</a></div><div class="clear"></div></div>');
+                        },
+                        separator_after : false
+                    },
+                    rename : {
+                        label   : "Rename", 
+                        icon    : "rename",
+                        visible : function (NODE, TREE_OBJ) { 
+                            if(NODE.length != 1) return false; 
+                            return TREE_OBJ.check("renameable", NODE); 
+                        }, 
+                        action  : function (NODE, TREE_OBJ) { 
+                            TREE_OBJ.rename(NODE); 
+                        } 
+                    },
+                    hide : {
+                        label   : "Unpublish", 
+                        icon    : "hide",
+                        visible : function (NODE, TREE_OBJ) { 
+                            if(NODE.length != 1) return false; 
+                            if(NODE.find("a.page").hasClass("hidden")) return false;
+                            //return TREE_OBJ.check("renameable", NODE); 
+                        }, 
+                        action  : function (NODE, TREE_OBJ) { 
+                            NODE.find("a.page").addClass("hidden");
+                            //TREE_OBJ.rename(NODE); 
+                        } 
+                    },
+                    publish : {
+                        label   : "Publish", 
+                        icon    : "publish",
+                        visible : function (NODE, TREE_OBJ) { 
+                            if(NODE.length != 1) return false; 
+                            if(NODE.find("a.page").not(".hidden").length) return false;
+                            //return TREE_OBJ.check("renameable", NODE); 
+                        }, 
+                        action  : function (NODE, TREE_OBJ) { 
+                            NODE.find("a.page").removeClass("hidden");
+                            //TREE_OBJ.rename(NODE); 
+                        } 
+                    },
+                    hideMenu : {
+                        label   : "Hide in menu", 
+                        icon    : "hide-menu",
+                        visible : function (NODE, TREE_OBJ) { 
+                            if(NODE.length != 1) return false; 
+                            if(NODE.find("a.page").hasClass("hidden-menu")) return false;
+                            //return TREE_OBJ.check("renameable", NODE); 
+                        }, 
+                        action  : function (NODE, TREE_OBJ) { 
+                            NODE.find("a.page").addClass("hidden-menu");
+                            //TREE_OBJ.rename(NODE); 
+                        } 
+                    },
+                    appearMenu : {
+                        label   : "Appear in menu", 
+                        icon    : "appear-menu",
+                        visible : function (NODE, TREE_OBJ) { 
+                            if(NODE.length != 1) return false; 
+                            if(NODE.find("a.page").not(".hidden-menu").length) return false;
+                            //return TREE_OBJ.check("renameable", NODE); 
+                        }, 
+                        action  : function (NODE, TREE_OBJ) { 
+                            NODE.find("a.page").removeClass("hidden-menu");
+                            //TREE_OBJ.rename(NODE); 
+                        } 
+                    },
+                    edit : {
+                        label   : "Edit properties", 
+                        icon    : "edit",
+                        visible : function (NODE, TREE_OBJ) { 
+                            if(NODE.length != 1) return false; 
+                            return TREE_OBJ.check("renameable", NODE); 
+                        }, 
+                        action  : function (NODE, TREE_OBJ) { 
+                            window.location.replace(NODE.find("a.page").attr("href"));
+                            //TREE_OBJ.rename(NODE); 
+                        } 
+                    },
+                    remove : {
+                        label   : "Delete",
+                        icon    : "remove",
+                        visible : function (NODE, TREE_OBJ) { 
+                            var ok = true; 
+                            $.each(NODE, function () { 
+                                if(TREE_OBJ.check("deletable", this) == false) {
+                                    ok = false; 
+                                    return false; 
+                                }
+                            }); 
+                            return ok; 
+                        }, 
+                        action  : function (NODE, TREE_OBJ) { 
+                            $.each(NODE, function () { 
+                                TREE_OBJ.remove(this); 
+                            }); 
+                        } 
+                    }
+                }
+            }
+        }
+    });
+    $(".field-switcher").CUI("switcher");
+});
+</script>
+</head>
+
+<body id="grid">
+
+<header class="h">
+    <h1>Centurion - Back Office</h1>
+      
+    <nav>
+        <ul class="main">
+            <li class="active"><a href="#" class="hover">Contents</a></li>
+            <li><a href="#">Users</a></li>
+            <li><a href="#">Pages</a></li>
+            <li><a href="#">Settings</a></li>
+            <li class="selecter"><a href="#"><span class="icon arrow"></span>Sites</a>
+                <ul>
+                    <li><a href="#">French</a></li>
+                    <li><a href="#">United Kingdom</a></li>
+                </ul>
+            </li>
+        </ul>
+        
+        <span class="user">
+            <span class="icon"></span>
+            Robert Octave, <a href="#">Log out</a> &nbsp;|&nbsp; <a href="#">View website</a>
+        </span>
+    </nav>
+    
+    <form class="search">
+        <div>
+            <input type="text" class="q" name="q" placeholder="Search" value="Search" />
+            <input type="image" class="icon valid" name="valid" value="Valid" src="/layout/backoffice/images/px.png" />
+        </div>
+    </form>
+</header>
+
+<section>
+    <nav>   
+        <div class="jstree">
+            <ul class="tree-default">
+                <li class="open root"><span><ins>&nbsp;</ins>Sitemap</span>
+                    <ul class="open">
+                        <li>
+                            <a href="in-action-form.html" class="page"><ins>&nbsp;</ins>Homepage</a>  
+                        </li> 
+                        <li>
+                            <a href="in-action-form.html" class="page"><ins>&nbsp;</ins>About</a>
+                        </li> 
+                        <li>
+                            <a href="in-action-form.html" class="page"><ins>&nbsp;</ins>Blog</a>
+                            <ul class="open">
+                                <li>
+                                    <a href="in-action-form.html" class="page"><ins>&nbsp;</ins>Tutorials</a>
+                                </li> 
+                                <li>
+                                    <a href="in-action-form.html" class="page"><ins>&nbsp;</ins>Web trends</a>
+                                </li> 
+                                <li>
+                                    <a href="in-action-form.html" class="page hidden"><ins>&nbsp;</ins>General</a>
+                                </li>                           
+                            </ul>
+                        </li> 
+                        <li>
+                            <a href="in-action-form.html" class="page"><ins>&nbsp;</ins>Contact</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div> 
+    </nav>
+
+    <header class="sh">
+        <div class="ui-button-big">
+            <a href="#" class="ui-button ui-button-bg-white ui-button-text-red ui-button-text-only">
+                <span class="ui-button-text">Add a new game</span>
+            </a>   
+        </div>
+        <h1>Manage pages</h1>
+    </header>
+    
+    <aside>
+        <div class="box grid-filter">
+            <h2>Filters</h2>
+            <div class="filter filter-open" id="filter-id-0">
+                <h3><span class="arrow"></span>Filter by name</h3>
+                <div class="in">
+                    <input name="filter-id-0" id="filter-id-0" value="" type="text">
+                </div>
+            </div>
+            
+            <div class="filter filter-open" id="filter-id-1">
+                <h3><span class="arrow"></span>Filter by status</h3>
+                <div class="in">
+                    <input name="filter-id-1" id="filter-id-1" value="0" type="radio">All<br>
+                    <input name="filter-id-1" id="filter-id-1" value="1" type="radio">Offline<br>
+                    <input name="filter-id-1" id="filter-id-1" value="2" type="radio">Online<br>
+                </div>
+            </div>
+         </div>
+     </aside>   
+    
+    <section>
+        <p>Pour réordonner les éléments d'un menu, utilisez la technique du glisser/déposer dans la colonne Eléments du 
+        menu et déplacer les éléments dans la liste. Attention, les changements ne seront pas enregistrés tant vous 
+        n'aurez pas cliqué sur le bouton Enregistrer la configuration en bas de la page.</p>
+            
+        <div class="grid pages">
+            <div class="heading">
+                Title
+                <div class="cells">
+                    <div class="online">Is published</div>
+                    <div class="date">At</div>
+                    <div class="actions">Actions</div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+            <div class="jstree">
+                <ul class="tree">
+                    <li>
+                        <a href="in-action-form.html" class="page"><ins>&nbsp;</ins>Homepage</a>                
+                        <div class="cells">
+                            <div class="online"><select selected="1" class="field-switcher" name="is_published-4"><option value="0">Offline</option><option value="1">Online</option></select></div>
+                            <div class="date">Sep 25, 2009</div>
+                            <div class="actions">
+                                <a href="in-action-form.html" class="help" title="Edit"><span class="ui-icon ui-icon-pencil">Edit properties</span></a>
+                                <a href="in-action-form.html" class="help" title="Translate"><span class="ui-icon ui-icon-flag">Translate</span></a>
+                                <a onclick="return confirm('Are you sure? This operation can not be undone');" href="in-action-form.html" class="help" title="Delete"><span class="ui-icon ui-icon-close">Delete</span></a>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </li> 
+                    <li>
+                        <a href="in-action-form.html" class="page loading"><ins>&nbsp;</ins>About</a>
+                        <div class="cells">
+                            <div class="online"><select selected="1" class="field-switcher" name="is_published-4"><option value="0">Offline</option><option value="1">Online</option></select></div>
+                            <div class="date">Sep 25, 2009</div>
+                            <div class="actions">
+                                <a href="in-action-form.html" class="help" title="Edit"><span class="ui-icon ui-icon-pencil">Edit properties</span></a>
+                                <a href="in-action-form.html" class="help" title="Translate"><span class="ui-icon ui-icon-flag">Translate</span></a>
+                                <a onclick="return confirm('Are you sure? This operation can not be undone');" href="in-action-form.html" class="help" title="Delete"><span class="ui-icon ui-icon-close">Delete</span></a>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </li> 
+                    <li>
+                        <a href="in-action-form.html" class="page"><ins>&nbsp;</ins>Blog</a>
+                        <div class="cells">
+                            <div class="online"><select selected="1" class="field-switcher" name="is_published-4"><option value="0">Offline</option><option value="1">Online</option></select></div>
+                            <div class="date">Sep 24, 2009</div>
+                            <div class="actions">
+                                <a href="in-action-form.html" class="help" title="Edit"><span class="ui-icon ui-icon-pencil">Edit properties</span></a>
+                                <a href="in-action-form.html" class="help" title="Translate"><span class="ui-icon ui-icon-flag">Translate</span></a>
+                                <a onclick="return confirm('Are you sure? This operation can not be undone');" href="in-action-form.html" class="help" title="Delete"><span class="ui-icon ui-icon-close">Delete</span></a>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <ul class="open">
+                            <li>
+                                <a href="in-action-form.html" class="page"><ins>&nbsp;</ins>Tutorials</a>
+                                <div class="cells">
+                                    <div class="online"><select selected="1" class="field-switcher" name="is_published-4"><option value="0">Offline</option><option value="1">Online</option></select></div>
+                                    <div class="date">Sep 23, 2009</div>
+                                    <div class="actions">
+                                        <a href="in-action-form.html" class="help" title="Edit"><span class="ui-icon ui-icon-pencil">Edit properties</span></a>
+                                        <a href="in-action-form.html" class="help" title="Translate"><span class="ui-icon ui-icon-flag">Translate</span></a>
+                                        <a onclick="return confirm('Are you sure? This operation can not be undone');" href="in-action-form.html" class="help" title="Delete"><span class="ui-icon ui-icon-close">Delete</span></a>
+                                    </div>
+                                    <div class="clear"></div>
+                                </div>
+                            </li> 
+                            <li>
+                                <a href="in-action-form.html" class="page"><ins>&nbsp;</ins>Web trends</a>
+                                <div class="cells">
+                                    <div class="online"><select selected="1" class="field-switcher" name="is_published-4"><option value="0">Offline</option><option value="1">Online</option></select></div>
+                                    <div class="date">Sep 22, 2009</div>
+                                    <div class="actions">
+                                        <a href="in-action-form.html" class="help" title="Edit"><span class="ui-icon ui-icon-pencil">Edit properties</span></a>
+                                        <a href="in-action-form.html" class="help" title="Translate"><span class="ui-icon ui-icon-flag">Translate</span></a>
+                                        <a onclick="return confirm('Are you sure? This operation can not be undone');" href="in-action-form.html" class="help" title="Delete"><span class="ui-icon ui-icon-close">Delete</span></a>
+                                    </div>
+                                    <div class="clear"></div>
+                                </div>
+                            </li> 
+                            <li>
+                                <a href="in-action-form.html" class="page hidden"><ins>&nbsp;</ins>General</a>
+                                <div class="cells">
+                                    <div class="online"><select selected="0" class="field-switcher" name="is_published-4"><option value="0">Offline</option><option value="1">Online</option></select></div>
+                                    <div class="date">Sep 21, 2009</div>
+                                    <div class="actions">
+                                        <a href="in-action-form.html"" class="help" title="Edit"><span class="ui-icon ui-icon-pencil">Edit properties</span></a>
+                                        <a href="in-action-form.html"" class="help" title="Translate"><span class="ui-icon ui-icon-flag">Translate</span></a>
+                                        <a onclick="return confirm('Are you sure? This operation can not be undone');" href="in-action-form.html"" class="help" title="Delete"><span class="ui-icon ui-icon-close">Delete</span></a>
+                                    </div>
+                                    <div class="clear"></div>
+                                </div>
+                            </li>                           
+                        </ul>
+                    </li> 
+                    <li>
+                        <a href="in-action-form.html" class="page"><ins>&nbsp;</ins>Contact</a>
+                        <div class="cells">
+                            <div class="online"><select selected="1" class="field-switcher" name="is_published-4"><option value="0">Offline</option><option value="1">Online</option></select></div>
+                            <div class="date">Sep 20, 2009</div>
+                            <div class="actions">
+                                <a href="in-action-form.html"" class="help" title="Edit"><span class="ui-icon ui-icon-pencil">Edit properties</span></a>
+                                <a href="in-action-form.html"" class="help" title="Translate"><span class="ui-icon ui-icon-flag">Translate</span></a>
+                                <a onclick="return confirm('Are you sure? This operation can not be undone');" href="in-action-form.html"" class="help" title="Delete"><span class="ui-icon ui-icon-close">Delete</span></a>
+                            </div>
+                             <div class="clear"></div>
+                        </div>
+                    </li>   
+
+                </ul>
+            </div>
+        </div>
+        
+    </section>
+</section>
+
+</body>
+</html>

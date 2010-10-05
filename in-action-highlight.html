@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Centurion UI > CRUD > Grid</title>
+<link type="text/css" media="all" rel="stylesheet" href="layouts/backoffice/css/styles.css" />
+<script type="text/javascript" src="cui/core/libs/jquery.js"></script>
+<script type="text/javascript" src="cui/core/libs/jquery-ui.js"></script>
+<script type="text/javascript" src="cui/core/plugins/grid/jquery.CUI.grid.js"></script>
+<script type="text/javascript" src="layouts/backoffice/js/all.js"></script>
+<!--[if IE]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+<script>
+
+</script>
+</head>
+
+<body>
+
+<header class="h">
+    <h1>Centurion - Back Office</h1>
+      
+    <nav>
+        <ul class="main">
+            <li class="active"><a href="#" class="hover">Contents</a></li>
+            <li><a href="#">Users</a></li>
+            <li><a href="#">Pages</a></li>
+            <li class="selecter"><a href="#"><span class="icon arrow"></span>Settings</a>
+			    <ul>
+                    <li><a href="#">Translation</a></li>
+                    <li><a href="#">United Kingdom</a></li>
+                </ul></li>
+            <li class="selecter"><a href="#"><span class="icon arrow"></span>Sites</a>
+			    <ul>
+                    <li><a href="#">French</a></li>
+                    <li><a href="#">United Kingdom</a></li>
+                </ul>
+            </li>
+        </ul>
+		
+		<span class="user">
+			<span class="icon"></span>
+			Robert Octave, <a href="#">Log out</a> &nbsp;|&nbsp; <a href="#">View website</a>
+		</span>
+    </nav>
+    
+    <form class="search">
+        <div>
+            <input type="text" class="q" name="q" placeholder="Search" value="Search" />
+            <input type="image" class="icon valid" name="valid" value="Valid" src="layouts/backoffice/images/px.png" />
+        </div>
+    </form>
+</header>
+
+<section>
+    <nav>	
+		<ul class="contents">
+            <li class="first"><a href="#">Rating</a></li>
+            <li><a href="#">Genre</a></li>
+            <li><a href="#">Platform</a></li>
+            <li><a href="#">Games</a>
+                <ul>
+                    <li class="active"><a href="#">Release by Website</a></li>
+                    <li><a href="#">Release</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Familly</a></li>
+            <li><a href="#">Developer</a></li>
+            <li><a href="#">Distributor</a></li>
+            <li><a href="#">Publisher</a></li>
+            <li><a href="#">Retailer</a></li>
+		</ul>
+    </nav>
+
+    <header class="sh">
+        <h1><span class="icon"></span>Manage highlights</h1>
+	</header>
+	
+	<section>
+<style>
+.hl-template {          height:800px; }
+.hl-item {              position:absolute; }
+.hl-item-1 {            top:0; left:0; width:294px; height:140px; }
+.hl-item-2 {            top:0; left:324px; width:132px; height:55px; }
+.hl-item-3 {            top:0; left:486px; width:132px; height:55px; }
+.hl-item-4 {            top:0; left:648px; width:132px; height:55px; }
+.hl-item-5 {            top:85px; left:324px; width:294px; height:55px; }
+.hl-item-6 {            top:170px; left:324px; width:294px; height:140px; }
+.hl-item-7 {            top:170px; left:0; width:132px; height:55px; }
+.hl-item-8 {            top:170px; left:162px; width:132px; height:55px; }
+.hl-item-9 {            top:255px; left:0; width:294px; height:55px; }
+.hl-item-10 {           top:340px; left:0; width:294px; height:140px; }
+.hl-item-11 {           top:340px; left:324px; width:132px; height:55px; }
+.hl-item-12 {           top:340px; left:486px; width:132px; height:55px; }
+.hl-item-13 {           top:425px; left:324px; width:294px; height:55px; }
+.hl-item-14 {           top:85px; left:648px; width:132px; height:55px; }
+.hl-item-15 {           top:170px; left:648px; width:132px; height:55px; }
+.hl-item-16 {           top:255px; left:648px; width:132px; height:55px; }
+.hl-item-17 {           top:340px; left:648px; width:132px; height:140px; }
+
+
+/* sam festival */
+/*
+.hl-item-1 {            top:0; left:0; width:370px; height:140px; }
+.hl-item-2 {            top:0; left:400px; width:170px; height:55px; }
+.hl-item-3 {            top:0; left:600px; width:170px; height:55px; }
+.hl-item-4 {            top:85px; left:400px; width:370px; height:55px; }
+.hl-item-5 {            top:170px; left:0; width:170px; height:55px; }
+.hl-item-6 {            top:170px; left:200px; width:170px; height:55px; }
+.hl-item-7 {            top:170px; left:400px; width:170px; height:55px; }
+.hl-item-8 {            top:170px; left:600px; width:170px; height:55px; }
+.hl-item-9 {            top:255px; left:0; width:170px; height:55px; }
+.hl-item-10 {           top:255px; left:200px; width:170px; height:55px; }
+.hl-item-11 {           top:255px; left:400px; width:170px; height:55px; }
+.hl-item-12 {           top:255px; left:600px; width:170px; height:55px; }
+*/
+
+</style>
+
+
+        <form id="formAutocomplete" class="form form-highlight" method="post" action="/highlight/admin-highlight/add/id/5" >
+            <fieldset>
+                <legend>Add a highlight</legend>
+                <div class="float-left">
+                    <input type="text" value="" id="autocomplete" name="autocomplete" value="Choose a content"
+                    class="ui-autocomplete-input ui-autocomplete-loading" autocomplete="off" role="textbox" 
+                    aria-autocomplete="list" aria-haspopup="true">
+                    <input type="hidden" value="" id="model" name="model">
+                    <input type="hidden" value="" id="pk" name="pk">
+                    <input id="_add" type="submit" value="Ajouter">
+                </div>
+                <div>
+                    <a href="">... or add a highlight</a>
+                    
+                </div>                
+            </fieldset>
+        </form>
+
+        <ul class="hl-template">
+            <li class="hl-item hl-item-1">
+                <h3>Strasbourg Place de l'homme de fer - Place des Halles</h3>
+                <ul class="actions">
+                    <li><a href="" class="help help-edit" title="Edit"><span class="ui-icon ui-icon-pencil">Edit</span></a></li>
+                    <li><a href="" class="help help-remove" title="Remove"><span class="ui-icon ui-icon-close">Remove</span></a></li>
+                </ul>    
+            </li>
+            <li class="hl-item hl-item-2">
+                <h3>Fac Nice Sofia Antipolis</h3>
+                <ul class="actions">
+                    <li><a href="" class="help help-edit" title="Edit"><span class="ui-icon ui-icon-pencil">Edit</span></a></li>
+                    <li><a href="" class="help help-remove" title="Remove"><span class="ui-icon ui-icon-close">Remove</span></a></li>
+                </ul>    
+            </li>
+            <li class="hl-item hl-item-3">
+                <h3>Fac Nice Sofia Antipolis</h3>
+                <ul class="actions">
+                    <li><a href="" class="help help-edit" title="Edit"><span class="ui-icon ui-icon-pencil">Edit</span></a></li>
+                    <li><a href="" class="help help-remove" title="Remove"><span class="ui-icon ui-icon-close">Remove</span></a></li>
+                </ul>    
+            </li>
+            <li class="hl-item hl-item-4">
+                <em>Empty</em>
+                <ul class="actions">
+                    <li><a href="" class="help help-add" title="Add"><span class="ui-icon ui-icon-plus">Add</span></a></li>
+                </ul>
+            </li>
+            <li class="hl-item hl-item-5">
+                <em>Empty</em>
+                <ul class="actions">
+                    <li><a href="" class="help help-add" title="Add"><span class="ui-icon ui-icon-plus">Add</span></a></li>
+                </ul>
+            </li>
+            <li class="hl-item hl-item-6">
+                <em>Empty</em>
+                <ul class="actions">
+                    <li><a href="" class="help help-add" title="Add"><span class="ui-icon ui-icon-plus">Add</span></a></li>
+                </ul>
+            </li>
+            <li class="hl-item hl-item-7">
+                <em>Empty</em>
+                <ul class="actions">
+                    <li><a href="" class="help help-add" title="Add"><span class="ui-icon ui-icon-plus">Add</span></a></li>
+                </ul>
+            </li>   
+            <li class="hl-item hl-item-8">
+                <em>Empty</em>
+                <ul class="actions">
+                    <li><a href="" class="help help-add" title="Add"><span class="ui-icon ui-icon-plus">Add</span></a></li>
+                </ul>
+            </li> 
+            <li class="hl-item hl-item-9">
+                <em>Empty</em>
+                <ul class="actions">
+                    <li><a href="" class="help help-add" title="Add"><span class="ui-icon ui-icon-plus">Add</span></a></li>
+                </ul>
+            </li>
+            <li class="hl-item hl-item-10">
+                <em>Empty</em>
+                <ul class="actions">
+                    <li><a href="" class="help help-add" title="Add"><span class="ui-icon ui-icon-plus">Add</span></a></li>
+                </ul>
+            </li>
+            <li class="hl-item hl-item-11">
+                <em>Empty</em>
+                <ul class="actions">
+                    <li><a href="" class="help help-add" title="Add"><span class="ui-icon ui-icon-plus">Add</span></a></li>
+                </ul>
+            </li>
+            <li class="hl-item hl-item-12">
+                <em>Empty</em>
+                <ul class="actions">
+                    <li><a href="" class="help help-add" title="Add"><span class="ui-icon ui-icon-plus">Add</span></a></li>
+                </ul>
+            </li>   
+            <li class="hl-item hl-item-13">
+                <em>Empty</em>
+                <ul class="actions">
+                    <li><a href="" class="help help-add" title="Add"><span class="ui-icon ui-icon-plus">Add</span></a></li>
+                </ul>
+            </li>   
+            <li class="hl-item hl-item-14">
+                <em>Empty</em>
+                <ul class="actions">
+                    <li><a href="" class="help help-add" title="Add"><span class="ui-icon ui-icon-plus">Add</span></a></li>
+                </ul>
+            </li>   
+            <li class="hl-item hl-item-15">
+                <em>Empty</em>
+                <ul class="actions">
+                    <li><a href="" class="help help-add" title="Add"><span class="ui-icon ui-icon-plus">Add</span></a></li>
+                </ul>
+            </li>   
+            <li class="hl-item hl-item-16">
+                <em>Empty</em>
+                <ul class="actions">
+                    <li><a href="" class="help help-add" title="Add"><span class="ui-icon ui-icon-plus">Add</span></a></li>
+                </ul>
+            </li>  
+            <li class="hl-item hl-item-17">
+                <em>Empty</em>
+                <ul class="actions">
+                    <li><a href="" class="help help-add" title="Add"><span class="ui-icon ui-icon-plus">Add</span></a></li>
+                </ul>
+            </li>      
+        </ul>
+	</section>
+	
+	<div class="clear"></div>
+</section>
+
+<footer>© Centurion | Running version 0.232</footer>
+</body>
+</html>

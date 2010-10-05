@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Centurion UI > CRUD > Grid</title>
+<link type="text/css" media="all" rel="stylesheet" href="layouts/backoffice/styles.css" />
+<script type="text/javascript" src="cui/libs/jquery.js"></script>
+<script type="text/javascript" src="cui/jquery.CUI.js"></script>
+<script type="text/javascript" src="layouts/backoffice/js/all.js"></script>
+<!--[if IE]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+<script>
+    $(function() {
+        $(".grid").CUI('grid', {
+            callback: function() {
+                $('.on-off').CUI('switcher', {title:'Publish'});
+            }
+        });
+        $(".buttonset").CUI('buttonset');
+        $(".datepicker").CUI('datepicker');
+    });
+    
+    function actionRemove() {
+        //...
+    }
+    function actionPublish() {
+        //...
+    }
+    function actionUnpublish() {
+        //...
+    }
+</script>
+</head>
+
+<body>
+
+<header class="h">
+    <h1>Centurion - Back Office</h1>
+      
+    <nav>
+        <ul class="main">
+            <li class="active"><a href="#" class="hover">Contents</a></li>
+            <li><a href="#">Users</a></li>
+            <li><a href="#">Pages</a></li>
+            <li class="selecter"><a href="#"><span class="icon arrow"></span>Settings</a>
+                <ul>
+                    <li><a href="#">Translation</a></li>
+                    <li><a href="#">United Kingdom</a></li>
+                </ul></li>
+            <li class="selecter"><a href="#"><span class="icon arrow"></span>Sites</a>
+                <ul>
+                    <li><a href="#">French</a></li>
+                    <li><a href="#">United Kingdom</a></li>
+                </ul>
+            </li>
+        </ul>
+
+        <span class="user">
+            <span class="icon"></span>
+            Robert Octave, <a href="#">Log out</a> &nbsp;|&nbsp; <a href="#">View website</a>
+        </span>
+    </nav>
+
+    <form class="search">
+        <div>
+            <input type="text" class="q" name="q" placeholder="Search" value="Search" />
+            <input type="image" class="icon valid" name="valid" value="Valid" src="layouts/backoffice/images/px.png" />
+        </div>
+    </form>
+</header>
+
+<section>
+    <nav>	
+        <ul class="contents">
+            <li class="first"><a href="#">Rating</a></li>
+            <li><a href="#">Genre</a></li>
+            <li><a href="#">Platform</a></li>
+            <li><a href="#">Games</a>
+                <ul>
+                    <li class="active"><a href="#">Release by Website</a></li>
+                    <li><a href="#">Release</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Familly</a></li>
+            <li><a href="#">Developer</a></li>
+            <li><a href="#">Distributor</a></li>
+            <li><a href="#">Publisher</a></li>
+            <li><a href="#">Retailer</a></li>
+        </ul>
+    </nav>
+
+    <header class="sh">
+        <div class="ui-button-big">
+            <a href="#" class="ui-button ui-button-bg-white ui-button-text-red ui-button-text-only">
+                <span class="ui-button-text">Add a new game</span>
+            </a>   
+        </div>
+        <h1>Manage games</h1>
+    </header>
+
+    <aside>
+        <form action="#" method="get" id="grid-filter-form">
+            <div class="box grid-filter">
+                <h2>Filters</h2>
+                <div class="filter">
+                    <h3><span class="ui-icon ui-icon-triangle-1-s"></span>Filter by name</h3>
+                    <div class="in">
+                        <input name="name" value="" type="text" class="field-text">
+                    </div>
+                </div>
+                
+                <div class="filter">
+                    <h3><span class="ui-icon ui-icon-triangle-1-s"></span>Filter by status</h3>
+                    <div class="in">
+                        <label><input name="status" value="0" type="radio">All</label>
+                        <label><input name="status" value="1" type="radio">Offline</label>
+                        <label><input name="status" value="2" type="radio">Online</label>
+                    </div>
+                </div>
+                
+                <div class="filter">
+                    <h3><span class="ui-icon ui-icon-triangle-1-s"></span>Filter by genre</h3>
+                    <div class="in">
+                        <label><input name="genre[]" value="0" type="checkbox">Adventure</label>
+                        <label><input name="genre[]" value="1" type="checkbox">Educationnal</label>
+                        <label><input name="genre[]" value="2" type="checkbox">Fighting</label>
+                        <label><input name="genre[]" value="3" type="checkbox">Other</label>
+                        <label><input name="genre[]" value="4" type="checkbox">Puzzle</label>
+                        <label><input name="genre[]" value="5" type="checkbox">Racing</label>
+                        <label><input name="genre[]" value="6" type="checkbox">RPG</label>
+                        <label><input name="genre[]" value="7" type="checkbox">Simulation</label>
+                        <label><input name="genre[]" value="8" type="checkbox">Sports</label>
+                        <label><input name="genre[]" value="9" type="checkbox">Strategy</label>
+                    </div>
+                </div>
+                <div class="filter">
+                    <h3><span class="ui-icon ui-icon-triangle-1-s"></span>Filter by date</h3>
+                    <div class="in">
+                        <div>
+                            <label>From</label>
+                            <input name="date_from" class="field-text datepicker" value="" type="text">
+                        </div>
+                        <div>
+                            <label>To</label>
+                            <input name="date_to" class="field-text datepicker" value="" type="text">
+                        </div>
+                    </div>
+                </div>
+                <div class="submit ui-button-tiny-squared">
+                    <input type="submit" value="Send filter" class="ui-button" role="button" aria-disabled="false">
+                </div>
+             </div>
+         </form>
+     </aside>	
+
+    <section>
+        <form action="" method="post" id="grid-action-form">
+            <div class="toolbar toolbar-top">
+                <div class="pager">
+                    <span class="infos"><strong>1-10</strong> of <strong>816</strong></span>
+                    <a class="next"href="#">Next</a>
+                    <a class="last"href="#">Last</a>  
+                </div>
+               
+                <div class="select ui-button-tiny-squared">
+                    Select: <a href="#" class="select-all">All</a>, <a href="#" class="select-none">None</a> &nbsp;&nbsp;
+                    
+                    <span class="buttonset">
+                        <input type="radio" name="event" value="remove" id="input-top-1" /><label for="input-top-1">Supprimer</label>
+                        <input type="radio" name="event" value="publish" id="input-top-2" /><label for="input-top-2">Publish</label>
+                        <input type="radio" name="event" value="unpublish" id="input-top-3" /><label for="input-top-3">Unpublish</label>
+                    </span>  
+                </div>
+            </div>
+            
+            <table cellspacing="0" cellpadding="0" class="grid datas">
+                <tbody>
+                    <tr>
+                        <th width="10" class="head first"></th>
+                        <th class="head sorting-asc"><a href="#"><span class="ui-icon"></span>Name</a></th>
+                        <th class="head"><a href="#"><span class="ui-icon"></span>Genre</a></th>
+                        <th class="head"><a href="#"><span class="ui-icon"></span>Rating</a></th>
+                        <th class="head"><a href="#"><span class="ui-icon"></span>Website</a></th>
+                        <th class="head"><a href="#"><span class="ui-icon"></span>Is published</a></th>
+                        <th class="head" width="60px"></th>
+                    </tr>
+                    <tr class="row row-template">
+                        <td valign="top" class="first col"></td>
+                        <td valign="top" class="col"></td>
+                        <td valign="top" class="col"></td>
+                        <td valign="top" class="col"></td>
+                        <td valign="top" class="col"></td>
+                        <td valign="top" class="col"></td>
+                        <td valign="top" class="col"></td>
+                    </tr>
+                    <tr class="row odd">
+                        <td valign="top" class="first col"><input type="checkbox" value="1" name="rowId-4"></td>
+                        <td valign="top" class="col"><img height="33" width="33" style="float: left; margin-right: 10px; background: none repeat scroll 0% 0% rgb(238, 238, 238); border: 1px solid rgb(204, 204, 204);" alt="" src="layout/backoffice/images/px.png"><a href="in-action-form.html" class="edit">Afro Samurai</a><br></td>
+                        <td valign="top" class="col">Fighting</td>
+                        <td valign="top" class="col">18+</td>
+                        <td valign="top" class="col"><a href="http://www.afrosamurai.eu" class="link"><span class="ui-icon"></span>www.afrosamurai.eu</a></td>
+                        <td valign="top" class="col"><select selected="1" class="on-off" name="online-1"><option value="0">Offline</option><option value="1">Online</option></select></td>
+                        <td valign="top" class="col">
+                            <ul class="actions">
+                                <li><a href="#" class="help" title="Edit"><span class="ui-icon ui-icon-pencil">Edit properties</span></a></li>
+                                <li><a href="#" class="help" title="Translate"><span class="ui-icon ui-icon-flag">Translate</span></a>
+                                    <ul class="tree-context">
+                                        <li><a href="#"><span>Français</span></a></li>
+                                        <li><a href="#"><span>Espanol</span></a></li>
+                                        <li><a href="#"><span>Deutsh</span></a></li>
+                                        <li><a href="#"><span>Portuguese</span></a></li>
+                                        <li><a href="#"><span>Italian</span></a></li>
+                                    </ul>
+                                </li>
+                                <li><a onclick="return confirm('Are you sure? This operation can not be undone');" href="#" class="help" title="Delete"><span class="ui-icon ui-icon-close">Delete</span></a></li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr class="row even">
+                        <td valign="top" class="first col"><input type="checkbox" value="1" name="rowId-4"></td>
+                        <td valign="top" class="col"><img height="33" width="33" style="float: left; margin-right: 10px; background: none repeat scroll 0% 0% rgb(238, 238, 238); border: 1px solid rgb(204, 204, 204);" alt="" src="layout/backoffice/images/px.png"><a href="in-action-form.html" class="edit">Afro Samurai</a><br></td>
+                        <td valign="top" class="col">Fighting</td>
+                        <td valign="top" class="col">18+</td>
+                        <td valign="top" class="col"><a href="http://www.afrosamurai.eu" class="link"><span class="ui-icon"></span>www.afrosamurai.eu</a></td>
+                        <td valign="top" class="col"><select selected="1" class="on-off" name="online-1"><option value="0">Offline</option><option value="1">Online</option></select></td>
+                        <td valign="top" class="col">
+                            <ul class="actions">
+                                <li><a href="#" class="help" title="Edit"><span class="ui-icon ui-icon-pencil">Edit properties</span></a></li>
+                                <li><a href="#" class="help" title="Translate"><span class="ui-icon ui-icon-flag">Translate</span></a>
+                                    <ul class="tree-context">
+                                        <li><a href="#"><span>Français</span></a></li>
+                                        <li><a href="#"><span>Espanol</span></a></li>
+                                        <li><a href="#"><span>Deutsh</span></a></li>
+                                        <li><a href="#"><span>Portuguese</span></a></li>
+                                        <li><a href="#"><span>Italian</span></a></li>
+                                    </ul>
+                                </li>
+                                <li><a onclick="return confirm('Are you sure? This operation can not be undone');" href="#" class="help" title="Delete"><span class="ui-icon ui-icon-close">Delete</span></a></li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr class="row odd">
+                        <td valign="top" class="first col"><input type="checkbox" value="1" name="rowId-4"></td>
+                        <td valign="top" class="col"><img height="33" width="33" style="float: left; margin-right: 10px; background: none repeat scroll 0% 0% rgb(238, 238, 238); border: 1px solid rgb(204, 204, 204);" alt="" src="layout/backoffice/images/px.png"><a href="in-action-form.html" class="edit">Afro Samurai</a><br></td>
+                        <td valign="top" class="col">Fighting</td>
+                        <td valign="top" class="col">18+</td>
+                        <td valign="top" class="col"><a href="http://www.afrosamurai.eu" class="link"><span class="ui-icon"></span>www.afrosamurai.eu</a></td>
+                        <td valign="top" class="col"><select selected="1" class="on-off" name="online-1"><option value="0">Offline</option><option value="1">Online</option></select></td>
+                        <td valign="top" class="col">
+                            <ul class="actions">
+                                <li><a href="#" class="help" title="Edit"><span class="ui-icon ui-icon-pencil">Edit properties</span></a></li>
+                                <li><a href="#" class="help" title="Translate"><span class="ui-icon ui-icon-flag">Translate</span></a>
+                                    <ul class="tree-context">
+                                        <li><a href="#"><span>Français</span></a></li>
+                                        <li><a href="#"><span>Espanol</span></a></li>
+                                        <li><a href="#"><span>Deutsh</span></a></li>
+                                        <li><a href="#"><span>Portuguese</span></a></li>
+                                        <li><a href="#"><span>Italian</span></a></li>
+                                    </ul>
+                                </li>
+                                <li><a onclick="return confirm('Are you sure? This operation can not be undone');" href="#" class="help" title="Delete"><span class="ui-icon ui-icon-close">Delete</span></a></li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr class="row even">
+                        <td valign="top" class="first col"><input type="checkbox" value="1" name="rowId-4"></td>
+                        <td valign="top" class="col"><img height="33" width="33" style="float: left; margin-right: 10px; background: none repeat scroll 0% 0% rgb(238, 238, 238); border: 1px solid rgb(204, 204, 204);" alt="" src="layout/backoffice/images/px.png"><a href="in-action-form.html" class="edit">Afro Samurai</a><br></td>
+                        <td valign="top" class="col">Fighting</td>
+                        <td valign="top" class="col">18+</td>
+                        <td valign="top" class="col"><a href="http://www.afrosamurai.eu" class="link"><span class="ui-icon"></span>www.afrosamurai.eu</a></td>
+                        <td valign="top" class="col"><select selected="1" class="on-off" name="online-1"><option value="0">Offline</option><option value="1">Online</option></select></td>
+                        <td valign="top" class="col">
+                            <ul class="actions">
+                                <li><a href="#" class="help" title="Edit"><span class="ui-icon ui-icon-pencil">Edit properties</span></a></li>
+                                <li><a href="#" class="help" title="Translate"><span class="ui-icon ui-icon-flag">Translate</span></a>
+                                    <ul class="tree-context">
+                                        <li><a href="#"><span>Français</span></a></li>
+                                        <li><a href="#"><span>Espanol</span></a></li>
+                                        <li><a href="#"><span>Deutsh</span></a></li>
+                                        <li><a href="#"><span>Portuguese</span></a></li>
+                                        <li><a href="#"><span>Italian</span></a></li>
+                                    </ul>
+                                </li>
+                                <li><a onclick="return confirm('Are you sure? This operation can not be undone');" href="#" class="help" title="Delete"><span class="ui-icon ui-icon-close">Delete</span></a></li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr class="row odd">
+                        <td valign="top" class="first col"><input type="checkbox" value="1" name="rowId-4"></td>
+                        <td valign="top" class="col"><img height="33" width="33" style="float: left; margin-right: 10px; background: none repeat scroll 0% 0% rgb(238, 238, 238); border: 1px solid rgb(204, 204, 204);" alt="" src="layout/backoffice/images/px.png"><a href="in-action-form.html" class="edit">Afro Samurai</a><br></td>
+                        <td valign="top" class="col">Fighting</td>
+                        <td valign="top" class="col">18+</td>
+                        <td valign="top" class="col"><a href="http://www.afrosamurai.eu" class="link"><span class="ui-icon"></span>www.afrosamurai.eu</a></td>
+                        <td valign="top" class="col"><select selected="1" class="on-off" name="online-1"><option value="0">Offline</option><option value="1">Online</option></select></td>
+                        <td valign="top" class="col">
+                            <ul class="actions">
+                                <li><a href="#" class="help" title="Edit"><span class="ui-icon ui-icon-pencil">Edit properties</span></a></li>
+                                <li><a href="#" class="help" title="Translate"><span class="ui-icon ui-icon-flag">Translate</span></a>
+                                    <ul class="tree-context">
+                                        <li><a href="#"><span>Français</span></a></li>
+                                        <li><a href="#"><span>Espanol</span></a></li>
+                                        <li><a href="#"><span>Deutsh</span></a></li>
+                                        <li><a href="#"><span>Portuguese</span></a></li>
+                                        <li><a href="#"><span>Italian</span></a></li>
+                                    </ul>
+                                </li>
+                                <li><a onclick="return confirm('Are you sure? This operation can not be undone');" href="#" class="help" title="Delete"><span class="ui-icon ui-icon-close">Delete</span></a></li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr class="row even">
+                        <td valign="top" class="first col"><input type="checkbox" value="1" name="rowId-4"></td>
+                        <td valign="top" class="col"><img height="33" width="33" style="float: left; margin-right: 10px; background: none repeat scroll 0% 0% rgb(238, 238, 238); border: 1px solid rgb(204, 204, 204);" alt="" src="layout/backoffice/images/px.png"><a href="in-action-form.html" class="edit">Afro Samurai</a><br></td>
+                        <td valign="top" class="col">Fighting</td>
+                        <td valign="top" class="col">18+</td>
+                        <td valign="top" class="col"><a href="http://www.afrosamurai.eu" class="link"><span class="ui-icon"></span>www.afrosamurai.eu</a></td>
+                        <td valign="top" class="col"><select selected="1" class="on-off" name="online-1"><option value="0">Offline</option><option value="1">Online</option></select></td>
+                        <td valign="top" class="col">
+                            <ul class="actions">
+                                <li><a href="#" class="help" title="Edit"><span class="ui-icon ui-icon-pencil">Edit properties</span></a></li>
+                                <li><a href="#" class="help" title="Translate"><span class="ui-icon ui-icon-flag">Translate</span></a>
+                                    <ul class="tree-context">
+                                        <li><a href="#"><span>Français</span></a></li>
+                                        <li><a href="#"><span>Espanol</span></a></li>
+                                        <li><a href="#"><span>Deutsh</span></a></li>
+                                        <li><a href="#"><span>Portuguese</span></a></li>
+                                        <li><a href="#"><span>Italian</span></a></li>
+                                    </ul>
+                                </li>
+                                <li><a onclick="return confirm('Are you sure? This operation can not be undone');" href="#" class="help" title="Delete"><span class="ui-icon ui-icon-close">Delete</span></a></li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr class="row odd">
+                        <td valign="top" class="first col"><input type="checkbox" value="1" name="rowId-4"></td>
+                        <td valign="top" class="col"><img height="33" width="33" style="float: left; margin-right: 10px; background: none repeat scroll 0% 0% rgb(238, 238, 238); border: 1px solid rgb(204, 204, 204);" alt="" src="layout/backoffice/images/px.png"><a href="in-action-form.html" class="edit">Afro Samurai</a><br></td>
+                        <td valign="top" class="col">Fighting</td>
+                        <td valign="top" class="col">18+</td>
+                        <td valign="top" class="col"><a href="http://www.afrosamurai.eu" class="link"><span class="ui-icon"></span>www.afrosamurai.eu</a></td>
+                        <td valign="top" class="col"><select selected="1" class="on-off" name="online-1"><option value="0">Offline</option><option value="1">Online</option></select></td>
+                        <td valign="top" class="col">
+                            <ul class="actions">
+                                <li><a href="#" class="help" title="Edit"><span class="ui-icon ui-icon-pencil">Edit properties</span></a></li>
+                                <li><a href="#" class="help" title="Translate"><span class="ui-icon ui-icon-flag">Translate</span></a>
+                                    <ul class="tree-context">
+                                        <li><a href="#"><span>Français</span></a></li>
+                                        <li><a href="#"><span>Espanol</span></a></li>
+                                        <li><a href="#"><span>Deutsh</span></a></li>
+                                        <li><a href="#"><span>Portuguese</span></a></li>
+                                        <li><a href="#"><span>Italian</span></a></li>
+                                    </ul>
+                                </li>
+                                <li><a onclick="return confirm('Are you sure? This operation can not be undone');" href="#" class="help" title="Delete"><span class="ui-icon ui-icon-close">Delete</span></a></li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr class="row even">
+                        <td valign="top" class="first col"><input type="checkbox" value="1" name="rowId-4"></td>
+                        <td valign="top" class="col"><img height="33" width="33" style="float: left; margin-right: 10px; background: none repeat scroll 0% 0% rgb(238, 238, 238); border: 1px solid rgb(204, 204, 204);" alt="" src="layout/backoffice/images/px.png"><a href="in-action-form.html" class="edit">Afro Samurai</a><br></td>
+                        <td valign="top" class="col">Fighting</td>
+                        <td valign="top" class="col">18+</td>
+                        <td valign="top" class="col"><a href="http://www.afrosamurai.eu" class="link"><span class="ui-icon"></span>www.afrosamurai.eu</a></td>
+                        <td valign="top" class="col"><select selected="1" class="on-off" name="online-1"><option value="0">Offline</option><option value="1">Online</option></select></td>
+                        <td valign="top" class="col">
+                            <ul class="actions">
+                                <li><a href="#" class="help" title="Edit"><span class="ui-icon ui-icon-pencil">Edit properties</span></a></li>
+                                <li><a href="#" class="help" title="Translate"><span class="ui-icon ui-icon-flag">Translate</span></a>
+                                    <ul class="tree-context">
+                                        <li><a href="#"><span>Français</span></a></li>
+                                        <li><a href="#"><span>Espanol</span></a></li>
+                                        <li><a href="#"><span>Deutsh</span></a></li>
+                                        <li><a href="#"><span>Portuguese</span></a></li>
+                                        <li><a href="#"><span>Italian</span></a></li>
+                                    </ul>
+                                </li>
+                                <li><a onclick="return confirm('Are you sure? This operation can not be undone');" href="#" class="help" title="Delete"><span class="ui-icon ui-icon-close">Delete</span></a></li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr class="row odd">
+                        <td valign="top" class="first col"><input type="checkbox" value="1" name="rowId-4"></td>
+                        <td valign="top" class="col"><img height="33" width="33" style="float: left; margin-right: 10px; background: none repeat scroll 0% 0% rgb(238, 238, 238); border: 1px solid rgb(204, 204, 204);" alt="" src="layout/backoffice/images/px.png"><a href="in-action-form.html" class="edit">Afro Samurai</a><br></td>
+                        <td valign="top" class="col">Fighting</td>
+                        <td valign="top" class="col">18+</td>
+                        <td valign="top" class="col"><a href="http://www.afrosamurai.eu" class="link"><span class="ui-icon"></span>www.afrosamurai.eu</a></td>
+                        <td valign="top" class="col"><select selected="1" class="on-off" name="online-1"><option value="0">Offline</option><option value="1">Online</option></select></td>
+                        <td valign="top" class="col">
+                            <ul class="actions">
+                                <li><a href="#" class="help" title="Edit"><span class="ui-icon ui-icon-pencil">Edit properties</span></a></li>
+                                <li><a href="#" class="help" title="Translate"><span class="ui-icon ui-icon-flag">Translate</span></a>
+                                    <ul class="tree-context">
+                                        <li><a href="#"><span>Français</span></a></li>
+                                        <li><a href="#"><span>Espanol</span></a></li>
+                                        <li><a href="#"><span>Deutsh</span></a></li>
+                                        <li><a href="#"><span>Portuguese</span></a></li>
+                                        <li><a href="#"><span>Italian</span></a></li>
+                                    </ul>
+                                </li>
+                                <li><a onclick="return confirm('Are you sure? This operation can not be undone');" href="#" class="help" title="Delete"><span class="ui-icon ui-icon-close">Delete</span></a></li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr class="row even">
+                        <td valign="top" class="first col"><input type="checkbox" value="1" name="rowId-4"></td>
+                        <td valign="top" class="col"><img height="33" width="33" style="float: left; margin-right: 10px; background: none repeat scroll 0% 0% rgb(238, 238, 238); border: 1px solid rgb(204, 204, 204);" alt="" src="layout/backoffice/images/px.png"><a href="in-action-form.html" class="edit">Afro Samurai</a><br></td>
+                        <td valign="top" class="col">Fighting</td>
+                        <td valign="top" class="col">18+</td>
+                        <td valign="top" class="col"><a href="http://www.afrosamurai.eu" class="link"><span class="ui-icon"></span>www.afrosamurai.eu</a></td>
+                        <td valign="top" class="col"><select selected="1" class="on-off" name="online-1"><option value="0">Offline</option><option value="1">Online</option></select></td>
+                        <td valign="top" class="col">
+                            <ul class="actions">
+                                <li><a href="#" class="help" title="Edit"><span class="ui-icon ui-icon-pencil">Edit properties</span></a></li>
+                                <li><a href="#" class="help" title="Translate"><span class="ui-icon ui-icon-flag">Translate</span></a>
+                                    <ul class="tree-context">
+                                        <li><a href="#"><span>Français</span></a></li>
+                                        <li><a href="#"><span>Espanol</span></a></li>
+                                        <li><a href="#"><span>Deutsh</span></a></li>
+                                        <li><a href="#"><span>Portuguese</span></a></li>
+                                        <li><a href="#"><span>Italian</span></a></li>
+                                    </ul>
+                                </li>
+                                <li><a onclick="return confirm('Are you sure? This operation can not be undone');" href="#" class="help" title="Delete"><span class="ui-icon ui-icon-close">Delete</span></a></li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            
+    
+            <div class="toolbar toolbar-bottom">
+                <div class="pager">
+                    <span class="infos"><strong>1-10</strong> of <strong>816</strong></span>
+                    <a class="next"href="#">Next</a>
+                    <a class="last"href="#">Last</a>  
+                </div>
+                
+                <div class="select ui-button-tiny-squared">
+                    Select: <a href="#" class="select-all">All</a>, <a href="#" class="select-none">None</a> &nbsp;&nbsp;
+                    <span class="buttonset">
+                        <input type="radio" name="event" value="remove" id="input-bottom-1" /><label for="input-bottom-1">Supprimer</label>
+                        <input type="radio" name="event" value="publish" id="input-bottom-2" /><label for="input-bottom-2">Publish</label>
+                        <input type="radio" name="event" value="unpublish" id="input-bottom-3" /><label for="input-bottom-3">Unpublish</label>
+                    </span>
+                </div>
+            </div>
+            <br/>
+            <input type="submit" value="Send grid" class="float-right ui-button" role="button" aria-disabled="false" />
+        </form>
+        
+        <span class="grid-loading">Loading</span>
+        
+        <div class="clear"></div>
+    </section>
+
+</section>
+
+<footer>© Centurion | Running version 0.232</footer>
+</body>
+</html>

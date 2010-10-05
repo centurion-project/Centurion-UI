@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Centurion UI > CRUD > Buttons</title>
+<link type="text/css" media="all" rel="stylesheet" href="cui/theme/css/components.css" />
+<!--[if IE]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+</head>
+
+<body>
+<div class="demo">
+    <button class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button" aria-disabled="false"><span class="ui-button-text">A button element</span></button>
+	
+    <input type="submit" value="A submit button" class="ui-button ui-widget ui-state-default ui-corner-all" role="button" aria-disabled="false">
+
+    <a href="#" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button" aria-disabled="false">
+        <span class="ui-button-text">An anchor</span>
+    </a>
+</div><br/>
+
+
+<div class="demo">
+    <a href="#" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-icon-only" role="button" aria-disabled="false" title="Button with icon only">
+        <span class="ui-button-icon-primary ui-icon ui-icon-locked"></span>
+        <span class="ui-button-text">Button with icon only</span>
+    </a>
+    <a href="#" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon" role="button" aria-disabled="false">
+        <span class="ui-button-icon-primary ui-icon ui-icon-disk"></span>
+        <span class="ui-button-text">Button with icon on the left</span>
+    </a>
+    <a href="#" class="ui-button ui-button-nicy ui-button-text-icon" role="button" aria-disabled="false">
+        <span class="ui-button-icon-primary ui-icon ui-icon-nicy-dot"></span>
+        <span class="ui-button-text">Button with icon on the left</span>
+    </a>
+    <a href="#" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icons" role="button" aria-disabled="false">
+        <span class="ui-button-icon-primary ui-icon ui-icon-gear"></span>
+        <span class="ui-button-text">Button with two icons</span>
+        <span class="ui-button-icon-secondary ui-icon ui-icon-triangle-1-s"></span>
+    </a>
+    <a href="#" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-icons-only" role="button" aria-disabled="false" title="Button with two icons and no text">
+        <span class="ui-button-icon-primary ui-icon ui-icon-gear"></span>
+        <span class="ui-button-text">Button with two icons and no text</span>
+        <span class="ui-button-icon-secondary ui-icon ui-icon-triangle-1-s"></span>
+    </a>
+</div><br/>
+
+<div class="demo">
+    <span class="ui-buttonset">
+        <input type="radio" checked="checked" name="repeat" id="repeat0" class="ui-helper-hidden-accessible">
+        <label for="repeat0" class="ui-button ui-widget ui-state-default ui-button-text-only ui-corner-left ui-state-active" aria-pressed="true" role="button" aria-disabled="false">
+            <span class="ui-button-text">No Repeat</span>
+        </label>
+        <input type="radio" name="repeat" id="repeat1" class="ui-helper-hidden-accessible">
+        <label for="repeat1" aria-pressed="false" class="ui-button ui-widget ui-state-default ui-button-text-only" role="button" aria-disabled="false">            <span class="ui-button-text">Once</span>
+        </label>
+        <input type="radio" name="repeat" id="repeatall" class="ui-helper-hidden-accessible">
+        <label for="repeatall" aria-pressed="false" class="ui-button ui-widget ui-state-default ui-button-text-only ui-corner-right" role="button" aria-disabled="false">
+            <span class="ui-button-text">All</span>
+        </label>
+    </span>
+</div><br/>
+
+<div class="demo">
+    <span class="ui-toolbar ui-widget-header ui-corner-all ui-button-tiny">
+        <button id="beginning" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-icon-only" role="button" aria-disabled="false" title="go to beginning">
+            <span class="ui-button-icon-primary ui-icon ui-icon-triangle-1-w"></span>
+            <span class="ui-button-text">go to beginning</span>
+        </button>
+        <button id="rewind" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-icon-only" role="button" aria-disabled="false" title="rewind">
+            <span class="ui-button-icon-primary ui-icon ui-icon-triangle-1-e"></span>
+            <span class="ui-button-text">rewind</span>
+        </button>
+        <input type="checkbox" id="shuffle" class="ui-helper-hidden-accessible">
+        <label for="shuffle" aria-pressed="false" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button" aria-disabled="false">
+            <span class="ui-button-text">Shuffle</span>
+        </label>
+        <span id="repeat" class="ui-buttonset">
+            <input type="radio" checked="checked" name="repeat" id="repeat0" class="ui-helper-hidden-accessible">
+            <label for="repeat0" class="ui-state-active ui-button ui-widget ui-state-default ui-button-icon-only ui-corner-left" aria-pressed="true" role="button" aria-disabled="false">
+                 <span class="ui-button-icon-primary ui-icon ui-icon-zoomin"></span>
+                <span class="ui-button-text">No Repeat</span>
+            </label>
+            <input type="radio" name="repeat" id="repeat1" class="ui-helper-hidden-accessible">
+            <label for="repeat1" aria-pressed="false" class="ui-button ui-widget ui-state-default ui-button-icon-only" role="button" aria-disabled="false">
+                <span class="ui-button-icon-primary ui-icon ui-icon-zoomout"></span>
+                <span class="ui-button-text">Once</span>
+            </label>
+            <input type="radio" name="repeat" id="repeatall" class="ui-helper-hidden-accessible">
+            <label for="repeatall" aria-pressed="false" class="ui-button ui-widget ui-state-default ui-button-icon-only ui-corner-right" role="button" aria-disabled="false">
+                <span class="ui-button-icon-primary ui-icon ui-icon ui-icon-search"></span>
+                <span class="ui-button-text">All</span>
+            </label>
+        </span>
+        <span id="repeat" class="ui-buttonset">
+            <input type="radio" checked="checked" name="repeat" id="repeat0" class="ui-helper-hidden-accessible">
+            <label for="repeat0" class="ui-state-active ui-button ui-widget ui-state-default ui-button-text-only ui-corner-left" aria-pressed="true" role="button" aria-disabled="false">
+                <span class="ui-button-text">No Repeat</span>
+            </label>
+            <input type="radio" name="repeat" id="repeat1" class="ui-helper-hidden-accessible">
+            <label for="repeat1" aria-pressed="false" class="ui-button ui-widget ui-state-default ui-button-text-only" role="button" aria-disabled="false">
+                <span class="ui-button-text">Once</span>
+            </label>
+            <input type="radio" name="repeat" id="repeatall" class="ui-helper-hidden-accessible">
+            <label for="repeatall" aria-pressed="false" class="ui-button ui-widget ui-state-default ui-button-text-only ui-corner-right" role="button" aria-disabled="false">
+                <span class="ui-button-text">All</span>
+            </label>
+        </span>
+    </span>
+</div><br/>
+
+
+<div class="demo">
+    <span class="ui-toolbar ui-widget-header ui-corner-all ui-button-tiny-squared">
+        <button id="beginning" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-icon-only" role="button" aria-disabled="false" title="go to beginning">
+            <span class="ui-button-icon-primary ui-icon ui-icon-triangle-1-w"></span>
+            <span class="ui-button-text">go to beginning</span>
+        </button>
+        <button id="rewind" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-icon-only" role="button" aria-disabled="false" title="rewind">
+            <span class="ui-button-icon-primary ui-icon ui-icon-triangle-1-e"></span>
+            <span class="ui-button-text">rewind</span>
+        </button>
+        <input type="checkbox" id="shuffle" class="ui-helper-hidden-accessible">
+        <label for="shuffle" aria-pressed="false" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button" aria-disabled="false">
+            <span class="ui-button-text">Shuffle</span>
+        </label>
+        
+        <span id="repeat" class="ui-buttonset">
+            <input type="radio" checked="checked" name="repeat" id="repeat0" class="ui-helper-hidden-accessible">
+            <label for="repeat0" class="ui-state-active ui-button ui-widget ui-state-default ui-button-icon-only ui-corner-left" aria-pressed="true" role="button" aria-disabled="false">
+                 <span class="ui-button-icon-primary ui-icon ui-icon-disk"></span>
+                <span class="ui-button-text">No Repeat</span>
+            </label>
+            <input type="radio" name="repeat" id="repeat1" class="ui-helper-hidden-accessible">
+            <label for="repeat1" aria-pressed="false" class="ui-button ui-widget ui-state-default ui-button-icon-only" role="button" aria-disabled="false">
+                <span class="ui-button-icon-primary ui-icon ui-icon-print"></span>
+                <span class="ui-button-text">Once</span>
+            </label>
+            <input type="radio" name="repeat" id="repeatall" class="ui-helper-hidden-accessible">
+            <label for="repeatall" aria-pressed="false" class="ui-button ui-widget ui-state-default ui-button-icon-only ui-corner-right" role="button" aria-disabled="false">
+                <span class="ui-button-icon-primary ui-icon ui-icon-trash"></span>
+                <span class="ui-button-text">All</span>
+            </label>
+        </span>        
+        
+        <span id="repeat" class="ui-buttonset">
+            <input type="radio" checked="checked" name="repeat" id="repeat0" class="ui-helper-hidden-accessible">
+            <label for="repeat0" class="ui-state-active ui-button ui-widget ui-state-default ui-button-text-only ui-corner-left" aria-pressed="true" role="button" aria-disabled="false">
+                <span class="ui-button-text">No Repeat</span>
+            </label>
+            <input type="radio" name="repeat" id="repeat1" class="ui-helper-hidden-accessible">
+            <label for="repeat1" aria-pressed="false" class="ui-button ui-widget ui-state-default ui-button-text-only" role="button" aria-disabled="false">
+                <span class="ui-button-text">Once</span>
+            </label>
+            <input type="radio" name="repeat" id="repeatall" class="ui-helper-hidden-accessible">
+            <label for="repeatall" aria-pressed="false" class="ui-button ui-widget ui-state-default ui-button-text-only ui-corner-right" role="button" aria-disabled="false">
+                <span class="ui-button-text">All</span>
+            </label>
+        </span>
+        
+        <span class="ui-buttonset">
+            <button id="rerun" class="ui-button ui-widget ui-state-default ui-button-text-only ui-corner-left" role="button" aria-disabled="false"><span class="ui-button-text">Run last action</span></button>
+            <button id="select" class="ui-button ui-widget ui-state-default ui-button-icon-only ui-corner-right" role="button" aria-disabled="false" title="Select an action"><span class="ui-button-icon-primary ui-icon ui-icon-triangle-1-s"></span><span class="ui-button-text">Select an action</span></button>
+        </span>  
+    </span>
+</div><br/>
+
+<div class="demo ui-button-big">
+    <a href="#" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon" role="button" aria-disabled="false" title="Button with icon only">
+        <span class="ui-button-icon-primary ui-icon ui-icon-locked"></span>
+        <span class="ui-button-text">Button with icon only</span>
+    </a>   
+</div><br/><br/><br/>
+
+
+
+
+
+
+
+
+
+
+
+<div class="demo">
+    <button class="ui-button ui-button-bg-white ui-button-text-red ui-button-text-only" role="button" aria-disabled="false"><span class="ui-button-text">A button element</span></button>
+	
+    <input type="submit" value="A submit button" class="ui-button ui-button-bg-white ui-button-text-red" role="button" aria-disabled="false">
+
+    <a href="#" class="ui-button ui-button-bg-white ui-button-text-red ui-button-text-only" role="button" aria-disabled="false">
+        <span class="ui-button-text">An anchor</span>
+    </a>
+</div><br/>
+
+
+<div class="demo">
+    <a href="#" class="ui-button ui-button-bg-white ui-button-text-red ui-button-icon-only" role="button" aria-disabled="false" title="Button with icon only">
+        <span class="ui-button-icon-primary ui-icon ui-icon-red ui-icon-locked"></span>
+        <span class="ui-button-text">Button with icon only</span>
+    </a>
+    <a href="#" class="ui-button ui-button-bg-white ui-button-text-red ui-button-text-icon" role="button" aria-disabled="false">
+        <span class="ui-button-icon-primary ui-icon ui-icon-red ui-icon-locked"></span>
+        <span class="ui-button-text">Button with icon on the left</span>
+    </a>
+    <a href="#" class="ui-button ui-button-bg-white ui-button-text-red ui-button-nicy ui-button-text-icon" role="button" aria-disabled="false">
+        <span class="ui-button-icon-primary ui-icon ui-icon-red ui-icon-nicy-dot"></span>
+        <span class="ui-button-text">Button with icon on the left</span>
+    </a>
+    <a href="#" class="ui-button ui-button-bg-white ui-button-text-red ui-button-text-icons" role="button" aria-disabled="false">
+        <span class="ui-button-icon-primary ui-icon ui-icon-red ui-icon-gear"></span>
+        <span class="ui-button-text">Button with two icons</span>
+        <span class="ui-button-icon-secondary ui-icon ui-icon-triangle-1-s"></span>
+    </a>
+    <a href="#" class="ui-button ui-button-bg-white ui-button-text-red ui-button-icons-only" role="button" aria-disabled="false" title="Button with two icons and no text">
+        <span class="ui-button-icon-primary ui-icon ui-icon-red ui-icon-gear"></span>
+        <span class="ui-button-text">Button with two icons and no text</span>
+        <span class="ui-button-icon-secondary ui-icon ui-icon-triangle-1-s"></span>
+    </a>
+</div><br/>
+
+<div class="demo">
+    <span class="ui-buttonset">
+        <input type="radio" checked="checked" name="repeat" id="repeat0" class="ui-helper-hidden-accessible">
+        <label for="repeat0" class="ui-button ui-button-bg-white ui-button-text-red ui-button-text-only ui-corner-left ui-state-active" aria-pressed="true" role="button" aria-disabled="false">
+            <span class="ui-button-text">No Repeat</span>
+        </label>
+        <input type="radio" name="repeat" id="repeat1" class="ui-helper-hidden-accessible">
+        <label for="repeat1" aria-pressed="false" class="ui-button ui-button-bg-white ui-button-text-red ui-button-text-only" role="button" aria-disabled="false">            <span class="ui-button-text">Once</span>
+        </label>
+        <input type="radio" name="repeat" id="repeatall" class="ui-helper-hidden-accessible">
+        <label for="repeatall" aria-pressed="false" class="ui-button ui-button-bg-white ui-button-text-red ui-button-text-only ui-corner-right" role="button" aria-disabled="false">
+            <span class="ui-button-text">All</span>
+        </label>
+    </span>
+</div><br/>
+
+<div class="demo">
+    <span class="ui-toolbar ui-widget-header ui-corner-all ui-button-tiny">
+        <button id="beginning" class="ui-button ui-button-bg-white ui-button-text-red ui-button-icon-only" role="button" aria-disabled="false" title="go to beginning">
+            <span class="ui-button-icon-primary ui-icon ui-icon-red ui-icon-triangle-1-w"></span>
+            <span class="ui-button-text">go to beginning</span>
+        </button>
+        <button id="rewind" class="ui-button ui-button-bg-white ui-button-text-red ui-button-icon-only" role="button" aria-disabled="false" title="rewind">
+            <span class="ui-button-icon-primary ui-icon ui-icon-red ui-icon-triangle-1-e"></span>
+            <span class="ui-button-text">rewind</span>
+        </button>
+        <input type="checkbox" id="shuffle" class="ui-helper-hidden-accessible">
+        <label for="shuffle" aria-pressed="false" class="ui-button ui-button-bg-white ui-button-text-red ui-button-text-only" role="button" aria-disabled="false">
+            <span class="ui-button-text">Shuffle</span>
+        </label>
+        <span id="repeat" class="ui-buttonset">
+            <input type="radio" checked="checked" name="repeat" id="repeat0" class="ui-helper-hidden-accessible">
+            <label for="repeat0" class="ui-state-active ui-button ui-button-bg-white ui-button-text-red ui-button-icon-only ui-corner-left" aria-pressed="true" role="button" aria-disabled="false">
+                 <span class="ui-button-icon-primary ui-icon ui-icon-red ui-icon-zoomin"></span>
+                <span class="ui-button-text">No Repeat</span>
+            </label>
+            <input type="radio" name="repeat" id="repeat1" class="ui-helper-hidden-accessible">
+            <label for="repeat1" aria-pressed="false" class="ui-button ui-button-bg-white ui-button-text-red ui-button-icon-only" role="button" aria-disabled="false">
+                <span class="ui-button-icon-primary ui-icon ui-icon-red ui-icon-zoomout"></span>
+                <span class="ui-button-text">Once</span>
+            </label>
+            <input type="radio" name="repeat" id="repeatall" class="ui-helper-hidden-accessible">
+            <label for="repeatall" aria-pressed="false" class="ui-button ui-button-bg-white ui-button-text-red ui-button-icon-only ui-corner-right" role="button" aria-disabled="false">
+                <span class="ui-button-icon-primary ui-icon ui-icon-red ui-icon-search"></span>
+                <span class="ui-button-text">All</span>
+            </label>
+        </span>
+        <span id="repeat" class="ui-buttonset">
+            <input type="radio" checked="checked" name="repeat" id="repeat0" class="ui-helper-hidden-accessible">
+            <label for="repeat0" class="ui-state-active ui-button ui-button-bg-white ui-button-text-red ui-button-text-only ui-corner-left" aria-pressed="true" role="button" aria-disabled="false">
+                <span class="ui-button-text">No Repeat</span>
+            </label>
+            <input type="radio" name="repeat" id="repeat1" class="ui-helper-hidden-accessible">
+            <label for="repeat1" aria-pressed="false" class="ui-button ui-button-bg-white ui-button-text-red ui-button-text-only" role="button" aria-disabled="false">
+                <span class="ui-button-text">Once</span>
+            </label>
+            <input type="radio" name="repeat" id="repeatall" class="ui-helper-hidden-accessible">
+            <label for="repeatall" aria-pressed="false" class="ui-button ui-button-bg-white ui-button-text-red ui-button-text-only ui-corner-right" role="button" aria-disabled="false">
+                <span class="ui-button-text">All</span>
+            </label>
+        </span>
+    </span>
+</div><br/>
+
+
+<div class="demo">
+    <span class="ui-toolbar ui-widget-header ui-corner-all ui-button-tiny-squared">
+        <button id="beginning" class="ui-button ui-button-bg-white ui-button-text-red ui-button-icon-only" role="button" aria-disabled="false" title="go to beginning">
+            <span class="ui-button-icon-primary ui-icon ui-icon-red ui-icon-triangle-1-w"></span>
+            <span class="ui-button-text">go to beginning</span>
+        </button>
+        <button id="rewind" class="ui-button ui-button-bg-white ui-button-text-red ui-button-icon-only" role="button" aria-disabled="false" title="rewind">
+            <span class="ui-button-icon-primary ui-icon ui-icon-red ui-icon-triangle-1-e"></span>
+            <span class="ui-button-text">rewind</span>
+        </button>
+        <input type="checkbox" id="shuffle" class="ui-helper-hidden-accessible">
+        <label for="shuffle" aria-pressed="false" class="ui-button ui-button-bg-white ui-button-text-red ui-button-text-only" role="button" aria-disabled="false">
+            <span class="ui-button-text">Shuffle</span>
+        </label>
+        
+        <span id="repeat" class="ui-buttonset">
+            <input type="radio" checked="checked" name="repeat" id="repeat0" class="ui-helper-hidden-accessible">
+            <label for="repeat0" class="ui-state-active ui-button ui-button-bg-white ui-button-text-red ui-button-icon-only ui-corner-left" aria-pressed="true" role="button" aria-disabled="false">
+                 <span class="ui-button-icon-primary ui-icon ui-icon-red ui-icon-disk"></span>
+                <span class="ui-button-text">No Repeat</span>
+            </label>
+            <input type="radio" name="repeat" id="repeat1" class="ui-helper-hidden-accessible">
+            <label for="repeat1" aria-pressed="false" class="ui-button ui-button-bg-white ui-button-text-red ui-button-icon-only" role="button" aria-disabled="false">
+                <span class="ui-button-icon-primary ui-icon ui-icon-red ui-icon-print"></span>
+                <span class="ui-button-text">Once</span>
+            </label>
+            <input type="radio" name="repeat" id="repeatall" class="ui-helper-hidden-accessible">
+            <label for="repeatall" aria-pressed="false" class="ui-button ui-button-bg-white ui-button-text-red ui-button-icon-only ui-corner-right" role="button" aria-disabled="false">
+                <span class="ui-button-icon-primary ui-icon ui-icon-red ui-icon-trash"></span>
+                <span class="ui-button-text">All</span>
+            </label>
+        </span>        
+        
+        <span id="repeat" class="ui-buttonset">
+            <input type="radio" checked="checked" name="repeat" id="repeat0" class="ui-helper-hidden-accessible">
+            <label for="repeat0" class="ui-state-active ui-button ui-button-bg-white ui-button-text-red ui-button-text-only ui-corner-left" aria-pressed="true" role="button" aria-disabled="false">
+                <span class="ui-button-text">No Repeat</span>
+            </label>
+            <input type="radio" name="repeat" id="repeat1" class="ui-helper-hidden-accessible">
+            <label for="repeat1" aria-pressed="false" class="ui-button ui-button-bg-white ui-button-text-red ui-button-text-only" role="button" aria-disabled="false">
+                <span class="ui-button-text">Once</span>
+            </label>
+            <input type="radio" name="repeat" id="repeatall" class="ui-helper-hidden-accessible">
+            <label for="repeatall" aria-pressed="false" class="ui-button ui-button-bg-white ui-button-text-red ui-button-text-only ui-corner-right" role="button" aria-disabled="false">
+                <span class="ui-button-text">All</span>
+            </label>
+        </span>
+    </span>
+</div><br/>
+
+<div class="demo ui-button-big">
+    <a href="#" class="ui-button ui-button-bg-white ui-button-text-red ui-button-text-icon" role="button" aria-disabled="false" title="Button with icon only">
+        <span class="ui-button-icon-primary ui-icon ui-icon-red ui-icon-locked"></span>
+        <span class="ui-button-text">Button with icon only</span>
+    </a>
+</div><br/><br/><br/>
+
+
+
+
+
+
+
+
+
+
+
+<div class="demo">
+    <button class="ui-button ui-button-bg-white-gradient ui-button-text-red ui-button-text-only" role="button" aria-disabled="false"><span class="ui-button-text">A button element</span></button>
+	
+    <input type="submit" value="A submit button" class="ui-button ui-button-bg-white-gradient ui-button-text-red" role="button" aria-disabled="false">
+
+    <a href="#" class="ui-button ui-button-bg-white-gradient ui-button-text-red ui-button-text-only" role="button" aria-disabled="false">
+        <span class="ui-button-text">An anchor</span>
+    </a>
+</div><br/>
+
+
+<div class="demo">
+    <a href="#" class="ui-button ui-button-bg-white-gradient ui-button-text-red ui-button-icon-only" role="button" aria-disabled="false" title="Button with icon only">
+        <span class="ui-button-icon-primary ui-icon ui-icon-red ui-icon-locked"></span>
+        <span class="ui-button-text">Button with icon only</span>
+    </a>
+    <a href="#" class="ui-button ui-button-bg-white-gradient ui-button-text-red ui-button-text-icon" role="button" aria-disabled="false">
+        <span class="ui-button-icon-primary ui-icon ui-icon-red ui-icon-locked"></span>
+        <span class="ui-button-text">Button with icon on the left</span>
+    </a>
+    <a href="#" class="ui-button ui-button-bg-white-gradient ui-button-text-red ui-button-nicy ui-button-text-icon" role="button" aria-disabled="false">
+        <span class="ui-button-icon-primary ui-icon ui-icon-red ui-icon-nicy-dot"></span>
+        <span class="ui-button-text">Button with icon on the left</span>
+    </a>
+    <a href="#" class="ui-button ui-button-bg-white-gradient ui-button-text-red ui-button-text-icons" role="button" aria-disabled="false">
+        <span class="ui-button-icon-primary ui-icon ui-icon-red ui-icon-gear"></span>
+        <span class="ui-button-text">Button with two icons</span>
+        <span class="ui-button-icon-secondary ui-icon ui-icon-triangle-1-s"></span>
+    </a>
+    <a href="#" class="ui-button ui-button-bg-white-gradient ui-button-text-red ui-button-icons-only" role="button" aria-disabled="false" title="Button with two icons and no text">
+        <span class="ui-button-icon-primary ui-icon ui-icon-red ui-icon-gear"></span>
+        <span class="ui-button-text">Button with two icons and no text</span>
+        <span class="ui-button-icon-secondary ui-icon ui-icon-triangle-1-s"></span>
+    </a>
+</div><br/>
+
+<div class="demo">
+    <span class="ui-buttonset">
+        <input type="radio" checked="checked" name="repeat" id="repeat0" class="ui-helper-hidden-accessible">
+        <label for="repeat0" class="ui-button ui-button-bg-white-gradient ui-button-text-red ui-button-text-only ui-corner-left ui-state-active" aria-pressed="true" role="button" aria-disabled="false">
+            <span class="ui-button-text">No Repeat</span>
+        </label>
+        <input type="radio" name="repeat" id="repeat1" class="ui-helper-hidden-accessible">
+        <label for="repeat1" aria-pressed="false" class="ui-button ui-button-bg-white-gradient ui-button-text-red ui-button-text-only" role="button" aria-disabled="false">            <span class="ui-button-text">Once</span>
+        </label>
+        <input type="radio" name="repeat" id="repeatall" class="ui-helper-hidden-accessible">
+        <label for="repeatall" aria-pressed="false" class="ui-button ui-button-bg-white-gradient ui-button-text-red ui-button-text-only ui-corner-right" role="button" aria-disabled="false">
+            <span class="ui-button-text">All</span>
+        </label>
+    </span>
+</div><br/>
+
+<div class="demo">
+    <span class="ui-toolbar ui-widget-header ui-corner-all ui-button-tiny">
+        <button id="beginning" class="ui-button ui-button-bg-white-gradient ui-button-text-red ui-button-icon-only" role="button" aria-disabled="false" title="go to beginning">
+            <span class="ui-button-icon-primary ui-icon ui-icon-red ui-icon-triangle-1-w"></span>
+            <span class="ui-button-text">go to beginning</span>
+        </button>
+        <button id="rewind" class="ui-button ui-button-bg-white-gradient ui-button-text-red ui-button-icon-only" role="button" aria-disabled="false" title="rewind">
+            <span class="ui-button-icon-primary ui-icon ui-icon-red ui-icon-triangle-1-e"></span>
+            <span class="ui-button-text">rewind</span>
+        </button>
+        <input type="checkbox" id="shuffle" class="ui-helper-hidden-accessible">
+        <label for="shuffle" aria-pressed="false" class="ui-button ui-button-bg-white-gradient ui-button-text-red ui-button-text-only" role="button" aria-disabled="false">
+            <span class="ui-button-text">Shuffle</span>
+        </label>
+        <span id="repeat" class="ui-buttonset">
+            <input type="radio" checked="checked" name="repeat" id="repeat0" class="ui-helper-hidden-accessible">
+            <label for="repeat0" class="ui-state-active ui-button ui-button-bg-white-gradient ui-button-text-red ui-button-icon-only ui-corner-left" aria-pressed="true" role="button" aria-disabled="false">
+                 <span class="ui-button-icon-primary ui-icon ui-icon-red ui-icon-zoomin"></span>
+                <span class="ui-button-text">No Repeat</span>
+            </label>
+            <input type="radio" name="repeat" id="repeat1" class="ui-helper-hidden-accessible">
+            <label for="repeat1" aria-pressed="false" class="ui-button ui-button-bg-white-gradient ui-button-text-red ui-button-icon-only" role="button" aria-disabled="false">
+                <span class="ui-button-icon-primary ui-icon ui-icon-red ui-icon-zoomout"></span>
+                <span class="ui-button-text">Once</span>
+            </label>
+            <input type="radio" name="repeat" id="repeatall" class="ui-helper-hidden-accessible">
+            <label for="repeatall" aria-pressed="false" class="ui-button ui-button-bg-white-gradient ui-button-text-red ui-button-icon-only ui-corner-right" role="button" aria-disabled="false">
+                <span class="ui-button-icon-primary ui-icon ui-icon-red ui-icon-search"></span>
+                <span class="ui-button-text">All</span>
+            </label>
+        </span>
+        <span id="repeat" class="ui-buttonset">
+            <input type="radio" checked="checked" name="repeat" id="repeat0" class="ui-helper-hidden-accessible">
+            <label for="repeat0" class="ui-state-active ui-button ui-button-bg-white-gradient ui-button-text-red ui-button-text-only ui-corner-left" aria-pressed="true" role="button" aria-disabled="false">
+                <span class="ui-button-text">No Repeat</span>
+            </label>
+            <input type="radio" name="repeat" id="repeat1" class="ui-helper-hidden-accessible">
+            <label for="repeat1" aria-pressed="false" class="ui-button ui-button-bg-white-gradient ui-button-text-red ui-button-text-only" role="button" aria-disabled="false">
+                <span class="ui-button-text">Once</span>
+            </label>
+            <input type="radio" name="repeat" id="repeatall" class="ui-helper-hidden-accessible">
+            <label for="repeatall" aria-pressed="false" class="ui-button ui-button-bg-white-gradient ui-button-text-red ui-button-text-only ui-corner-right" role="button" aria-disabled="false">
+                <span class="ui-button-text">All</span>
+            </label>
+        </span>
+    </span>
+</div><br/>
+
+
+<div class="demo">
+    <span class="ui-toolbar ui-widget-header ui-corner-all ui-button-tiny-squared">
+        <button id="beginning" class="ui-button ui-button-bg-white-gradient ui-button-text-red ui-button-icon-only" role="button" aria-disabled="false" title="go to beginning">
+            <span class="ui-button-icon-primary ui-icon ui-icon-red ui-icon-triangle-1-w"></span>
+            <span class="ui-button-text">go to beginning</span>
+        </button>
+        <button id="rewind" class="ui-button ui-button-bg-white-gradient ui-button-text-red ui-button-icon-only" role="button" aria-disabled="false" title="rewind">
+            <span class="ui-button-icon-primary ui-icon ui-icon-red ui-icon-triangle-1-e"></span>
+            <span class="ui-button-text">rewind</span>
+        </button>
+        <input type="checkbox" id="shuffle" class="ui-helper-hidden-accessible">
+        <label for="shuffle" aria-pressed="false" class="ui-button ui-button-bg-white-gradient ui-button-text-red ui-button-text-only" role="button" aria-disabled="false">
+            <span class="ui-button-text">Shuffle</span>
+        </label>
+        
+        <span id="repeat" class="ui-buttonset">
+            <input type="radio" checked="checked" name="repeat" id="repeat0" class="ui-helper-hidden-accessible">
+            <label for="repeat0" class="ui-state-active ui-button ui-button-bg-white-gradient ui-button-text-red ui-button-icon-only ui-corner-left" aria-pressed="true" role="button" aria-disabled="false">
+                 <span class="ui-button-icon-primary ui-icon ui-icon-red ui-icon-disk"></span>
+                <span class="ui-button-text">No Repeat</span>
+            </label>
+            <input type="radio" name="repeat" id="repeat1" class="ui-helper-hidden-accessible">
+            <label for="repeat1" aria-pressed="false" class="ui-button ui-button-bg-white-gradient ui-button-text-red ui-button-icon-only" role="button" aria-disabled="false">
+                <span class="ui-button-icon-primary ui-icon ui-icon-red ui-icon-print"></span>
+                <span class="ui-button-text">Once</span>
+            </label>
+            <input type="radio" name="repeat" id="repeatall" class="ui-helper-hidden-accessible">
+            <label for="repeatall" aria-pressed="false" class="ui-button ui-button-bg-white-gradient ui-button-text-red ui-button-icon-only ui-corner-right" role="button" aria-disabled="false">
+                <span class="ui-button-icon-primary ui-icon ui-icon-red ui-icon-trash"></span>
+                <span class="ui-button-text">All</span>
+            </label>
+        </span>        
+        
+        <span id="repeat" class="ui-buttonset">
+            <input type="radio" checked="checked" name="repeat" id="repeat0" class="ui-helper-hidden-accessible">
+            <label for="repeat0" class="ui-state-active ui-button ui-button-bg-white-gradient ui-button-text-red ui-button-text-only ui-corner-left" aria-pressed="true" role="button" aria-disabled="false">
+                <span class="ui-button-text">No Repeat</span>
+            </label>
+            <input type="radio" name="repeat" id="repeat1" class="ui-helper-hidden-accessible">
+            <label for="repeat1" aria-pressed="false" class="ui-button ui-button-bg-white-gradient ui-button-text-red ui-button-text-only" role="button" aria-disabled="false">
+                <span class="ui-button-text">Once</span>
+            </label>
+            <input type="radio" name="repeat" id="repeatall" class="ui-helper-hidden-accessible">
+            <label for="repeatall" aria-pressed="false" class="ui-button ui-button-bg-white-gradient ui-button-text-red ui-button-text-only ui-corner-right" role="button" aria-disabled="false">
+                <span class="ui-button-text">All</span>
+            </label>
+        </span>
+    </span>
+</div><br/>
+
+<div class="demo ui-button-big">
+    <a href="#" class="ui-button ui-button-bg-white-gradient ui-button-text-red ui-button-text-icon" role="button" aria-disabled="false" title="Button with icon only">
+        <span class="ui-button-icon-primary ui-icon ui-icon-red ui-icon-locked"></span>
+        <span class="ui-button-text">Button with icon only</span>
+    </a>
+</div><br/>
+
+
+
+</body>
+</html>

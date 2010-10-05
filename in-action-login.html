@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Centurion UI > CRUD > Grid</title>
+<link type="text/css" media="all" rel="stylesheet" href="layouts/backoffice/styles.css" />
+<script type="text/javascript" src="cui/libs/jquery.js"></script>
+<script type="text/javascript" src="layouts/backoffice/js/all.js"></script>
+<!--[if IE]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+</head>
+
+<body id="login">
+
+<header class="h">
+    <h1>Centurion - Back Office</h1>
+</header>
+
+<section>
+
+    <header class="sh">
+        
+    </header>
+
+    <section>
+        <form class="form" method="post" id="loginform">
+            <fieldset class="form-main">
+                <fieldset class="form-group">
+                    <legend>Centurion administration</legend>
+                    <div class="form-item form-item-large">
+                        <label for="login">User</label>    
+                        <div class="field-wrapper">
+                            <input type="text" class=" field-text" value="" id="login" name="login">            
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    
+                    <div class="form-item form-item-large">
+                        <label for="password">Password</label>    
+                        <div class="field-wrapper">
+                            <input type="password" class=" field-text" value="" id="password" name="password">            
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    
+                    <div class="form-item form-item-large">
+                        <fieldset class="form-checkbox form-border-top" id="checkbox">
+                            <div class="field-wrapper">
+                                <label for="option1">
+                                    <input type="hidden" value="0" name="remember_me">
+                                    <input type="checkbox" class="field-checkbox" value="1" id="remember_me" name="remember_me">
+                                    Remember me
+                                </label> 
+                            </div>
+                        </fieldset>
+                    </div>
+
+
+                </fieldset>                    
+                <div class="form-submit">
+                    <button class="ui-button ui-button-nicy ui-button-text-icon" id="send" name="send" role="button" aria-disabled="false">
+                        <span class="ui-button-icon-primary ui-icon ui-icon-nicy-arrow-right"></span>
+                        <span class="ui-button-text">Log in</span>
+                    </button> 
+                </div>
+            </fieldset>
+        </form>
+        <div class="clear"></div>
+	</section>
+	
+</section>
+
+<footer>© Centurion | Running version 0.232</footer>
+</body>
+</html>

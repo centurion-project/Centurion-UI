@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Centurion UI > CRUD > Grid</title>
+<link type="text/css" media="all" rel="stylesheet" href="layouts/backoffice/styles.css" />
+<script type="text/javascript" src="cui/libs/jquery.js"></script>
+<script type="text/javascript" src="layouts/backoffice/js/highcharts/excanvas.js"></script>
+<script type="text/javascript" src="layouts/backoffice/js/highcharts/highcharts.js"></script>
+<script type="text/javascript" src="layouts/backoffice/js/all.js"></script>
+<!--[if IE]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+<script type="text/javascript">
+    
+var chart;
+
+$(function () {
+    chart = new Highcharts.Chart({
+        chart: {
+            renderTo: 'container',
+            margin: [10, 0, 16, 21],
+            plotBorderColor: "#eeeeee"
+        },
+        labels: {
+            style: {
+                color: "#000000",
+                font: "normal 12px Arial"
+            }
+        },
+        title: {
+            text: ''
+        },
+        xAxis: {
+            type: 'datetime'
+        },
+        yAxis: {
+            title: {
+                text: ''
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+        },
+        tooltip: {
+            style: {
+                color: "#555",
+                font: "normal 10px Arial"
+            },
+            formatter: function() {
+                var s;
+                if (this.point.name) { // the pie chart
+                s = '<strong>'+ this.y + '</strong> '+ this.point.name;
+                } else {
+                s = Highcharts.dateFormat('%A, %B %e, %Y', this.x) +'<br/><strong>'+ this.y + '</strong> '+ this.series.name;
+                }
+                return s;
+            }
+        },
+        legend: {
+            enabled:false
+        },
+        plotOptions: {
+            areaspline: {
+                fillOpacity: 0.15
+            },
+            series: {
+                 marker: {
+                    enabled: false,
+                    states: {
+                       hover: {
+                          enabled: true,
+                          radius: 5
+                       }
+                    }
+                 }
+              }
+
+        },
+        credits: {
+            enabled: false
+        },
+
+        series: [{
+            type: "areaspline",
+            name: 'new member(s)', 
+            pointInterval: 24 * 3600 * 1000,
+            pointStart: Date.UTC(2010, 6, 01),
+            dataURL: 'stats.json',
+            color: "#5794d6"
+        }, {
+            type: 'pie',
+            name: 'users',
+            data: [{
+                name: 'subscribers',
+                y: 13,
+                color: "#5794d6" 
+            }, {
+                name: 'members',
+                y: 23,
+                color: "#eeeeee" 
+            }],
+            center: [50, 50],
+            size: 75,
+            showInLegend: false
+        }]
+    });
+});
+
+
+
+</script>
+</head>
+
+<body id="tpl-dashboard">
+
+<header class="h">
+    <h1>Centurion - Back Office</h1>
+      
+    <nav>
+        <ul class="main">
+            <li><a href="#">Contents</a></li>
+            <li><a href="#">Users</a></li>
+            <li><a href="#">Pages</a></li>
+            <li class="selecter"><a href="#"><span class="icon arrow"></span>Settings</a>
+                <ul>
+                    <li><a href="#">Translation</a></li>
+                    <li><a href="#">United Kingdom</a></li>
+                </ul></li>
+            <li class="selecter"><a href="#"><span class="icon arrow"></span>Sites</a>
+                <ul>
+                    <li><a href="#">French</a></li>
+                    <li><a href="#">United Kingdom</a></li>
+                </ul>
+            </li>
+        </ul>
+        
+        <span class="user">
+            <span class="icon"></span>
+            Robert Octave, <a href="#">Log out</a> &nbsp;|&nbsp; <a href="#">View website</a>
+        </span>
+    </nav>
+    
+    <form class="search">
+        <div>
+            <input type="text" class="q" name="q" placeholder="Search" value="Search" />
+            <input type="image" class="icon valid" name="valid" value="Valid" src="layouts/backoffice/images/px.png" />
+        </div>
+    </form>
+</header>
+
+<section>
+    <header class="sh">
+        <h1>Hey Robert, what's up?</h1>
+    </header>
+
+    <section>
+        <div class="col-right">
+            <div class="box-dashboard">
+                <h2>Users activity</h2>
+                <div id="container" class="highcharts-container" 
+                     style="height:210px; width:100%; clear:both"></div>
+            </div>
+        </div>
+        <div class="col-left">
+            <div class="box-dashboard box-dashboard-glance">
+                <h2>Your site at a glance</h2>
+                <div class="glance">
+                    <div class="first">
+                        <span class="col">
+                            <span class="number number-blue">989</span>
+                        </span>
+                        <a class="edit" href="#">games</a>
+                        <a href="#" class="create">
+                            <span class="ui-icon ui-icon-gray ui-icon-plus"></span>
+                            <span class="text">Create</span>
+                        </a>
+                    </div>
+                    <div class="first">
+                        <span class="col">
+                            <span class="number number-blue">1095</span>
+                        </span>
+                        <a class="edit" href="#">releases</a>
+                        <a href="#" class="create">
+                            <span class="ui-icon ui-icon-gray ui-icon-plus"></span>
+                            <span class="text">Create</span>
+                        </a>
+                    </div>
+                    <div class="clear"></div>
+                    <div>
+                        <span class="col">
+                            <span class="number number-blue">646</span>
+                        </span>
+                        <a class="edit" href="#">news</a>
+                        <a href="#" class="create">
+                            <span class="ui-icon ui-icon-gray ui-icon-plus"></span>
+                            <span class="text">Create</span>
+                        </a>
+                    </div>
+                    <div>
+                        <span class="col">
+                            <span class="number number-blue">45</span>
+                        </span>
+                        <a class="edit" href="#">downloads</a>
+                        <a href="#" class="create">
+                            <span class="ui-icon ui-icon-gray ui-icon-plus"></span>
+                            <span class="text">Create</span>
+                        </a>
+                    </div>
+                    <div class="clear"></div>
+                    <div>
+                        <span class="col">
+                            <span class="number number-silver">7</span>
+                        </span>
+                        <a class="edit" href="#">platforms</a>
+                        <a href="#" class="create">
+                            <span class="ui-icon ui-icon-gray ui-icon-plus"></span>
+                            <span class="text">Create</span>
+                        </a>
+                    </div>
+                    <div>
+                        <span class="col">
+                            <span class="number number-silver">121</span>
+                        </span>
+                        <a class="edit" href="#">developers</a>
+                        <a href="#" class="create">
+                            <span class="ui-icon ui-icon-gray ui-icon-plus"></span>
+                            <span class="text">Create</span>
+                        </a>
+                    </div>
+                    <div class="clear"></div>
+                    <div>
+                        <span class="col">
+                            <span class="number number-silver">47</span>
+                        </span>
+                        <a class="edit" href="#">publishers</a>
+                        <a href="#" class="create">
+                            <span class="ui-icon ui-icon-gray ui-icon-plus"></span>
+                            <span class="text">Create</span>
+                        </a>
+                    </div>
+                    <div>
+                        <span class="col">
+                            <span class="number number-silver">3</span>
+                        </span>
+                        <a class="edit" href="#">point of sales</a>
+                        <a href="#" class="create">
+                            <span class="ui-icon ui-icon-gray ui-icon-plus"></span>
+                            <span class="text">Create</span>
+                        </a>
+                    </div>
+                    <div class="clear"></div>
+                    <div>
+                        <span class="col">
+                            <span class="number number-silver">7</span>
+                        </span>
+                        <a class="edit" href="#">retailers</a>
+                        <a href="#" class="create">
+                            <span class="ui-icon ui-icon-gray ui-icon-plus"></span>
+                            <span class="text">Create</span>
+                        </a>
+                    </div>
+                    <div>
+                        <span class="col">
+                            <span class="number number-silver">11</span>
+                        </span>
+                        <a class="edit" href="#">ratings</a>
+                        <a href="#" class="create">
+                            <span class="ui-icon ui-icon-gray ui-icon-plus"></span>
+                            <span class="text">Create</span>
+                        </a>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </div>
+        <div class="clear"><br/><br/></div>
+        
+        <div class="col-right">
+            <div class="box-dashboard">
+                <h2>User generated contents</h2>
+                <table cellpadding="0" cellspacing="0" border="0" class="grid datas">
+                    <tr class="odd">
+                        <td class="where">Article</td>
+                        <td class="what">
+                            <img height="33" width="33" style="float: left; margin-right: 10px; background: #eee; 
+                            border: 1px solid #d6d6d6;" alt="" src="layouts/backoffice/images/px.png">
+                            <a class="edit" href="#">How Centurion is the best</a>
+                            <span class="who">created by <a href="#">Lolo-les-bon-tuyaux</a> at Sep 26, 2008</span>
+                        </td>
+                    </tr>
+                    <tr class="even">
+                        <td class="where">Article</td>
+                        <td class="what">
+                            <img height="33" width="33" style="float: left; margin-right: 10px; background: #eee; 
+                            border: 1px solid #d6d6d6;" alt="" src="layouts/backoffice/images/px.png">
+                            <a class="edit" href="#">How Centurion is the best</a>
+                            <span class="who">created by <a href="#">Lolo-les-bon-tuyaux</a> at Sep 26, 2008</span>
+                        </td>
+                    </tr>
+                    <tr class="odd">
+                        <td class="where">Article</td>
+                        <td class="what">
+                            <img height="33" width="33" style="float: left; margin-right: 10px; background: #eee; 
+                            border: 1px solid #d6d6d6;" alt="" src="layouts/backoffice/images/px.png">
+                            <a class="edit" href="#">How Centurion is the best</a>
+                            <span class="who">created by <a href="#">Lolo-les-bon-tuyaux</a> at Sep 26, 2008</span>
+                        </td>
+                    </tr>
+                    <tr class="even">
+                        <td class="where">Article</td>
+                        <td class="what">
+                            <img height="33" width="33" style="float: left; margin-right: 10px; background: #eee; 
+                            border: 1px solid #d6d6d6;" alt="" src="layouts/backoffice/images/px.png">
+                            <a class="edit" href="#">How Centurion is the best</a>
+                            <span class="who">created by <a href="#">Lolo-les-bon-tuyaux</a> at Sep 26, 2008</span>
+                        </td>
+                    </tr>
+
+                    <tr class="odd">
+                        <td class="where">Article</td>
+                        <td class="what">
+                            <img height="33" width="33" style="float: left; margin-right: 10px; background: #eee; 
+                            border: 1px solid #d6d6d6;" alt="" src="layouts/backoffice/images/px.png">
+                            <a class="edit" href="#">How Centurion is the best</a>
+                            <span class="who">created by <a href="#">Lolo-les-bon-tuyaux</a> at Sep 26, 2008</span>
+                        </td>
+                    </tr>
+                    <tr class="even">
+                        <td class="where">Article</td>
+                        <td class="what">
+                            <img height="33" width="33" style="float: left; margin-right: 10px; background: #eee; 
+                            border: 1px solid #d6d6d6;" alt="" src="layouts/backoffice/images/px.png">
+                            <a class="edit" href="#">How Centurion is the best</a>
+                            <span class="who">created by <a href="#">Lolo-les-bon-tuyaux</a> at Sep 26, 2008</span>
+                        </td>
+                    </tr>
+                    <tr class="odd">
+                        <td class="where">Article</td>
+                        <td class="what">
+                            <img height="33" width="33" style="float: left; margin-right: 10px; background: #eee; 
+                            border: 1px solid #d6d6d6;" alt="" src="layouts/backoffice/images/px.png">
+                            <a class="edit" href="#">How Centurion is the best</a>
+                            <span class="who">created by <a href="#">Lolo-les-bon-tuyaux</a> at Sep 26, 2008</span>
+                        </td>
+                    </tr>
+                    <tr class="even">
+                        <td class="where">Article</td>
+                        <td class="what">
+                            <img height="33" width="33" style="float: left; margin-right: 10px; background: #eee; 
+                            border: 1px solid #d6d6d6;" alt="" src="layouts/backoffice/images/px.png">
+                            <a class="edit" href="#">How Centurion is the best</a>
+                            <span class="who">created by <a href="#">Lolo-les-bon-tuyaux</a> at Sep 26, 2008</span>
+                        </td>
+                    </tr>
+                    <tr class="odd">
+                        <td class="where">Article</td>
+                        <td class="what">
+                            <img height="33" width="33" style="float: left; margin-right: 10px; background: #eee; 
+                            border: 1px solid #d6d6d6;" alt="" src="layouts/backoffice/images/px.png">
+                            <a class="edit" href="#">How Centurion is the best</a>
+                            <span class="who">created by <a href="#">Lolo-les-bon-tuyaux</a> at Sep 26, 2008</span>
+                        </td>
+                    </tr>
+                    <tr class="even">
+                        <td class="where">Article</td>
+                        <td class="what">
+                            <img height="33" width="33" style="float: left; margin-right: 10px; background: #eee; 
+                            border: 1px solid #d6d6d6;" alt="" src="layouts/backoffice/images/px.png">
+                            <a class="edit" href="#">How Centurion is the best</a>
+                            <span class="who">created by <a href="#">Lolo-les-bon-tuyaux</a> at Sep 26, 2008</span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        
+        <div class="col-left">  
+            <div class="box-dashboard">
+                <h2>Last edited</h2>
+                <table cellpadding="0" cellspacing="0" border="0" class="grid datas">
+                    <tr class="odd">
+                        <td class="where">Article</td>
+                        <td class="what">
+                            <img height="33" width="33" style="float: left; margin-right: 10px; background: #eee; 
+                            border: 1px solid #d6d6d6;" alt="" src="layouts/backoffice/images/px.png">
+                            <a class="edit" href="#">How Centurion is the best</a>
+                            <span class="who">created by <a href="#">Lolo-les-bon-tuyaux</a> at Sep 26, 2008</span>
+                        </td>
+                    </tr>
+                    <tr class="even">
+                        <td class="where">Article</td>
+                        <td class="what">
+                            <img height="33" width="33" style="float: left; margin-right: 10px; background: #eee; 
+                            border: 1px solid #d6d6d6;" alt="" src="layouts/backoffice/images/px.png">
+                            <a class="edit" href="#">How Centurion is the best</a>
+                            <span class="who">created by <a href="#">Lolo-les-bon-tuyaux</a> at Sep 26, 2008</span>
+                        </td>
+                    </tr>
+                    <tr class="odd">
+                        <td class="where">Article</td>
+                        <td class="what">
+                            <img height="33" width="33" style="float: left; margin-right: 10px; background: #eee; 
+                            border: 1px solid #d6d6d6;" alt="" src="layouts/backoffice/images/px.png">
+                            <a class="edit" href="#">How Centurion is the best</a>
+                            <span class="who">created by <a href="#">Lolo-les-bon-tuyaux</a> at Sep 26, 2008</span>
+                        </td>
+                    </tr>
+                    <tr class="even">
+                        <td class="where">Article</td>
+                        <td class="what">
+                            <img height="33" width="33" style="float: left; margin-right: 10px; background: #eee; 
+                            border: 1px solid #d6d6d6;" alt="" src="layouts/backoffice/images/px.png">
+                            <a class="edit" href="#">How Centurion is the best</a>
+                            <span class="who">created by <a href="#">Lolo-les-bon-tuyaux</a> at Sep 26, 2008</span>
+                        </td>
+                    </tr>
+
+                    <tr class="odd">
+                        <td class="where">Article</td>
+                        <td class="what">
+                            <img height="33" width="33" style="float: left; margin-right: 10px; background: #eee; 
+                            border: 1px solid #d6d6d6;" alt="" src="layouts/backoffice/images/px.png">
+                            <a class="edit" href="#">How Centurion is the best</a>
+                            <span class="who">created by <a href="#">Lolo-les-bon-tuyaux</a> at Sep 26, 2008</span>
+                        </td>
+                    </tr>
+                    <tr class="even">
+                        <td class="where">Article</td>
+                        <td class="what">
+                            <img height="33" width="33" style="float: left; margin-right: 10px; background: #eee; 
+                            border: 1px solid #d6d6d6;" alt="" src="layouts/backoffice/images/px.png">
+                            <a class="edit" href="#">How Centurion is the best</a>
+                            <span class="who">created by <a href="#">Lolo-les-bon-tuyaux</a> at Sep 26, 2008</span>
+                        </td>
+                    </tr>
+                    <tr class="odd">
+                        <td class="where">Article</td>
+                        <td class="what">
+                            <img height="33" width="33" style="float: left; margin-right: 10px; background: #eee; 
+                            border: 1px solid #d6d6d6;" alt="" src="layouts/backoffice/images/px.png">
+                            <a class="edit" href="#">How Centurion is the best</a>
+                            <span class="who">created by <a href="#">Lolo-les-bon-tuyaux</a> at Sep 26, 2008</span>
+                        </td>
+                    </tr>
+                    <tr class="even">
+                        <td class="where">Article</td>
+                        <td class="what">
+                            <img height="33" width="33" style="float: left; margin-right: 10px; background: #eee; 
+                            border: 1px solid #d6d6d6;" alt="" src="layouts/backoffice/images/px.png">
+                            <a class="edit" href="#">How Centurion is the best</a>
+                            <span class="who">created by <a href="#">Lolo-les-bon-tuyaux</a> at Sep 26, 2008</span>
+                        </td>
+                    </tr>
+                    <tr class="odd">
+                        <td class="where">Article</td>
+                        <td class="what">
+                            <img height="33" width="33" style="float: left; margin-right: 10px; background: #eee; 
+                            border: 1px solid #d6d6d6;" alt="" src="layouts/backoffice/images/px.png">
+                            <a class="edit" href="#">How Centurion is the best</a>
+                            <span class="who">created by <a href="#">Lolo-les-bon-tuyaux</a> at Sep 26, 2008</span>
+                        </td>
+                    </tr>
+                    <tr class="even">
+                        <td class="where">Article</td>
+                        <td class="what">
+                            <img height="33" width="33" style="float: left; margin-right: 10px; background: #eee; 
+                            border: 1px solid #d6d6d6;" alt="" src="layouts/backoffice/images/px.png">
+                            <a class="edit" href="#">How Centurion is the best</a>
+                            <span class="who">created by <a href="#">Lolo-les-bon-tuyaux</a> at Sep 26, 2008</span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        
+        <div class="clear">&nbsp;</div>
+    </section>
+    
+</section>
+
+<footer>© Centurion | Running version 0.232</footer>
+</body>
+</html>
