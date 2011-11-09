@@ -23,6 +23,7 @@
             base.options = $.extend({},$.CUI.Grid.defaultOptions, options);
             
             base.rowTemplate = base.$el.find(".row-template").clone().removeClass("row-template");
+            base.nbColTemplate = base.rowTemplate.find("> *").length;
             base.$el.coord = base.$el.offset();                
              
             $(base.options.filter).find('input[type=submit]').hide();
@@ -44,14 +45,16 @@
                     $(this).addClass("hover")
                 })
                 .live("mouseleave", function() {
-                    $(this).removeClass("hover")
+                    $(this).removeClass("hover");
                 })
                 .live("click", function() {
-                    if($(this).hasClass("select")) {
-                        $(this).removeClass("select")
-                               .find("input[type=checkbox]").removeAttr("checked");
-                    } else {
-                        $(this).addClass("select").find("input[type=checkbox]").attr("checked", "checked");
+                    if($(this).parents(".ui-sortable").length == 0) {
+                        if($(this).hasClass("select")) {
+                            $(this).removeClass("select")
+                                   .find("input[type=checkbox]").removeAttr("checked").change();
+                        } else {
+                            $(this).addClass("select").find("input[type=checkbox]").attr("checked", "checked").change();
+                        }
                     }
                 });
             base.$el.find('.row').find("a, .switch-1, .switch-0")
@@ -65,42 +68,114 @@
                     }
                     //event.stopPropagation();
                 }); 
-                         
+            
             // actions event
-            $(base.options.action).find(":input").bind("change", function(){
+            $(base.options.action).find(":radio").bind("change", function(){
                 $(base.options.action).submit();
             });
             
             // select event
-            $(base.options.action).find('a.select-all').live('click', function() { 
+            $(base.options.action).find('.dropdown-select').live('click', function(e){
+                if($(e.target).hasClass('checkbox-all')) {
+                    base.$el.find('input[type=checkbox]').attr('checked', $(e.target).attr('checked'));
+                    if($(e.target).attr('checked')) {
+                        base.$el.find('input[type=checkbox]').parent().parent().addClass('select');
+                    } else {
+                        base.$el.find('input[type=checkbox]').parent().parent().removeClass('select');
+                    }
+                } else {
+                    $(this).find('.picker').show();
+                }
+            });
+            $(base.options.action).find('.select-all').live('click', function() { 
+                    $(base.options.action).find('.checkbox-all').attr('checked', 'checked');
                     base.$el.find('input[type=checkbox]').each(function(){
                         $(this).parent().parent().addClass('select');
                         $(this).attr('checked', 'checked');
+                        $(base.options.action).find('.picker').hide();
                         });
                     return false;
                 });  
             $(base.options.action).find('a.select-none').live('click', function() {
+                    $(base.options.action).find('.checkbox-all').removeAttr('checked');
                     base.$el.find('input[type=checkbox]').each(function(){
                         $(this).parent().parent().removeClass('select');
                         $(this).removeAttr('checked');
+                        $(base.options.action).find('.picker').hide();
                         });
                     return false;
                 }); 
-                
+            $('body').bind('click', function() {
+                $(base.options.action).find('.picker').hide();
+            });
+            
+            // order list
+            var orderMode = false;
+            $(base.options.action).find('.trigger-order').live("click", function(){
+                if(!orderMode) {
+                    orderMode = true;
+                    var self = $(this);
+                    $.history.load($(this).attr("href") + '?sorting=true');
+                    $(this).html('<span class="ui-icon ui-icon-arrow-1-w"></span><span class="ui-button-text">Back to filter</span>');
+                    $(base.options.filter).hide();
+                    $(base.options.action).parent().animate({
+                        "margin-right" : 0
+                    }, 250);
+                    $(base.options.action).find(".select").fadeTo("fast",0.3);
+                    $(base.options.action).find(".grid-sortable").CUI('sortable', {
+                        'basePath': base.options.basePath, 
+                        'placeholder': 'ui-state-highlight',
+                        'start': function (event, ui) { 
+                            if(ui.placeholder[0].tagName == "TR") {
+                                ui.placeholder.html('<td colspan="'+base.nbColTemplate+'">&nbsp;</td>');
+                            } else {
+                                ui.placeholder.html('<div class="row">&nbsp;</div>');
+                            }
+                        },
+                        'update': function() {
+                            $(base.options.action).find("input:checkbox").attr('checked', 'checked');
+                            $(base.options.action).find("#order-radio").attr('checked', 'checked');
+                            var url = $(base.options.action).attr('action') + '?order=true&action=bash&event=order&' + $(base.options.action).serialize();
+                            
+                            $.getJSON(url, function(data) {
+                                //TODO: gestion des errors
+                            });
+                            
+                            $(base.options.action).find("input:checkbox").removeAttr('checked');
+                            base.$el.find('.row').removeClass('even').removeClass('odd');
+                            base.$el.find('.row:even').not('.row-template').addClass('even');
+                            base.$el.find('.row:odd').not('.row-template').addClass('odd');
+                        }
+                    });
+                } else {
+                    orderMode = false;
+                    $.history.load($(this).attr("href"));
+                    $(this).html('<span class="ui-icon ui-icon-arrow-2-n-s"></span><span class="ui-button-text">Order list</span>');
+                    $(base.options.action).parent().animate({
+                        "margin-right" : 255
+                    }, 250, function() {
+                        $(base.options.filter).fadeIn();
+                        $(base.options.action).find(".select").fadeTo("fast",1);
+                    });
+                    $(base.options.action).find(".grid-sortable").CUI('sortable', 'destroy');
+                }
+                return false;
+            });
+            
             // pager event
             $(base.options.action).find('.pager a').live("click", function() {
                 //$.history.load('json.html');
                 $.history.load($(this).attr("href"));
                 return false;
-            });    
-              
-            // sorting event         
+            });
+            
+            // sorting event
             base.$el.find('.head a').live("click", function() {
                 //$.history.load('json.html');
                 $.history.load($(this).attr("href"));
                 return false;
-            });   
-              
+            });
+            
             // filters events
             $(base.options.filter).find('h3')
                 .mouseenter(function() {
@@ -111,19 +186,30 @@
                 })
                 .click(function() { 
                     var filterDiv = $(this).parent();
-                    if(filterDiv.hasClass('filter-closed')) { 
-                        filterDiv.removeClass('filter-closed')     
+                    if(filterDiv.hasClass('filter-closed')) {
+                        filterDiv.removeClass('filter-closed')
                     }
                     else {
                         filterDiv.addClass('filter-closed')
-                    }               
-                });            
+                    }
+                });
             $(base.options.filter).find(":input").live("change", function(){
-                var url = $(base.options.filter).attr("action") + '?submit=submit&' + $(base.options.filter).serialize();
+                var url = $(base.options.filter).attr("action") + '?filter[submit]=submit&' + $(base.options.filter).serialize();
                 //$.history.load('json.html');
                 $.history.load(url);
                 return false;
-            });
+            }); 
+            $("<a/>", {
+                "html": "<span class=\"icon\"></span><span>Remove all</span>",
+                "class": "reset-filter",
+                "href": "#"
+            }).bind("click", function(){
+                $(base.options.filter).find("input:radio, input:checkbox").removeAttr("checked")
+                $(base.options.filter).find("input:text").val("");
+                var url = $(base.options.filter).attr("action") + '?filter[submit]=submit&' + $(base.options.filter).serialize();
+                $.history.load(url);
+                return false;
+            }).appendTo($(base.options.filter).find("h2"));
         };
         
 
@@ -146,8 +232,6 @@
             
             $.getJSON(url, function(data) {
                 
-                $('.grid-debug').html(data.debug);
-                
                 // Update header links
                 $.each(data.header, function(i,link){
                     base.$el.find(".head")
@@ -168,10 +252,29 @@
                     $.each(row, function(j,data){
                         rowHtml.children().eq(j).html(data);
                     });
+                    
+                    if (data.attributes != undefined) {
+                        if (data.attributes[data.rows.length - i - 1] != undefined) {
+                            $.each(data.attributes[data.rows.length - i - 1], function (attrib, value) {
+                                if (attrib == 'addClass') {
+                                    $(rowHtml).addClass(value);
+                                } else if (attrib == 'removeClass') {
+                                    $(rowHtml).removeClass(value);
+                                } else {
+                                    $(rowHtml).attr(attrib, value);
+                                }
+                            });
+                        }
+                    }
                 });
                 base.$el.find('.row:even').not('.row-template').addClass('even');
                 base.$el.find('.row:odd').not('.row-template').addClass('odd');
                 
+                if (data.replace != undefined) {
+                    $.each(data.replace, function(attrib, element) {
+                        $(element[0]).html(element[1]);
+                    });
+                }
                 
                 // Update pager links
                 $(base.options.action).find('.pager').empty();
@@ -194,6 +297,10 @@
                 
                 // Update filter url action
                 $(base.options.filter).attr('action', data.filter);
+                
+                if(base.options.onReloadGrid) {
+                    base.options.onReloadGrid(data);
+                } 
                 
                 // end
                 $('.grid-loading').hide();
@@ -253,19 +360,30 @@
                     base.options.onclick(base.$el) 
                 } else if (base.options.url != undefined) {
                 	var saveThis = this;
-                	$.post(base.options.url, {name: base.$el[0].name, value:base.$el[0].value}, function(data){
-                        if (data.statut !== 200) {
-                            alert('probleme');
-                        } else {
-                        	if(data.value == 0) {
-                                $(saveThis).removeClass('switch-1').addClass('switch-0').empty().append('Offline');
-                                base.$el.find('option[value=0]').attr('selected', 'selected');
+                	$.ajax({
+                		type: "post", 
+                		url: base.options.url, 
+                		data:{name: base.$el[0].name, value:base.$el[0].value},
+                		dataType: 'json',
+                	    success: function (data, text) {
+                            if (data.statut !== 200) {
+                                alert('probleme');
                             } else {
-                                $(saveThis).removeClass('switch-0').addClass('switch-1').empty().append('Online');
-                                base.$el.find('option[value=1]').attr('selected', 'selected');                                
+                            	if(data.value == 0) {
+                                    $(saveThis).removeClass('switch-1').addClass('switch-0').empty().append('Offline');
+                                    base.$el.find('option[value=0]').attr('selected', 'selected');
+                                } else {
+                                    $(saveThis).removeClass('switch-0').addClass('switch-1').empty().append('Online');
+                                    base.$el.find('option[value=1]').attr('selected', 'selected');                                
+                                }
                             }
-                        }
-                    });
+                	    },
+                	    error: function (request, status) {
+                	    	var obj = $.parseJSON(request.responseText);
+                	        alert(obj.error);
+                	    }
+                	});
+                	//$.post
                 } else {
                 	if($(this).hasClass('switch-1')) {
                         $(this).removeClass('switch-1').addClass('switch-0').empty().append('Offline');
@@ -289,7 +407,8 @@
             var availableContainer = $('<div class="availableContainer"/>');
             var availableActions = $('<div class="actions"><input type="text" class="search" name="multiselect-search" value="" /><a href="#" class="add-all">Add All</a></div>');
             var availableList = $('<ul class="availableList"/>');
-            var nbSelected = 0;    
+            var nbSelected = 0; 
+            var nbAvailable =  base.$el.find('option').not(':selected').not('[value=]').length;    
 
             // update the selected items count
             base.multiselect.updateCount = function () {
@@ -330,11 +449,15 @@
             base.multiselect.updateCount();
 
             // events
-            $(output).find('li a').bind('click', function() {
+            $(output).find('li a').bind('click', function() { 
                 if($(this).parent().parent().hasClass('availableList')) {
                     $(this).parent().hide().prependTo(selectedList).fadeIn("slow"); 
                     base.$el.find('option[value='+$(this).attr('rel')+']').attr("selected", "selected");
                     nbSelected = nbSelected + 1; 
+                    nbAvailable = nbAvailable - 1;
+                    if(base.$el.parents("fieldset.form-aside").length) {
+                        availableList.hide();
+                    }
                 }
                 else
                 {
@@ -343,6 +466,12 @@
                     })
                     base.$el.find('option[value='+$(this).attr('rel')+']').removeAttr("selected");
                     nbSelected = nbSelected - 1;
+                    nbAvailable = nbAvailable + 1;
+                }
+                if(base.$el.parents("fieldset.form-aside").length) {
+                    if(nbAvailable>0) {
+                        addLink.show();
+                    } 
                 }
                 base.multiselect.updateCount();
                 return false;
@@ -353,6 +482,7 @@
                     $(selectedList).append(this);
                     base.$el.find('option[value='+$(this).find('a').attr('rel')+']').attr("selected", "selected");
                     nbSelected = nbSelected + 1;
+                    nbAvailable = nbAvailable - 1;
                 }); 
                 base.multiselect.updateCount();
                 return false;
@@ -363,6 +493,7 @@
                     $(availableList).append(this);
                     base.$el.find('option[value='+$(this).find('a').attr('rel')+']').removeAttr("selected");
                     nbSelected = 0;
+                    nbAvailable = nbAvailable + 1;
                 }); 
                 base.multiselect.updateCount();
                 return false;
@@ -389,30 +520,25 @@
                 }
             }); 
 
-            if(base.$el.parents("fieldset.aside").length) {
+            if(base.$el.parents("fieldset.form-aside").length) {
                 availableList.hide();
                 var addLink = $("<a/>", {
                     "class": "ui-button ui-button-text-only",
                     "href": "#",
-                    "html": "<span class=\"ui-button-text\">Add a new</span>"                   
+                    "html": "<span class=\"ui-button-text\">Add a new</span>"
                 }).bind("click", function () {
                     availableList.show();
                     $(this).hide();
                     return false;
                 }).prependTo(availableContainer);
-                availableList.find('a').bind("click", function() {
-                    availableList.hide();
-                    addLink.show();
-                    
-                });
             }
         }
         
-        base.fieldset = function() {
+        base.fieldset = function() {            
             var expandLink = $("<a/>", {
                 html: "<span class=\"icon icon-less\"></span> Minimize",
                 "class": "expand"
-            }).insertBefore(base.$el)
+            }).prependTo(base.$el)
               .bind("click", function() {
                 if(base.$el.hasClass('fieldset-closed')) {
                     base.$el.removeClass('fieldset-closed');
@@ -423,17 +549,21 @@
                 }
             });
             
-            if(base.$el.prev().prev().length) {
+            if((base.$el.prev().length) && (base.options.autoClose!=false)) {
                 expandLink.html("<span class=\"icon\"></span> Maximize");
                 base.$el.addClass('fieldset-closed');
             }
         }
 
-        base.letterLimit = function() {
+        base.letterLimit = function() { 
+            if(base.$el.attr("maxlength") != undefined) {
+                base.options.maxChar = parseInt(base.$el.attr("maxlength"));
+                base.$el.removeAttr("maxlength");
+            }
             var counter = $("<div>", {
                 "class": "count-letter",
                 text: base.options.maxChar
-            }).insertBefore(base.$el);
+            }).insertAfter(base.$el);
 
             // Update counter function
             base.letterLimit.updateCount = function () {
@@ -457,7 +587,7 @@
 
         base.file = function() { 
             var wrapper = base.$el.parents('.form-item').find(".ui-button-tiny-squared").show();
-            var filename = base.$el.parents('.form-item').find(".field-preview-wrapper");
+            
             base.$el.prependTo(wrapper);
             base.$el.css({
                 "position": "absolute",
@@ -480,9 +610,22 @@
                 base.$el.css("left", "-167px");
             };
             base.$el.bind("change", function() {
-                filename.html('<input type="checkbox" checked="checked" value="1" class="field-checkbox" '+
-                              'name="filename_delete_logo"><div class="description">'+
-                              base.$el.val()+'</div><div class="clear"></div>');
+                var filename = base.$el.parents('.form-item').find(".field-preview-wrapper");
+                
+                if (filename.length === 0) {
+                    filename = $('<div class="field-wrapper field-preview-wrapper"/>');
+                    base.$el.parents('.form-item').append(filename);
+                    
+                    filename.html('<input type="checkbox" checked="checked" value="1" class="field-checkbox" '+
+                            'name="' + base.$el.attr('name').replace('filename_', 'filename_delete_') + '"><div class="description">'+
+                            +'</div><div class="clear"></div>');
+                }
+                
+                checkbox = filename.find('.field-checkbox');
+                
+                filename.html('<div class="description">' + base.$el.val() + '</div><div class="clear"></div>');
+                filename.prepend(checkbox);
+                /*-*/
             });
         }
 
@@ -499,38 +642,40 @@
      *  --- DISPATCHER ---
      */
     
-    $.CUI.Include = function(plugin){
+    $.CUI.Include = function(plugin, basePath){
         if ($.CUI.IncludeFiles[plugin] != 0) {
             $.each($.CUI.IncludeFiles[plugin], function(i, file){
                 $('body').append($('<script />', {
                     "type": "text/javascript",
                     "language": "javascript",
-                    "src": file
+                    "src": [basePath, file].join('')
                 }));
             $.CUI.IncludeFiles[plugin] = 0;
             });
         }
     }
     $.CUI.IncludeFiles = {
-         'jquery-ui':       ['/cui/libs/jquery-ui.js'],
-         'jquery-history':  ['/cui/plugins/utils/jquery.history.js'],
-         'swfupload':       ['/cui/plugins/swfupload/swfupload.js',
-                             '/cui/plugins/swfupload/swfupload.queue.js',
-                             '/cui/plugins/swfupload/fileprogress.js',
-                             '/cui/plugins/swfupload/handlers.js'],
-         'tinymce':         ['/cui/plugins/tinymce/jquery.tinymce.js'],
-         'jquery-jstree':   ['/cui/plugins/utils/mustache.js',
-                             '/cui/plugins/utils/jquery.cookie.js',
-                             '/cui/plugins/jstree/jquery.tree.js',
-                             '/cui/plugins/jstree/jquery.tree.contextmenu.js']
+         'jquery-ui':       ['cui/libs/jquery-ui.js', 'cui/plugins/utils/timepicker-addon.js'],
+         'jquery-history':  ['cui/plugins/utils/jquery.history.js'],
+         'swfupload':       ['cui/plugins/swfupload/swfupload.js',
+                             'cui/plugins/swfupload/swfupload.queue.js',
+                             'cui/plugins/swfupload/fileprogress.js',
+                             'cui/plugins/swfupload/handlers.js'],
+         'tinymce':         ['cui/plugins/tinymce/jquery.tinymce.js'],
+         'jquery-jstree':   ['cui/plugins/utils/mustache.js',
+                             'cui/plugins/jstree/jquery.tree.js',
+                             'cui/plugins/jstree/jquery.tree.contextmenu.js']
     }
     
-    $.fn.CUI = function(plugin, options) {
+    $.fn.CUI = function(plugin, opts) {
+        var options = $.extend({}, {'basePath': '/'}, opts);
+        
+        options.basePath = [(options ? (options.basePath || '') : ''), '/'].join('');
         return this.each(function(){
             switch (plugin) {
                 case 'grid':
                     // CUI Grid for datas and medias:
-                    (new $.CUI.Include('jquery-history'));
+                    (new $.CUI.Include('jquery-history', options.basePath));
                     (new $.CUI.Grid(this, options));
                 break;
                 case 'switcher':
@@ -543,18 +688,17 @@
                 break;
                 case 'tree':
                     // JSTree:
-                    (new $.CUI.Include('jquery-jstree'));
+                    (new $.CUI.Include('jquery-jstree', options.basePath));
                     $(this).tree(options);
 
                 break;
                 case 'files':
                     // SwfUpload:
-                    (new $.CUI.Include('swfupload'));
+                    (new $.CUI.Include('swfupload', options.basePath));
                     var swfu;
                     var defaultOptions = {
-
                         // Button settings
-                        button_image_url: "/layout/backoffice/images/px.png",
+                        button_image_url: [options.basePath, "layout/backoffice/images/px.png"].join(''),
                         button_width: "75",
                         button_height: "22",
                         button_placeholder_id: "spanButtonPlaceHolder",
@@ -577,33 +721,45 @@
                     };
                     settings = $.extend({}, defaultOptions, options);
                     swfu = new SWFUpload(settings); 
+                    $(".fsUploadProgress").CUI('sortable', { items: '.field-preview-wrapper', placeholder: 'ui-state-highlight'});
                 break;
                 case 'rte':
                     // TinyMCE:
-                    (new $.CUI.Include('tinymce'));
+                    (new $.CUI.Include('tinymce', options.basePath));
                     var defaultOptions = {
-                        script_url : '/cui/plugins/tinymce/tiny_mce.js',
+                        script_url : [options.basePath, "cui/plugins/tinymce/tiny_mce.js"].join(''),
                         theme : "advanced",
-                        width : '100%',
-                        height : '400',
+                        width: parseInt($(this).css("width"))+4,
+                        height : "400",
+                        theme_advanced_resize_horizontal : false,
                         plugins : "safari,pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,"
                                 + "insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,"
                                 + "fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template",
                         theme_advanced_buttons1 : "undo,redo,separator,bold,italic,underline,forecolor,formatselect,"
-                                                + "styleselect,separator,bullist,numlist,link,unlink,image,separator,code",
+                                                + "styleselect,separator,bullist,numlist,link,unlink,image,hr,"
+                                                + "separator,fullscreen,code",
                         theme_advanced_buttons2 : "",
-                        theme_advanced_buttons3 : "",   
+                        theme_advanced_buttons3 : "",
+                        extended_valid_elements : "header[*],article[*],time[*],footer[*],aside[*]",
                         theme_advanced_toolbar_location : "top",
                         theme_advanced_toolbar_align : "left",
                         theme_advanced_statusbar_location : "bottom",
                         theme_advanced_resizing : true
+                    };
+                    if (options && !options['plugins'] && options['add_plugins']) {
+                    	options['plugins'] = defaultOptions['plugins'] + ',' + options['add_plugins'];
+                    	delete(options['add_plugins']);
                     }
+                    if (options && !options['theme_advanced_buttons1'] && options['add_buttons']) {
+                    	options['theme_advanced_buttons1'] = defaultOptions['theme_advanced_buttons1'] + ',' + options['add_buttons'];
+                    	delete(options['add_buttons']);
+                    }                    
                     settings = $.extend({}, defaultOptions, options);
                     $(this).tinymce(settings);
                 break;
                 default: 
                     // jQuery UI:
-                    (new $.CUI.Include('jquery-ui'));
+                    (new $.CUI.Include('jquery-ui', options.basePath));
                     ($(this)[plugin])(options);
                 break;
             }

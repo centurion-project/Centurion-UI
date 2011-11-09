@@ -1,8 +1,9 @@
-
-
-
-
-
+/*
+* COMPONENTS CSS
+* CenturionUI CSS-JS Framework
+* Copyright (c) 2009
+* Dual licensed under the MIT (MIT-LICENSE.txt) and GPL (GPL-LICENSE.txt) licenses.
+*/
 
 /* FORMS -------------------- */
 
@@ -11,13 +12,16 @@ form.form {                     font-size:12px; }
 .form-header,
 .form-main  {                   width:660px; margin-right:28px; position:relative; }
 .form-main {                    float:left; }
-.form-aside  {                  margin-top:16px; #margin-top:19px; width:230px; float:left; }
+.form-aside  {                  margin-top:18px; #margin-top:29px; width:230px; float:left; }
 
 
 /* .form-main & .form-header */
 .form-item-hidden {             display: none; }
-.form-main .form-group {        margin:-25px 0 10px 0; padding:10px 25px 25px 25px; border:solid 1px #d6d6d6; 
-                                position:relative;
+.form-main .form-item {         margin-top:18px; #margin-top:13px; }
+.form-main .form-group 
+.form-item {                    margin-top:0; }
+.form-main .form-group {        margin:0 0 10px 0; padding:10px 25px 25px 25px; border:solid 1px #d6d6d6; 
+                                position:relative; 
                                 -moz-border-radius:5px; -khtml-border-radius: 5px; -webkit-border-radius:5px;  }
 .form-main .form-group legend { margin:0; padding:10px; font:bold 15px/20px Arial, sans-serif; color:#ff2f05; }
 .form-main .form-group label {  margin-right:10px; float:left; width:165px; font:bold 12px/14px Arial, sans-serif; }
@@ -26,8 +30,7 @@ form.form {                     font-size:12px; }
 .form-main .form-group 
 .form-item-large 
 .field-wrapper {                width:602px; }
-.form-main .form-group 
-.field-wrapper,
+.form-main .field-wrapper,
 .form-header .field-wrapper {   margin:0 0 15px 0; padding:3px; background:#eee none repeat scroll 0 0; 
                                 -moz-border-radius:5px; -khtml-border-radius: 5px; -webkit-border-radius:5px; }
 .form-main .form-group
@@ -46,7 +49,9 @@ form.form .field-text-big {     margin:0; padding:8px; background:url("../images
                                 font:bold 16px/normal Arial, sans-serif; border:1px solid #c3c3c3;
                                 -moz-border-radius:3px; -khtml-border-radius: 3px; -webkit-border-radius:3px;
                                 width:415px; color:#666; } 
-
+.form-main .field-rte {         width:648px }
+.form-main .form-group 
+.field-rte {                    width:auto; height:400px; }
 form.form .form-item-large 
 .field-text-big {               width:637px; }
 .form-main .form-group 
@@ -74,6 +79,9 @@ p.field-description {           margin:0; padding:5px; font:italic normal 11px/n
 .form-main .form-group
 .form-item-warning 
 .field-wrapper,
+.form-main
+.form-item-warning 
+.field-wrapper,
 .form-header 
 .form-item-warning 
 .field-wrapper {                background-color:#f1bdbf; }
@@ -94,6 +102,7 @@ ul.field-errors li {            padding:0 5px 5px 5px; font:italic normal 11px/1
 .form-main .form-group 
 textarea {                      height:100px; display:block; }
 
+form.form label {               display:block; }
 form.form .label-hidden {       display:none; }
 
 
@@ -103,7 +112,7 @@ form.form .label-hidden {       display:none; }
 .form-main .form-checkbox 
 legend,
 .form-main .form-radio legend { margin:0; padding:0; width:165px; color:#555; position:absolute; left:0; #left:-8px;
-                                font:bold 12px/14px Arial, sans-serif; display:block; }
+                                font:bold 12px/14px Arial, sans-serif;  }
 .form-main .form-checkbox 
 .field-wrapper,
 .form-main .form-radio 
@@ -125,38 +134,40 @@ legend,
 
 
 /* aside */
-.form-aside .form-group {       margin:0 0 10px 0; padding:20px 15px 10px 15px; background:#e5ecf9;
+.form-aside .form-group {       margin:0 0 10px 0; padding:40px 15px 10px 15px; background:#e5ecf9; position:relative;
                                 -moz-border-radius:8px; -khtml-border-radius:8px; -webkit-border-radius:8px;}
-.form-aside .form-group legend{ display:none; }
-.form-aside .form-group label { margin:0; padding:0 10px 0 0; float:left; width:128px; 
+.form-aside .form-group legend{ display:block; position:absolute; top:15px; left:15px; #left:9px;
                                 font:normal 16px/16px Arial, sans-serif; }
+.form-aside .form-group label { margin:0; padding:0 10px 0 0; float:left; width:128px; 
+                                font:bold 12px/16px Arial, sans-serif; }
 .form-aside .form-group 
 .form-label {                   font:normal 16px/16px Arial, sans-serif; }
-.form-aside .form-group p {     margin-bottom:7px; }
+.form-aside .form-group p {     margin-bottom:0; }
 .form-aside .form-group 
 .field-wrapper {                float:left; padding-bottom:10px; }
 .form-aside .form-group 
-.form-item-large label {		margin-bottom:5px; width:auto; display:block; float:none; }
+.form-item-large label {		margin-bottom:5px; width:auto; float:none; }
 .form-aside .clear {            height:1px; line-height:1px; font-size:1px; }
 .form-aside .field-text,
-.form-aside .field-select {     width:188px; font-size:11px; padding:3px 5px; color:#444;
+.form-aside .field-textarea,
+.form-aside .field-select {     width:188px; font-size:11px; padding:3px 5px; color:#444; font-family: Arial;
                                 border:solid 1px #dbdfe6; border-top-color:#abadb3; border-right-color:#cfd4de;
                                 -moz-border-radius:2px; -webkit-border-radius:2px; border-radius:2px; }
-.form-aside .field-select {     width:200px; }
-
+.form-aside .field-select {     width:200px; height:23px; }
+.form-aside .field-textarea {   height:75px; }
+.form-aside .count-letter {     margin:-5px 0 -5px 0; }
 
 /* fieldset expanded or not */
 form.form .form-hint {          display:none; }
 form.form .fieldset-closed 
-.form-hint {                    margin:-10px 0 -20px 0; display:block;  }
+.form-hint {                    margin:-10px 0; display:block;  }
 form.form .fieldset-closed 
 .form-item {                    display:none; }
-fieldset .expand {              padding:10px 10px 10px 8px; font-size:11px; color:#999; text-decoration:none; 
-                                position:relative; top:4px; #top:12px; left:540px; background:#fff; z-index:2;  }
-fieldset .expand:hover {        cursor:pointer; }
+fieldset .expand {              padding:1px 10px 1px 20px; font-size:11px; color:#999; text-decoration:none; 
+                                position:absolute; top:6px; right:25px; background:#fff;   }
+fieldset .expand:hover {        cursor:pointer;  }
 fieldset .expand .icon {        background-image: url("../images/ui-icons_c1c1c1_256x240.png"); display:inline-block;
-                                background-position: -16px -128px; 
-                                position:relative; top:3px; left:2px; #top:1px; #left:0; }
+                                background-position: -16px -128px; position:absolute; top:3px; left:5px;  }
 fieldset .expand .icon-less {   background-image: url("../images/ui-icons_c1c1c1_256x240.png"); 
                                 background-position: -48px -128px; }
 
@@ -225,7 +236,7 @@ input.search {                  height: 14px; padding: 1px; opacity: 0.5; margin
 .form-aside .nicy-multiselect 
 .actions {                      display:none; }
 .form-aside .nicy-multiselect 
-ul {                            -moz-user-select: none; }
+ul {                            -moz-user-select: none; width:198px; }
 .form-aside .nicy-multiselect 
 li {                            margin: 0; padding: 0; cursor: default; font-size: 11px; 
                                 list-style: none; }
@@ -258,14 +269,14 @@ li .icon {                      position: absolute; left: 2px; top: 0px; width:1
 .selectedList {                 margin-bottom:10px; }
 .form-aside .nicy-multiselect 
 .availableList {                position: relative; padding:0; overflow: auto; overflow-x: hidden;  
-                                list-style: none;  position:relative; height:114px;
+                                list-style: none;  position:relative; height:114px; width:198px;
                                 background:url(../images/bg-input-text.png) repeat-x scroll 0 0 #fff;
                                 border:1px solid #c3c3c3; 
                                 -moz-border-radius:3px; -khtml-border-radius: 3px; -webkit-border-radius:3px; }
 
 
 /* letterLimit */
-.count-letter {                 font-size:16px; font-weight:bold; text-align:right; color:#999 }
+.count-letter {                 margin:2px 5px 0 0; font-size:11px; font-style:italic; text-align:right; color:#999;  }
 .count-letter-hot {             color:#ff2f05; }
 
 
@@ -301,8 +312,13 @@ form.form .progressBarStatus {  }
 form.form .progressBarInProgress,
 form.form .progressBarComplete,
 form.form .progressBarError {   clear:both; }
-
-
+#fsUploadProgress 
+.ui-state-highlight {           margin:0 0 5px 175px; _margin-left:86px; position:relative; top:-5px; z-index:1;
+                                zoom:1; background:#ffc; height:58px; width:427px; float:left; }
+.form-main .form-group 
+.ui-sortable 
+.field-preview-wrapper:hover {  background:url(../images/handle.png) no-repeat 7px 27px #e5ecf9; cursor:pointer; }
+ 
 /* RTE */
 form.form .defaultSkin 
 table.mceLayout,
@@ -345,4 +361,17 @@ form.form .defaultSkin
 .mceSplitButtonSelected 
 a.mceOpen {                     background-color:#fff; border-color:#c3c3c3; 
                                 -moz-border-radius:2px; -khtml-border-radius: 2px; -webkit-border-radius:2px;}
+.form-main
+.form-item-warning 
+.field-wrapper .defaultSkin 
+.mceButton {                    border-color:#f1bdbf; }
+
+
+/* -- FF Fix -- */
+
+@-moz-document url-prefix() {   
+    .form-aside .form-group 
+    legend {                    top:-25px; left:0; } 
+    fieldset .expand {          top:-42px; right:50px; }
+}
 

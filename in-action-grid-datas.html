@@ -33,10 +33,10 @@
 </script>
 </head>
 
-<body>
+<body class="toggle-sidebars">
 
 <header class="h">
-    <h1>Centurion - Back Office</h1>
+    <h1><a href="#">Centurion - Back Office</a></h1>
       
     <nav>
         <ul class="main">
@@ -159,18 +159,39 @@
             <div class="toolbar toolbar-top">
                 <div class="pager">
                     <span class="infos"><strong>1-10</strong> of <strong>816</strong></span>
-                    <a class="next"href="#">Next</a>
-                    <a class="last"href="#">Last</a>  
+                    <a class="next" href="#">Next</a>
+                    <a class="last" href="#">Last</a>  
                 </div>
                
                 <div class="select ui-button-tiny-squared">
-                    Select: <a href="#" class="select-all">All</a>, <a href="#" class="select-none">None</a> &nbsp;&nbsp;
+                    <div class="dropdown-select">
+                        <span class="ui-button ui-button-icons-only ui-button-black" href="#">
+                            <span class="ui-button-icon-primary"><input class="checkbox-all" type="checkbox" value="" name="select"></span>
+                            <span class="ui-button-icon-secondary ui-icon ui-icon-triangle-1-s"></span>
+                        </span>
+                        <div class="picker">
+                            <ul>
+                                <li><a href="#" class="select-all">All</a></li>
+                                <li><a href="#" class="select-none">None</a></li>
+                            </ul>
+                        </div>
+                    </div>
                     
                     <span class="buttonset">
                         <input type="radio" name="event" value="remove" id="input-top-1" /><label for="input-top-1">Supprimer</label>
                         <input type="radio" name="event" value="publish" id="input-top-2" /><label for="input-top-2">Publish</label>
                         <input type="radio" name="event" value="unpublish" id="input-top-3" /><label for="input-top-3">Unpublish</label>
                     </span>  
+                </div>
+                <div class="ui-button-tiny-squared">
+                    <a href="#" class="ui-button ui-button-text-icon ui-button-black trigger-order">
+                        <span class="ui-icon ui-icon-arrow-2-n-s"></span>
+                        <span class="ui-button-text">Order list</span>
+                    </a>
+                    <a href="#" class="ui-button ui-button-text-icon ui-button-black">
+                        <span class="ui-icon ui-icon-pencil"></span>
+                        <span class="ui-button-text">Quick Edit</span>
+                    </a>
                 </div>
             </div>
             
@@ -196,8 +217,12 @@
                     </tr>
                     <tr class="row odd">
                         <td valign="top" class="first col"><input type="checkbox" value="1" name="rowId-4"></td>
-                        <td valign="top" class="col"><img height="33" width="33" style="float: left; margin-right: 10px; background: none repeat scroll 0% 0% rgb(238, 238, 238); border: 1px solid rgb(204, 204, 204);" alt="" src="layout/backoffice/images/px.png"><a href="in-action-form.html" class="edit">Afro Samurai</a><br></td>
-                        <td valign="top" class="col">Fighting</td>
+                        <td valign="top" class="col">
+                            <img height="33" width="33" style="float: left; margin-right: 10px; background: none repeat scroll 0% 0% rgb(238, 238, 238); border: 1px solid rgb(204, 204, 204);" alt="" src="layout/backoffice/images/px.png">
+                            <a href="in-action-form.html" class="edit">Afro Samurai</a><br/>
+                            <img src="layouts/backoffice/images/social/facebook.png" alt="pushed on facebook" />
+                            <img src="layouts/backoffice/images/social/twitter.png" alt="pushed on twitter" />
+                        </td>                        <td valign="top" class="col">Fighting</td>
                         <td valign="top" class="col">18+</td>
                         <td valign="top" class="col"><a href="http://www.afrosamurai.eu" class="link"><span class="ui-icon"></span>www.afrosamurai.eu</a></td>
                         <td valign="top" class="col"><select selected="1" class="on-off" name="online-1"><option value="0">Offline</option><option value="1">Online</option></select></td>
@@ -219,8 +244,12 @@
                     </tr>
                     <tr class="row even">
                         <td valign="top" class="first col"><input type="checkbox" value="1" name="rowId-4"></td>
-                        <td valign="top" class="col"><img height="33" width="33" style="float: left; margin-right: 10px; background: none repeat scroll 0% 0% rgb(238, 238, 238); border: 1px solid rgb(204, 204, 204);" alt="" src="layout/backoffice/images/px.png"><a href="in-action-form.html" class="edit">Afro Samurai</a><br></td>
-                        <td valign="top" class="col">Fighting</td>
+                        <td valign="top" class="col">
+                            <img height="33" width="33" style="float: left; margin-right: 10px; background: none repeat scroll 0% 0% rgb(238, 238, 238); border: 1px solid rgb(204, 204, 204);" alt="" src="layout/backoffice/images/px.png">
+                            <a href="in-action-form.html" class="edit">Afro Samurai</a><br/>
+                            <img src="layouts/backoffice/images/social/facebook.png" alt="pushed on facebook" />
+                            <img src="layouts/backoffice/images/social/twitter.png" alt="pushed on twitter" />
+                        </td>                        <td valign="top" class="col">Fighting</td>
                         <td valign="top" class="col">18+</td>
                         <td valign="top" class="col"><a href="http://www.afrosamurai.eu" class="link"><span class="ui-icon"></span>www.afrosamurai.eu</a></td>
                         <td valign="top" class="col"><select selected="1" class="on-off" name="online-1"><option value="0">Offline</option><option value="1">Online</option></select></td>
@@ -242,11 +271,18 @@
                     </tr>
                     <tr class="row odd">
                         <td valign="top" class="first col"><input type="checkbox" value="1" name="rowId-4"></td>
-                        <td valign="top" class="col"><img height="33" width="33" style="float: left; margin-right: 10px; background: none repeat scroll 0% 0% rgb(238, 238, 238); border: 1px solid rgb(204, 204, 204);" alt="" src="layout/backoffice/images/px.png"><a href="in-action-form.html" class="edit">Afro Samurai</a><br></td>
+                        <td valign="top" class="col">
+                            <img height="33" width="33" style="float: left; margin-right: 10px; background: none repeat scroll 0% 0% rgb(238, 238, 238); border: 1px solid rgb(204, 204, 204);" alt="" src="layout/backoffice/images/px.png">
+                            <a href="in-action-form.html" class="edit">Afro Samurai</a><br/>
+                            <img src="layouts/backoffice/images/social/facebook.png" alt="pushed on facebook" />
+                            <img src="layouts/backoffice/images/social/twitter.png" alt="pushed on twitter" />
+                        </td>
                         <td valign="top" class="col">Fighting</td>
                         <td valign="top" class="col">18+</td>
                         <td valign="top" class="col"><a href="http://www.afrosamurai.eu" class="link"><span class="ui-icon"></span>www.afrosamurai.eu</a></td>
-                        <td valign="top" class="col"><select selected="1" class="on-off" name="online-1"><option value="0">Offline</option><option value="1">Online</option></select></td>
+                        <td valign="top" class="col">
+                            <select selected="1" class="on-off" name="online-1"><option value="0">Offline</option><option value="1">Online</option></select>
+                        </td>
                         <td valign="top" class="col">
                             <ul class="actions">
                                 <li><a href="#" class="help" title="Edit"><span class="ui-icon ui-icon-pencil">Edit properties</span></a></li>
@@ -265,8 +301,12 @@
                     </tr>
                     <tr class="row even">
                         <td valign="top" class="first col"><input type="checkbox" value="1" name="rowId-4"></td>
-                        <td valign="top" class="col"><img height="33" width="33" style="float: left; margin-right: 10px; background: none repeat scroll 0% 0% rgb(238, 238, 238); border: 1px solid rgb(204, 204, 204);" alt="" src="layout/backoffice/images/px.png"><a href="in-action-form.html" class="edit">Afro Samurai</a><br></td>
-                        <td valign="top" class="col">Fighting</td>
+                        <td valign="top" class="col">
+                            <img height="33" width="33" style="float: left; margin-right: 10px; background: none repeat scroll 0% 0% rgb(238, 238, 238); border: 1px solid rgb(204, 204, 204);" alt="" src="layout/backoffice/images/px.png">
+                            <a href="in-action-form.html" class="edit">Afro Samurai</a><br/>
+                            <img src="layouts/backoffice/images/social/facebook.png" alt="pushed on facebook" />
+                            <img src="layouts/backoffice/images/social/twitter.png" alt="pushed on twitter" />
+                        </td>                        <td valign="top" class="col">Fighting</td>
                         <td valign="top" class="col">18+</td>
                         <td valign="top" class="col"><a href="http://www.afrosamurai.eu" class="link"><span class="ui-icon"></span>www.afrosamurai.eu</a></td>
                         <td valign="top" class="col"><select selected="1" class="on-off" name="online-1"><option value="0">Offline</option><option value="1">Online</option></select></td>
@@ -288,8 +328,12 @@
                     </tr>
                     <tr class="row odd">
                         <td valign="top" class="first col"><input type="checkbox" value="1" name="rowId-4"></td>
-                        <td valign="top" class="col"><img height="33" width="33" style="float: left; margin-right: 10px; background: none repeat scroll 0% 0% rgb(238, 238, 238); border: 1px solid rgb(204, 204, 204);" alt="" src="layout/backoffice/images/px.png"><a href="in-action-form.html" class="edit">Afro Samurai</a><br></td>
-                        <td valign="top" class="col">Fighting</td>
+                        <td valign="top" class="col">
+                            <img height="33" width="33" style="float: left; margin-right: 10px; background: none repeat scroll 0% 0% rgb(238, 238, 238); border: 1px solid rgb(204, 204, 204);" alt="" src="layout/backoffice/images/px.png">
+                            <a href="in-action-form.html" class="edit">Afro Samurai</a><br/>
+                            <img src="layouts/backoffice/images/social/facebook.png" alt="pushed on facebook" />
+                            <img src="layouts/backoffice/images/social/twitter.png" alt="pushed on twitter" />
+                        </td>                        <td valign="top" class="col">Fighting</td>
                         <td valign="top" class="col">18+</td>
                         <td valign="top" class="col"><a href="http://www.afrosamurai.eu" class="link"><span class="ui-icon"></span>www.afrosamurai.eu</a></td>
                         <td valign="top" class="col"><select selected="1" class="on-off" name="online-1"><option value="0">Offline</option><option value="1">Online</option></select></td>
@@ -311,8 +355,12 @@
                     </tr>
                     <tr class="row even">
                         <td valign="top" class="first col"><input type="checkbox" value="1" name="rowId-4"></td>
-                        <td valign="top" class="col"><img height="33" width="33" style="float: left; margin-right: 10px; background: none repeat scroll 0% 0% rgb(238, 238, 238); border: 1px solid rgb(204, 204, 204);" alt="" src="layout/backoffice/images/px.png"><a href="in-action-form.html" class="edit">Afro Samurai</a><br></td>
-                        <td valign="top" class="col">Fighting</td>
+                        <td valign="top" class="col">
+                            <img height="33" width="33" style="float: left; margin-right: 10px; background: none repeat scroll 0% 0% rgb(238, 238, 238); border: 1px solid rgb(204, 204, 204);" alt="" src="layout/backoffice/images/px.png">
+                            <a href="in-action-form.html" class="edit">Afro Samurai</a><br/>
+                            <img src="layouts/backoffice/images/social/facebook.png" alt="pushed on facebook" />
+                            <img src="layouts/backoffice/images/social/twitter.png" alt="pushed on twitter" />
+                        </td>                        <td valign="top" class="col">Fighting</td>
                         <td valign="top" class="col">18+</td>
                         <td valign="top" class="col"><a href="http://www.afrosamurai.eu" class="link"><span class="ui-icon"></span>www.afrosamurai.eu</a></td>
                         <td valign="top" class="col"><select selected="1" class="on-off" name="online-1"><option value="0">Offline</option><option value="1">Online</option></select></td>
@@ -334,8 +382,12 @@
                     </tr>
                     <tr class="row odd">
                         <td valign="top" class="first col"><input type="checkbox" value="1" name="rowId-4"></td>
-                        <td valign="top" class="col"><img height="33" width="33" style="float: left; margin-right: 10px; background: none repeat scroll 0% 0% rgb(238, 238, 238); border: 1px solid rgb(204, 204, 204);" alt="" src="layout/backoffice/images/px.png"><a href="in-action-form.html" class="edit">Afro Samurai</a><br></td>
-                        <td valign="top" class="col">Fighting</td>
+                        <td valign="top" class="col">
+                            <img height="33" width="33" style="float: left; margin-right: 10px; background: none repeat scroll 0% 0% rgb(238, 238, 238); border: 1px solid rgb(204, 204, 204);" alt="" src="layout/backoffice/images/px.png">
+                            <a href="in-action-form.html" class="edit">Afro Samurai</a><br/>
+                            <img src="layouts/backoffice/images/social/facebook.png" alt="pushed on facebook" />
+                            <img src="layouts/backoffice/images/social/twitter.png" alt="pushed on twitter" />
+                        </td>                        <td valign="top" class="col">Fighting</td>
                         <td valign="top" class="col">18+</td>
                         <td valign="top" class="col"><a href="http://www.afrosamurai.eu" class="link"><span class="ui-icon"></span>www.afrosamurai.eu</a></td>
                         <td valign="top" class="col"><select selected="1" class="on-off" name="online-1"><option value="0">Offline</option><option value="1">Online</option></select></td>
@@ -357,8 +409,12 @@
                     </tr>
                     <tr class="row even">
                         <td valign="top" class="first col"><input type="checkbox" value="1" name="rowId-4"></td>
-                        <td valign="top" class="col"><img height="33" width="33" style="float: left; margin-right: 10px; background: none repeat scroll 0% 0% rgb(238, 238, 238); border: 1px solid rgb(204, 204, 204);" alt="" src="layout/backoffice/images/px.png"><a href="in-action-form.html" class="edit">Afro Samurai</a><br></td>
-                        <td valign="top" class="col">Fighting</td>
+                        <td valign="top" class="col">
+                            <img height="33" width="33" style="float: left; margin-right: 10px; background: none repeat scroll 0% 0% rgb(238, 238, 238); border: 1px solid rgb(204, 204, 204);" alt="" src="layout/backoffice/images/px.png">
+                            <a href="in-action-form.html" class="edit">Afro Samurai</a><br/>
+                            <img src="layouts/backoffice/images/social/facebook.png" alt="pushed on facebook" />
+                            <img src="layouts/backoffice/images/social/twitter.png" alt="pushed on twitter" />
+                        </td>                        <td valign="top" class="col">Fighting</td>
                         <td valign="top" class="col">18+</td>
                         <td valign="top" class="col"><a href="http://www.afrosamurai.eu" class="link"><span class="ui-icon"></span>www.afrosamurai.eu</a></td>
                         <td valign="top" class="col"><select selected="1" class="on-off" name="online-1"><option value="0">Offline</option><option value="1">Online</option></select></td>
@@ -380,8 +436,12 @@
                     </tr>
                     <tr class="row odd">
                         <td valign="top" class="first col"><input type="checkbox" value="1" name="rowId-4"></td>
-                        <td valign="top" class="col"><img height="33" width="33" style="float: left; margin-right: 10px; background: none repeat scroll 0% 0% rgb(238, 238, 238); border: 1px solid rgb(204, 204, 204);" alt="" src="layout/backoffice/images/px.png"><a href="in-action-form.html" class="edit">Afro Samurai</a><br></td>
-                        <td valign="top" class="col">Fighting</td>
+                        <td valign="top" class="col">
+                            <img height="33" width="33" style="float: left; margin-right: 10px; background: none repeat scroll 0% 0% rgb(238, 238, 238); border: 1px solid rgb(204, 204, 204);" alt="" src="layout/backoffice/images/px.png">
+                            <a href="in-action-form.html" class="edit">Afro Samurai</a><br/>
+                            <img src="layouts/backoffice/images/social/facebook.png" alt="pushed on facebook" />
+                            <img src="layouts/backoffice/images/social/twitter.png" alt="pushed on twitter" />
+                        </td>                        <td valign="top" class="col">Fighting</td>
                         <td valign="top" class="col">18+</td>
                         <td valign="top" class="col"><a href="http://www.afrosamurai.eu" class="link"><span class="ui-icon"></span>www.afrosamurai.eu</a></td>
                         <td valign="top" class="col"><select selected="1" class="on-off" name="online-1"><option value="0">Offline</option><option value="1">Online</option></select></td>
@@ -403,8 +463,12 @@
                     </tr>
                     <tr class="row even">
                         <td valign="top" class="first col"><input type="checkbox" value="1" name="rowId-4"></td>
-                        <td valign="top" class="col"><img height="33" width="33" style="float: left; margin-right: 10px; background: none repeat scroll 0% 0% rgb(238, 238, 238); border: 1px solid rgb(204, 204, 204);" alt="" src="layout/backoffice/images/px.png"><a href="in-action-form.html" class="edit">Afro Samurai</a><br></td>
-                        <td valign="top" class="col">Fighting</td>
+                        <td valign="top" class="col">
+                            <img height="33" width="33" style="float: left; margin-right: 10px; background: none repeat scroll 0% 0% rgb(238, 238, 238); border: 1px solid rgb(204, 204, 204);" alt="" src="layout/backoffice/images/px.png">
+                            <a href="in-action-form.html" class="edit">Afro Samurai</a><br/>
+                            <img src="layouts/backoffice/images/social/facebook.png" alt="pushed on facebook" />
+                            <img src="layouts/backoffice/images/social/twitter.png" alt="pushed on twitter" />
+                        </td>                        <td valign="top" class="col">Fighting</td>
                         <td valign="top" class="col">18+</td>
                         <td valign="top" class="col"><a href="http://www.afrosamurai.eu" class="link"><span class="ui-icon"></span>www.afrosamurai.eu</a></td>
                         <td valign="top" class="col"><select selected="1" class="on-off" name="online-1"><option value="0">Offline</option><option value="1">Online</option></select></td>
@@ -442,6 +506,10 @@
                         <input type="radio" name="event" value="publish" id="input-bottom-2" /><label for="input-bottom-2">Publish</label>
                         <input type="radio" name="event" value="unpublish" id="input-bottom-3" /><label for="input-bottom-3">Unpublish</label>
                     </span>
+                    <a href="#" class="ui-button ui-button-text-icon ui-button-black trigger-order">
+                        <span class="ui-icon ui-icon-arrow-2-n-s"></span>
+                        <span class="ui-button-text">Order list</span>
+                    </a>
                 </div>
             </div>
             <br/>

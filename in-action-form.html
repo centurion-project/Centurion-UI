@@ -13,15 +13,14 @@
 <script type="text/javascript">
 
     $(function() {
-        $(".form :input:first").focus();
-        $(".form .form-main .form-group").CUI('fieldset');
-        $(".field-multiselect").CUI('multiselect');
-        $(".field-switcher").CUI('switcher');
-        $(".field-letterlimit").CUI('letterLimit', { maxChar: 100 });
-        $(".field-datepicker").CUI('datepicker', { changeMonth: true, changeYear: true });
-        $('.field-rte').CUI('rte');
-        $(".field-file").CUI('file');
-        $(".field-files").CUI('files', {
+        //$(".form .form-main .form-group").CUI("fieldset");
+        $(".field-multiselect").CUI("multiselect");
+        $(".field-switcher").CUI("switcher");
+        $(".field-letterlimit").CUI("letterLimit");
+        $(".field-datepicker").CUI("datepicker", { changeMonth: true, changeYear: true });
+        $(".field-rte").CUI("rte");
+        $(".field-file").CUI("file");
+        $(".field-files").CUI("files", {
             flash_url : "cui/plugins/swfupload/swfupload.swf",
             upload_url: "/",
             file_post_name : "filename_",
@@ -39,15 +38,36 @@
             },
             debug: false
         }); 
+        
+        // pushing social network
+        $("select[id^=_push]").each(function() {
+            $("#"+$(this).attr("id")+"_message").parents(".form-item").hide();
+            $(this).parent().find("span").bind("click", function() { 
+                if($(this).prev().val() == 0) {
+                    $("#"+$(this).prev().attr("id")+"_message").parents(".form-item").hide();
+                } else {
+                    $("#"+$(this).prev().attr("id")+"_message").parents(".form-item").show();
+                }
+            });
+        });
+        // url medias
+        $("a[href^=#push]").each(function() {
+            var urlItem = $("#_"+$(this).attr("href").substring(1)+"_url").parents(".form-item").hide();
+            $(this).bind("click", function() { 
+                urlItem.show();
+                return false;
+            });
+        });
+
     });
 
 </script>
 </head>
 
-<body>
+<body class="toggle-sidebars">
 
 <header class="h">
-    <h1>Centurion - Back Office</h1>
+    <h1><a href="#">Centurion - Back Office</a></h1>
       
     <nav>
         <ul class="main">
@@ -114,35 +134,40 @@
                 <div id="username-label" class="form-item form-item-large">
                     <label for="username" class="label-hidden">Nom d'utilisateur</label>
                     <div class="field-wrapper">
-                        <input class="field-text field-text-big" type="text" name="username" id="username" value="Rober93"/>
+                        <input class="field-text field-text-big" type="text" name="username" id="username" value="Rober93" autofocus />
                     </div>
                     <div class="clear"></div>
                 </div>
-                    
-                <div class="form-links ui-button-tiny-squared">
-                    <a class="ui-button ui-button-text-icon ui-button-bg-white-gradient ui-button-text-red" href="/octave/admin-client/index/id/22/language/fr">
-                        <span class="ui-icon ui-icon-arrow-1-w ui-icon-red"></span>
-                        <span class="ui-button-text">Back to the list</span> 
-                    </a>
-                    <a href="#" class="ui-button ui-button-text-only ui-button-bg-white-gradient ui-button-text-red">
-                        <span class="ui-button-text">Manage media</span>
-                    </a>
-                    <a href="#" class="ui-button ui-button-text-only ui-button-bg-white-gradient ui-button-text-red">
-                        <span class="ui-button-text">Manage translation</span>
-                    </a>
-                </div>
-
                 <div class="ui-button-big">
-                    <button class="ui-button ui-button-bg-white-gradient ui-button-text-red ui-button-text-only" role="button" aria-disabled="false">
+                    <button class="ui-button ui-button-bg-white ui-button-text-red ui-button-text-only" role="button" aria-disabled="false">
                         <span class="ui-button-text">Update</span>
                     </button>
                 </div>
             </fieldset>
             
             <fieldset class="form-main">
+                <div class="form-item form-item-large">
+                    <label for="username" class="label-hidden">Rich text editot</label>
+                    <div class="field-wrapper">
+                        <textarea name="text" class="field-rte" rows="24" cols="80">
+                            <h2>Headlines 2</h2>
+                            <img src="layout/backoffice/images/px.png" width="50" height="50" alt="" 
+                            style="float:left; margin-right:10px; background:#eee; border:solid 1px #ccc" />
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris a gravida lacus. 
+                            Suspendisse vel bibendum nulla. Nulla pulvinar, neque sed elementum iaculis, nibh 
+                            eros gravida purus, vitae laoreet erat ipsum eget quam. Duis condimentum eleifend 
+                            quam, in luctus dolor bibendum non. Vivamus vulputate malesuada magna eget egestas. 
+                            Pellentesque id lorem neque. Quisque condimentum varius metus sed rhoncus. Nulla 
+                            tincidunt, felis ac pretium sagittis, tellus leo euismod enim, in interdum lorem 
+                            dui rutrum libero. Donec vehicula fringilla luctus.</p>
+                        </textarea>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                
                 <fieldset class="form-group">
-                    <legend>Legend form</legend>
-                    <p class="form-hint">My super hyper genial form description</p>
+                    <legend>User form</legend>
+                    <p class="form-hint">Settings for managing an user</p>
                     
                     <div class="form-item">
                         <label for="username">Nom d'utilisateur</label>
@@ -177,44 +202,39 @@
                         </div>
                         <div class="clear"></div>
                     </div>
+                   
+                    
+
                     
                     <div class="form-item">
-                        <label for="filename_logo">Logo</label>    
-                        <div class="field-wrapper field-upload-wrapper">
-                            <div class="float-right">
-                                <p class="field-description">.jpg, .gif, .png, 600px-width max.</p>
+                        <fieldset class="form-radio">
+                            <legend>Sex</legend>
+                            <div class="field-wrapper">
+                                <label for="sex-M"><input type="radio" name="sex" id="sex-M" value="M" class="field-radio">Male</label> 
+                                &nbsp; 
+                                <label for="sex-F"><input type="radio" name="sex" id="sex-F" value="F" class="field-radio">Female</label>
                             </div>
-                            <input type="file" class="field-file" name="avatar" />
-                            <div class="ui-button-tiny-squared">
-                                <a href="#" class="ui-button ui-button-text-icon ui-button-bg-white-gradient">
-                                    <span class="ui-icon ui-icon-arrowthickstop-1-n ui-icon-red"></span>
-                                    <span class="ui-button-text">Browse</span>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="field-wrapper field-preview-wrapper">
-                            <input type="checkbox" checked="checked" value="1" class="field-checkbox" name="filename_delete_logo">        
-                            <img src="layout/backoffice/images/px.png" class="picture" width="75" height="75" />
-                            <div class="description">2010-06-11 16.38.24 (1).jpg</div>
                             <div class="clear"></div>
-                        </div>
-                        <div class="clear"></div>
+                        </fieldset>
                     </div>
-                    
-                    
+                </fieldset>
+                
+                <fieldset class="form-group">
+                    <legend>Medias</legend>
+                    <p class="form-hint">3 pictures, 1 video.</p>
                     <div class="form-item">
-                        <label for="filename_logo">Multiupload</label>    
+                        <label for="filename_logo">Pictures</label>    
                         <div class="field-wrapper field-upload-wrapper">
                             <div class="float-right">
-                                <span id="divStatus">0 files uploaded</span> &nbsp; 
-                                <span id="btnCancel" onclick="swfu.cancelQueue();">Remove All</span>
+                                <p class="field-description">.jpg, .gif, .png, 10MB max.</p>
                             </div>    
                             <span id="spanButtonPlaceHolder" class="field-files"></span>
                             <div class="ui-button-tiny-squared">
                                 <a href="#" class="ui-button ui-button-text-icon ui-button-bg-white-gradient">
                                     <span class="ui-icon ui-icon-arrowthickstop-1-n ui-icon-red"></span>
-                                    <span class="ui-button-text">Browse</span>
+                                    <span class="ui-button-text">Upload</span>
                                 </a>
+                                or <a href="#pushPicture">use an URL</a>
                             </div>
                         </div>
                         <div class="fieldset flash" id="fsUploadProgress">
@@ -239,37 +259,144 @@
                         </div>
                         <div class="clear"></div>
                     </div>
-                    
-                    
-                    <div class="form-item">
-                        <fieldset class="form-radio">
-                            <legend>Sex</legend>
-                            <div class="field-wrapper">
-                                <label for="sex-M"><input type="radio" name="sex" id="sex-M" value="M" class="field-radio">Male</label> 
-                                &nbsp; 
-                                <label for="sex-F"><input type="radio" name="sex" id="sex-F" value="F" class="field-radio">Female</label>
-                            </div>
-                            <div class="clear"></div>
-                        </fieldset>
-                    </div>
-
-                    <div class="form-item">
-                        <label for="country" >Country</label>
+                    <div  class="form-item">
+                        <label for="picture-url">&nbsp;</label>
                         <div class="field-wrapper">
-                            <select name="country" id="country" class="field-select">
-                                <option value="fr" label="France" selected="selected">France</option>
-                                <option value="en" label="England">England</option>
-                                <option value="mx" label="Mexico">Mexico</option>
-                            </select>
+                            <input id="_pushPicture_url" class="field-text" name="picture-url" />
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="form-item">
+                        <label for="filename_logo">Video</label>    
+                        <div class="field-wrapper field-upload-wrapper">
+                            <div class="float-right">
+                                <p class="field-description">.jpg, .gif, .png, 600px-width max.</p>
+                            </div>
+                            <input type="file" class="field-file" name="avatar" />
+                            <div class="ui-button-tiny-squared">
+                                <a href="#" class="ui-button ui-button-text-icon ui-button-bg-white-gradient">
+                                    <span class="ui-icon ui-icon-arrowthickstop-1-n ui-icon-red"></span>
+                                    <span class="ui-button-text">Upload</span>
+                                </a>
+                                or <a href="#pushVideo">use an URL/Embed</a>
+                            </div>
+                        </div>
+                        <div class="field-wrapper field-preview-wrapper">
+                            <input type="checkbox" checked="checked" value="1" class="field-checkbox" name="filename_delete_logo">        
+                            <img src="layout/backoffice/images/px.png" class="picture" width="75" height="75" />
+                            <div class="description">2010-06-11 16.38.24 (1).jpg</div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div  class="form-item">
+                        <label for="video-url">&nbsp;</label>
+                        <div class="field-wrapper">
+                            <textarea id="_pushVideo_url" class="field-textarea" name="video-url"></textarea>
                         </div>
                         <div class="clear"></div>
                     </div>
                 </fieldset>
-                
+
+
                 <fieldset class="form-group">
-                    <legend>Advanced</legend>
-                    <p class="form-hint">My super hyper genial form description bis</p>
+                    <legend>Advanced CMS settings</legend>
+                    <p class="form-hint">Advanced Content Managing System settings</p>
+                    <div class="form-item form-item-required">
+                        <label for="flatpage_template_id">Template&nbsp;<span class="required">*</span></label>
+                        <div class="field-wrapper">
+                            <select class=" field-select" id="flatpage_template_id" name="flatpage_template_id">
+                                <option label="Basic" value="1">Basic</option>
+                                <option label="RSE" value="3">RSE</option>
+                                <option selected="selected" label="RSE Card" value="4">RSE Card</option>
+                                <option label="Rewards" value="5">Rewards</option>
+                                <option label="Steps" value="6">Steps</option>
+                                <option label="Standard" value="7">Standard</option>
+                                <option label="Winners" value="8">Winners</option>
+                            </select>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
                     
+                    <div class="form-item">
+                        <label for="flatpage_position_id">Position</label>        
+                        <div class="field-wrapper">
+                            <select class=" field-select" id="flatpage_position_id" name="flatpage_position_id">
+                                <option label="" value=""></option>
+                                <option label="main" value="1">main</option>
+                                <option label="footer" value="2">footer</option>
+                            </select>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    
+                    <div class="form-item">
+                        <label for="mptt_parent_id">Parent</label>
+                        <div class="field-wrapper">
+                            <select class=" field-select" id="mptt_parent_id" name="mptt_parent_id">
+                                <option label="" value=""></option>
+                                <option label="Citizen Act" value="1">Citizen Act</option>
+                                <option label="Etapes" value="2">Etapes</option>
+                                <option label="Training" value="3">Training</option>
+                                <option label="Concept" value="4">Concept</option>
+                                <option label="CEL" value="5">CEL</option>
+                                <option label="Prix" value="6">Prix</option>
+                                <option label="Saison 2009-2010" value="7">Saison 2009-2010</option>
+                                <option label="Règlement" value="9">Règlement</option>
+                                <option label="Conseils" value="10">Conseils</option>
+                                <option selected="selected" label="Fiches RSE" value="11">Fiches RSE</option>
+                                <option label="1 - Développement durable" value="12">1 - Développement durable</option>
+                                <option label="2 - Responsabilité sociale et environnementale" value="13">2 - Responsabilité sociale et environnementale</option>
+                                <option label="3 - Pratiques RSE" value="14">3 - Pratiques RSE</option>
+                                <option label="Gagnants 09-10" value="15">Gagnants 09-10</option>
+                                <option label="E-learning" value="16">E-learning</option>
+                                <option label="RSE du groupe" value="18">RSE du groupe</option>
+                                <option label="Engagement" value="19">Engagement</option>
+                                <option label="Initiatives RSE" value="20">Initiatives RSE</option>
+                                <option label="Citizen Act" value="21">Citizen Act</option>
+                                <option label="Steps" value="22">Steps</option>
+                                <option label="Concept" value="23">Concept</option>
+                                <option label="CEL" value="24">CEL</option>
+                                <option label="Rewards" value="25">Rewards</option>
+                                <option label="2009-2010 Season" value="26">2009-2010 Season</option>
+                                <option label="Rules" value="28">Rules</option>
+                                <option label="Training" value="29">Training</option>
+                                <option label="Advices" value="30">Advices</option>
+                                <option label="Étape 1 : Recrutement | sept. - déc. 2010" value="31">Étape 1 : Recrutement | sept. - déc. 2010</option>
+                                <option label="Étape 2 : Sélection | 12 décembre 2010" value="32">Étape 2 : Sélection | 12 décembre 2010</option>
+                                <option label="Étape 3 : Élaboration | 1 février - 6 mars 2011" value="33">Étape 3 : Élaboration | 1 février - 6 mars 2011</option>
+                                <option label="Étape 4 : Final Contest | 21 avril 2011" value="34">Étape 4 : Final Contest | 21 avril 2011</option>
+                                <option label="Kit Com" value="35">Kit Com</option>
+                                <option label="1. Bank Better &ndash; Espagne" value="36">1. Bank Better &ndash; Espagne</option>
+                                <option label="2. Lousha! &ndash; Côte d’Ivoire" value="37">2. Lousha! &ndash; Côte d’Ivoire</option>
+                                <option label="3. Contribution Globale &ndash; Etats-Unis" value="38">3. Contribution Globale &ndash; Etats-Unis</option>
+                                <option label="Politique RH" value="39">Politique RH</option>
+                                <option label="Opportunités" value="40">Opportunités</option>
+                                <option label="Mentions légales" value="41">Mentions légales</option>
+                                <option label="Step 1 : Recruitment | 23 sept. &ndash; 5 dec. 2010" value="42">Step 1 : Recruitment | 23 sept. &ndash; 5 dec. 2010</option>
+                                <option label="Step 2 : Selection | 12 december " value="43">Step 2 : Selection | 12 december </option>
+                                <option label="Step 3 : Development | 1 feb. - 6 march 2011" value="44">Step 3 : Development | 1 feb. - 6 march 2011</option>
+                                <option label="Step 4 : Final Contest | 21 april " value="45">Step 4 : Final Contest | 21 april </option>
+                                <option label="Comms Kit" value="46">Comms Kit</option>
+                                <option label="CSR Sheets" value="47">CSR Sheets</option>
+                                <option label="1 &ndash; Sustainable development " value="48">1 &ndash; Sustainable development </option>
+                                <option label="2 - Corporate social (or societal) responsibility" value="49">2 - Corporate social (or societal) responsibility</option>
+                                <option label="3 - CSR Practices" value="50">3 - CSR Practices</option>
+                                <option label="2009-10 Winners" value="51">2009-10 Winners</option>
+                                <option label="Group CSR" value="52">Group CSR</option>
+                                <option label="Commitment" value="53">Commitment</option>
+                                <option label="Opportunities" value="54">Opportunities</option>
+                                <option label="CSR Initiatives" value="55">CSR Initiatives</option>
+                                <option label="HR Policy" value="56">HR Policy</option>
+                                <option label="Legal Information" value="57">Legal Information</option>
+                                <option label="E-learning" value="58">E-learning</option>
+                                <option label="1. Bank Better &ndash; Spain" value="59">1. Bank Better &ndash; Spain</option>
+                                <option label="2. Lousha! &ndash; Ivory Coast" value="60">2. Lousha! &ndash; Ivory Coast</option>
+                                <option label="3 - Global contribution - United States" value="61">3 - Global contribution - United States</option>
+                            </select>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
                     <div class="form-item">
                         <label for="biography" >Visited</label>
                         <div class="field-wrapper">
@@ -372,109 +499,111 @@
                         </div>
                         <div class="clear"></div>
                     </div>
+                </fieldset>
 
+
+                <fieldset class="form-group">
+                    <legend>SEO</legend>
+                    <p class="form-hint">Manage your meta tags for improving your Search Engine Optimization</p>
+                    
                     <div class="form-item">
-                        <label for="biography" >Biography</label>
+                        <label for="metatitle">Title</label>
                         <div class="field-wrapper">
-                            <textarea class="field-textarea field-letterlimit" name="biography" id="biography" rows="24" cols="80"></textarea>
+                            <input class="field-text field-letterlimit" name="metatitle" id="metatitle" maxlength="60"/>
                         </div>
                         <div class="clear"></div>
                     </div>
-                        
-                    <div class="form-item form-item-large">
-                        <label for="text">Example with a very very long label like a question or
-                        a Rich Text Editor:</label>
+                    
+                    <div class="form-item">
+                        <label for="metadescription">Description</label>
                         <div class="field-wrapper">
-                            <textarea name="text" class="field-rte" rows="24" cols="80">
-                                <h2>Headlines 2</h2>
-                                <img src="layout/backoffice/images/px.png" width="50" height="50" alt="" 
-                                style="float:left; margin-right:10px; background:#eee; border:solid 1px #ccc" />
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris a gravida lacus. 
-                                Suspendisse vel bibendum nulla. Nulla pulvinar, neque sed elementum iaculis, nibh 
-                                eros gravida purus, vitae laoreet erat ipsum eget quam. Duis condimentum eleifend 
-                                quam, in luctus dolor bibendum non. Vivamus vulputate malesuada magna eget egestas. 
-                                Pellentesque id lorem neque. Quisque condimentum varius metus sed rhoncus. Nulla 
-                                tincidunt, felis ac pretium sagittis, tellus leo euismod enim, in interdum lorem 
-                                dui rutrum libero. Donec vehicula fringilla luctus.</p>
-                            </textarea>
+                            <textarea class="field-textarea field-letterlimit" name="metadescription" id="metadescription" maxlength="160"></textarea>
                         </div>
                         <div class="clear"></div>
-                    </div>               
-                             
-                    <div class="form-item form-item-large">
-                        <label for="text">An other rte</label>
+                    </div>
+                    
+                    <div class="form-item">
+                        <label for="metakeyword">Keywords</label>
                         <div class="field-wrapper">
-                            <textarea name="text2" class="field-rte" rows="24" cols="80">s
-                            </textarea>
+                            <input class="field-text" name="metakeyword" id="metakeyword"/>
+                            <p class="field-description">Use comma for separating keywords</p>
                         </div>
                         <div class="clear"></div>
                     </div>
                     
                     <div class="form-item">
                         <fieldset class="form-checkbox">
-                            <legend>Options</legend>
+                            <legend>Robots</legend>
                             <div class="field-wrapper">
-                                <label for="option1"><input type="checkbox" name="option1" value="M" class="field-checkbox">Option1 with description</label> 
+                                <label for="indexpage"><input type="checkbox" name="indexpage" value="indexpage" class="field-checkbox">Ne pas indexer la page</label> 
                                 <br/> 
-                                <label for="option2"><input type="checkbox" name="option1" value="F" class="field-checkbox">Option2 with description</label>
+                                <label for="indexlinks"><input type="checkbox" name="indexlinks" value="indexlinks" class="field-checkbox">Ne pas suivre les liens de la page</label>
                             </div>
                             <div class="clear"></div>
                         </fieldset>
                     </div>
                     
-                    <div class="form-item form-item-large">
-                        <fieldset class="form-checkbox">
-                            <legend class="label-hidden">Options</legend>
-                            <div class="field-wrapper">
-                                <label for="option1"><input type="checkbox" name="option1" value="M" class="field-checkbox">I have read & agree the Centurion Terms of Service</label> 
-                                <br/> 
-                                <label for="option2"><input type="checkbox" name="option1" value="F" class="field-checkbox">I want to receive newsletter</label>
-                            </div>
-                            <div class="clear"></div>
-                        </fieldset>
-                    </div>
                 </fieldset>
 
                 <div class="form-submit">
                     <button class="ui-button ui-button-nicy ui-button-text-icon" role="button" aria-disabled="false">
                         <span class="ui-button-icon-primary ui-icon ui-icon-red ui-icon-nicy-cross"></span>
                         <span class="ui-button-text ui-button-text-red">Delete</span>
-                    </button> 
-
+                    </button>
                     <button class="ui-button ui-button-nicy ui-button-text-icon" role="button" aria-disabled="false">
                         <span class="ui-button-icon-primary ui-icon ui-icon-nicy-arrow-right"></span>
                         <span class="ui-button-text">Save</span>
                     </button> 
-
-                    <button class="ui-button ui-button-nicy ui-button-text-icon" role="button" aria-disabled="false">
-                        <span class="ui-button-icon-primary ui-icon ui-icon-nicy-arrow-top"></span>
-                        <span class="ui-button-text">Save and continue</span>
-                    </button> 
-
-                    <button class="ui-button ui-button-nicy ui-button-text-icon" role="button" aria-disabled="false">
-                        <span class="ui-button-icon-primary ui-icon ui-icon-nicy-plus"></span>
-                        <span class="ui-button-text">Save and add another</span>
-                    </button>
                 </div>
             </fieldset>
             
             <fieldset class="form-aside">
                 <fieldset class="form-group">
-                    <legend>Status</legend>
-                    <div class="form-item">
-                        <label for="published">Is published</label>
+                    <legend>Publishing</legend>
+                    <div class="form-item form-item-large form-item-required">
+                        <label for="status">Status</label>
                         <div class="field-wrapper">
-                            <select selected="1" class="field-switcher" name="published">
-                                <option value="0">Offline</option>
-                                <option value="1">Online</option>
+                            <select class="field-select" name="status">
+                                <option value="1">Publish now</option>
+                                <option value="2">Publish on...</option>
+                                <option value="3">Draft</option>
+                                <option value="4">Private</option>
+                            </select>                    
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="form-item form-item-large">
+                        <label for="published_at">Date to publish</label>
+                        <div class="field-wrapper">
+                            <input type="text" class="field-text field-datepicker" value="" id="published_at" name="published_at" />
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="form-item form-item-large">
+                        <label for="published_at">Status Message</label>
+                        <div class="field-wrapper">
+                            <input type="text" class="field-text" value="Pending review" name="status_message" />
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </fieldset>
+                
+                <fieldset class="form-group">
+                    <legend>Pushing</legend>
+                    <div class="form-item">
+                        <label for="pushed">Promote</label>
+                        <div class="field-wrapper">
+                            <select class="field-switcher" name="pushed">
+                                <option value="0">Not pushed</option>
+                                <option value="1">Pushed</option>
                             </select>
                         </div>
                         <div class="clear"></div>
                     </div>
                     <div class="form-item">
-                        <label for="pushed">Is pushed</label>
+                        <label for="facebook">Facebook</label>
                         <div class="field-wrapper">
-                            <select selected="1" class="field-switcher" name="pushed">
+                            <select id="_pushFacebook" class="field-switcher" name="facebook">
                                 <option value="0">Not pushed</option>
                                 <option value="1">Pushed</option>
                             </select>
@@ -482,107 +611,26 @@
                         <div class="clear"></div>
                     </div>
                     <div class="form-item form-item-large">
-                        <label for="published_at">Date to publish</label>
+                        <label for="facebook-msg" class="label-hidden">Facebook message</label>
                         <div class="field-wrapper">
-                            <input type="text" class="field-text field-datepicker" value="2010-09-20 10:42:38" id="published_at" name="published_at" />
+                            <textarea id="_pushFacebook_message" class="field-textarea field-letterlimit" name="facebook-msg" maxlength="200">Lorem ispum dolor sit amet dum http://www.bit.ly/octave</textarea>
                         </div>
                         <div class="clear"></div>
                     </div>
-                </fieldset>
-                
-                <fieldset class="form-group">
-                    <div class="form-item form-item-large form-item-required">
-                        <label for="flatpage_template_id">Template&nbsp;<span class="required">*</span></label>
+                    <div class="form-item">
+                        <label for="twitter">Twitter</label>
                         <div class="field-wrapper">
-                            <select class=" field-select" id="flatpage_template_id" name="flatpage_template_id">
-                                <option label="Basic" value="1">Basic</option>
-                                <option label="RSE" value="3">RSE</option>
-                                <option selected="selected" label="RSE Card" value="4">RSE Card</option>
-                                <option label="Rewards" value="5">Rewards</option>
-                                <option label="Steps" value="6">Steps</option>
-                                <option label="Standard" value="7">Standard</option>
-                                <option label="Winners" value="8">Winners</option>
-                            </select>                    
-                        </div>
-                        <div class="clear"></div>
-                    </div>
-                    
-                    <div class="form-item form-item-large">
-                        <label for="flatpage_position_id">Position</label>        
-                        <div class="field-wrapper">
-                            <select class=" field-select" id="flatpage_position_id" name="flatpage_position_id">
-                                <option label="" value=""></option>
-                                <option label="main" value="1">main</option>
-                                <option label="footer" value="2">footer</option>
+                            <select id="_pushTwitter" class="field-switcher" name="twitter">
+                                <option value="0">Not pushed</option>
+                                <option value="1">Pushed</option>
                             </select>
                         </div>
                         <div class="clear"></div>
                     </div>
-                    
                     <div class="form-item form-item-large">
-                        <label for="mptt_parent_id">Parent</label>
+                        <label for="twitter-msg" class="label-hidden">Twitter message</label>
                         <div class="field-wrapper">
-                            <select class=" field-select" id="mptt_parent_id" name="mptt_parent_id">
-                                <option label="" value=""></option>
-                                <option label="Citizen Act" value="1">Citizen Act</option>
-                                <option label="Etapes" value="2">Etapes</option>
-                                <option label="Training" value="3">Training</option>
-                                <option label="Concept" value="4">Concept</option>
-                                <option label="CEL" value="5">CEL</option>
-                                <option label="Prix" value="6">Prix</option>
-                                <option label="Saison 2009-2010" value="7">Saison 2009-2010</option>
-                                <option label="Règlement" value="9">Règlement</option>
-                                <option label="Conseils" value="10">Conseils</option>
-                                <option selected="selected" label="Fiches RSE" value="11">Fiches RSE</option>
-                                <option label="1 - Développement durable" value="12">1 - Développement durable</option>
-                                <option label="2 - Responsabilité sociale et environnementale" value="13">2 - Responsabilité sociale et environnementale</option>
-                                <option label="3 - Pratiques RSE" value="14">3 - Pratiques RSE</option>
-                                <option label="Gagnants 09-10" value="15">Gagnants 09-10</option>
-                                <option label="E-learning" value="16">E-learning</option>
-                                <option label="RSE du groupe" value="18">RSE du groupe</option>
-                                <option label="Engagement" value="19">Engagement</option>
-                                <option label="Initiatives RSE" value="20">Initiatives RSE</option>
-                                <option label="Citizen Act" value="21">Citizen Act</option>
-                                <option label="Steps" value="22">Steps</option>
-                                <option label="Concept" value="23">Concept</option>
-                                <option label="CEL" value="24">CEL</option>
-                                <option label="Rewards" value="25">Rewards</option>
-                                <option label="2009-2010 Season" value="26">2009-2010 Season</option>
-                                <option label="Rules" value="28">Rules</option>
-                                <option label="Training" value="29">Training</option>
-                                <option label="Advices" value="30">Advices</option>
-                                <option label="Étape 1 : Recrutement | sept. - déc. 2010" value="31">Étape 1 : Recrutement | sept. - déc. 2010</option>
-                                <option label="Étape 2 : Sélection | 12 décembre 2010" value="32">Étape 2 : Sélection | 12 décembre 2010</option>
-                                <option label="Étape 3 : Élaboration | 1 février - 6 mars 2011" value="33">Étape 3 : Élaboration | 1 février - 6 mars 2011</option>
-                                <option label="Étape 4 : Final Contest | 21 avril 2011" value="34">Étape 4 : Final Contest | 21 avril 2011</option>
-                                <option label="Kit Com" value="35">Kit Com</option>
-                                <option label="1. Bank Better &ndash; Espagne" value="36">1. Bank Better &ndash; Espagne</option>
-                                <option label="2. Lousha! &ndash; Côte d’Ivoire" value="37">2. Lousha! &ndash; Côte d’Ivoire</option>
-                                <option label="3. Contribution Globale &ndash; Etats-Unis" value="38">3. Contribution Globale &ndash; Etats-Unis</option>
-                                <option label="Politique RH" value="39">Politique RH</option>
-                                <option label="Opportunités" value="40">Opportunités</option>
-                                <option label="Mentions légales" value="41">Mentions légales</option>
-                                <option label="Step 1 : Recruitment | 23 sept. &ndash; 5 dec. 2010" value="42">Step 1 : Recruitment | 23 sept. &ndash; 5 dec. 2010</option>
-                                <option label="Step 2 : Selection | 12 december " value="43">Step 2 : Selection | 12 december </option>
-                                <option label="Step 3 : Development | 1 feb. - 6 march 2011" value="44">Step 3 : Development | 1 feb. - 6 march 2011</option>
-                                <option label="Step 4 : Final Contest | 21 april " value="45">Step 4 : Final Contest | 21 april </option>
-                                <option label="Comms Kit" value="46">Comms Kit</option>
-                                <option label="CSR Sheets" value="47">CSR Sheets</option>
-                                <option label="1 &ndash; Sustainable development " value="48">1 &ndash; Sustainable development </option>
-                                <option label="2 - Corporate social (or societal) responsibility" value="49">2 - Corporate social (or societal) responsibility</option>
-                                <option label="3 - CSR Practices" value="50">3 - CSR Practices</option>
-                                <option label="2009-10 Winners" value="51">2009-10 Winners</option>
-                                <option label="Group CSR" value="52">Group CSR</option>
-                                <option label="Commitment" value="53">Commitment</option>
-                                <option label="Opportunities" value="54">Opportunities</option>
-                                <option label="CSR Initiatives" value="55">CSR Initiatives</option>
-                                <option label="HR Policy" value="56">HR Policy</option>
-                                <option label="Legal Information" value="57">Legal Information</option>
-                                <option label="E-learning" value="58">E-learning</option>
-                                <option label="1. Bank Better &ndash; Spain" value="59">1. Bank Better &ndash; Spain</option>
-                                <option label="2. Lousha! &ndash; Ivory Coast" value="60">2. Lousha! &ndash; Ivory Coast</option>
-                                <option label="3 - Global contribution - United States" value="61">3 - Global contribution - United States</option>
-                            </select>
+                            <textarea id="_pushTwitter_message" class="field-textarea field-letterlimit" name="twitter-msg" maxlength="140">Lorem ispum dolor sit amet dum http://www.bit.ly/octave</textarea>
                         </div>
                         <div class="clear"></div>
                     </div>
@@ -591,39 +639,19 @@
                 <fieldset class="form-group">
                     <legend>Categories</legend>
                     <div class="form-item form-item-large">
-                        <label for="categories">Categories</label>
+                        <label for="categories" class="label-hidden">Categories</label>
                         <div class="field-wrapper">
                             <select class="field-multiselect" multiple="multiple" name="categories[]">
                                 <option value=""></option>
                                 <option value="AFG">Afghanistan</option>
                                 <option value="ALB">Albania</option>
                                 <option value="DZA">Algeria</option>
-                                <option value="AND">Andorra</option>
-                                <option value="ARG">Argentina</option>
-                                <option value="ARM">Armenia</option>
-                                <option value="ABW">Aruba</option>
-                                <option value="AUS">Australia</option>
+                                <option value="AND" selected="selected">Andorra</option>
+                                <option value="ARG" selected="selected">Argentina</option>
+                                <option value="ARM" selected="selected">Armenia</option>
+                                <option value="ABW" selected="selected">Aruba</option>
+                                <option value="AUS" selected="selected">Australia</option>
                                 <option value="AUT" selected="selected">Austria</option>
-                                
-                                <option value="AZE">Azerbaijan</option>
-                                <option value="BGD">Bangladesh</option>
-                                <option value="BLR">Belarus</option>
-                                <option value="BEL">Belgium</option>
-                                <option value="BIH">Bosnia and HerzegovinaBosnia and Herzegovina</option>
-                                <option value="BRA" selected="selected">Brazil</option>
-                                <option value="BRN">Brunei</option>
-                                <option value="BGR">Bulgaria</option>
-                                <option value="CAN" selected="selected">Canada</option>
-                                
-                                <option value="CHN">China</option>
-                                <option value="COL">Colombia</option>
-                                <option value="HRV">Croatia</option>
-                                <option value="CYP">Cyprus</option>
-                                <option value="CZE">Czech Republic</option>
-                                <option value="DNK">Denmark</option>
-                                <option value="EGY">Egypt</option>
-                                <option value="EST">Estonia</option>
-                                <option value="FIN">Finland</option>
                             </select>
                         </div>
                         <div class="clear"></div>
@@ -632,11 +660,13 @@
                 
                 <fieldset class="form-group">
                     <legend>Infos</legend>
-                    <p class="form-label">Infos</p>
-                    <p><strong>Last save:</strong> 20 06 2009</p>
-                    <p><strong>Creation date:</strong> 20 06 2009</p>
-                    <p><strong>Language:</strong> Fr</p>
-                    <p><strong>Tranlate from:</strong> En</p>
+                    <p><strong>Last save:</strong> June 20, 2009</p>
+                    <p><strong>Creation date:</strong> April 06, 2009</p>
+                    <p><strong>Language:</strong> <img src="layouts/backoffice/images/flags/fr.png" alt="French" /> French</p>
+                    <p><strong>Manage translations:</strong><br/>
+                    <a href="#"><img src="layouts/backoffice/images/flags/uk.png" alt="English" /></a>&nbsp;
+                    <a href="#"><img src="layouts/backoffice/images/flags/es.png" alt="Espanol" /></a>&nbsp;
+                    <a href="#"><img src="layouts/backoffice/images/flags/it.png" alt="Italian" /></a></p>
                 </fieldset>
             </fieldset>
         </form>               

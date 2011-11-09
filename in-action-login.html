@@ -13,64 +13,65 @@
 
 <body id="login">
 
-<header class="h">
-    <h1>Centurion - Back Office</h1>
-</header>
-
-<section>
-
-    <header class="sh">
-        
-    </header>
-
-    <section>
-        <form class="form" method="post" id="loginform">
-            <fieldset class="form-main">
-                <fieldset class="form-group">
-                    <legend>Centurion administration</legend>
-                    <div class="form-item form-item-large">
-                        <label for="login">User</label>    
-                        <div class="field-wrapper">
-                            <input type="text" class=" field-text" value="" id="login" name="login">            
-                        </div>
-                        <div class="clear"></div>
-                    </div>
-                    
-                    <div class="form-item form-item-large">
-                        <label for="password">Password</label>    
-                        <div class="field-wrapper">
-                            <input type="password" class=" field-text" value="" id="password" name="password">            
-                        </div>
-                        <div class="clear"></div>
-                    </div>
-                    
-                    <div class="form-item form-item-large">
-                        <fieldset class="form-checkbox form-border-top" id="checkbox">
+<section class="login-box">
+    <div class="inner">
+        <header class="left">
+            <a href="#">Centurion - Back Office</a>
+            <span>We are serious about web platform</span>
+        </header>
+        <div class="right">
+            <div class="bullet">
+                <p>Contributor access : user / user</p>
+                <p>Developer access : dev / dev</p>
+            </div>
+            <form class="form" method="post" id="loginform">
+                <fieldset class="form-main">
+                    <fieldset class="form-group">
+                        <legend>Log in to your Centurion account</legend>
+                        <div class="form-item form-item-large">
+                            <label for="login">Login</label>    
                             <div class="field-wrapper">
-                                <label for="option1">
-                                    <input type="hidden" value="0" name="remember_me">
-                                    <input type="checkbox" class="field-checkbox" value="1" id="remember_me" name="remember_me">
-                                    Remember me
-                                </label> 
+                                <input type="text" class=" field-text" value="" id="login" name="login" autofocus placeholder="Login">
                             </div>
-                        </fieldset>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="form-item form-item-large">
+                            <label for="password">Password</label>    
+                            <div class="field-wrapper">
+                                <input type="password" class=" field-text" value="" id="password" name="password" placeholder="Password"> 
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="form-item form-item-large">
+                            <fieldset class="form-checkbox" id="checkbox">
+                                <div class="field-wrapper">
+                                    <label for="option1">
+                                        <input type="hidden" value="0" name="remember_me">
+                                        <input type="checkbox" class="field-checkbox" value="1" id="remember_me" name="remember_me">
+                                        Remember me
+                                    </label> 
+                                </div>
+                                <div class="clear">&nbsp;</div>
+                            </fieldset>
+                        </div>
+                    </fieldset>                    
+                    <div class="form-submit">
+                        <button class="ui-button ui-button-text-only" id="send" name="send" role="button" aria-disabled="false">
+                            <span class="ui-button-text ui-button-text-blue">Log in</span>
+                        </button> 
                     </div>
-
-
-                </fieldset>                    
-                <div class="form-submit">
-                    <button class="ui-button ui-button-nicy ui-button-text-icon" id="send" name="send" role="button" aria-disabled="false">
-                        <span class="ui-button-icon-primary ui-icon ui-icon-nicy-arrow-right"></span>
-                        <span class="ui-button-text">Log in</span>
-                    </button> 
-                </div>
-            </fieldset>
-        </form>
+                </fieldset>
+            </form>
+        </div>
         <div class="clear"></div>
-	</section>
-	
+    </div>
+    <div class="clear"></div>
 </section>
-
-<footer>© Centurion | Running version 0.232</footer>
+<footer>
+    <a href="http://centurion-project.org" title="zend cms"><span class="icon icon-arrow"></span>Centurion website</a> 
+    © 2011 Centurion project
+</footer>
 </body>
 </html>

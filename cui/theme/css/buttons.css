@@ -152,7 +152,10 @@ button.ui-button::-moz-focus-inner { border: 0; padding: 0; } /* reset extra pad
 /*-*/
 
 .ui-button-big
-.ui-button {                    -moz-border-radius:19px; -khtml-border-radius: 19px; -webkit-border-radius:19px; }
+.ui-button {                    -moz-border-radius:19px; -khtml-border-radius: 19px; -webkit-border-radius:19px;
+                                /*-moz-box-shadow: 0 3px 3px rgba(0, 0, 0, 0.08);
+                                -webkit-box-shadow: 0 3px 3px rgba(0, 0, 0, 0.08); 
+                                box-shadow: 0 3px 3px rgba(0, 0, 0, 0.08); */}
 .ui-button-big
 .ui-button-text {               font:bold 16px/16px Arial, sans-serif; }
 .ui-button-big 
@@ -217,7 +220,7 @@ button.ui-button::-moz-focus-inner { border: 0; padding: 0; } /* reset extra pad
 
 .ui-button-text-blue,
 .ui-button-text-blue.ui-state-active:hover 
-.ui-button-text {               color:#06c; }  
+.ui-button-text {               color:#09f; }  
 
 
 

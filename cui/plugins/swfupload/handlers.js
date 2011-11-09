@@ -189,7 +189,7 @@ function uploadError(file, errorCode, message) {
 function initSwfupload()
 {
 	i = 0;
-	
+        
 	for (var name in this.customSettings.alreadyLoadedImage) {
 		id = this.customSettings.alreadyLoadedImage[name][0];
 		filename = this.customSettings.alreadyLoadedImage[name][1];

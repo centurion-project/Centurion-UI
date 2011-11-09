@@ -27,6 +27,7 @@ function FileProgress(file, targetID) {
 	
 	this.fileProgressWrapper = document.getElementById(this.fileProgressID);
 	if (!this.fileProgressWrapper) {
+            
 		this.fileProgressWrapper = document.createElement("div");
 		this.fileProgressWrapper.className = "field-wrapper field-preview-wrapper";
 		this.fileProgressWrapper.id = this.fileProgressID;
@@ -45,27 +46,28 @@ function FileProgress(file, targetID) {
 		this.progressText.appendChild(document.createTextNode(file.name));
 
 		this.progressBar = document.createElement("div");
-		this.progressBar.className = "progressBarInProgress";
+		this.progressBar.className = "progressBar progressBarInProgress";
 
 		this.progressStatus = document.createElement("span");
 		this.progressStatus.className = "progressBarStatus";
 		this.progressStatus.innerHTML = "&nbsp;";
 
 		this.fileProgressElement.appendChild(this.progressCancel);
-		//this.fileProgressElement.appendChild(this.progressText);
-		//this.fileProgressElement.appendChild(this.progressStatus);
+		this.fileProgressElement.appendChild(this.progressText);
+		this.fileProgressElement.appendChild(this.progressStatus);
 		this.fileProgressElement.appendChild(this.progressBar);
-
+                
 		this.fileProgressWrapper.appendChild(this.fileProgressElement);
-		this.fileProgressWrapper.appendChild(this.progressStatus);
-		this.fileProgressWrapper.appendChild(this.progressText);
+                //this.fileProgressWrapper.appendChild(this.progressBar);
+		//this.fileProgressWrapper.appendChild(this.progressStatus);
+		//this.fileProgressWrapper.appendChild(this.progressText);
 
 		document.getElementById(targetID).appendChild(this.fileProgressWrapper);
 	} else {
 		this.fileProgressElement = $('.progressContainer', this.fileProgressWrapper)[0];
 		this.progressCancel = $('.progressCancel', this.fileProgressWrapper)[0];
 		this.progressText = $('.progressName', this.fileProgressWrapper)[0];
-		this.progressBar = $('.progressBarInProgress', this.fileProgressWrapper)[0];
+		this.progressBar = $('.progressBar', this.fileProgressWrapper)[0];
 		this.progressStatus = $('.progressBarStatus', this.fileProgressWrapper)[0];
 		this.reset();
 	}
@@ -89,7 +91,7 @@ FileProgress.prototype.reset = function () {
 	this.progressStatus.innerHTML = "&nbsp;";
 	this.progressStatus.className = "progressBarStatus";
 	
-	this.progressBar.className = "progressBarInProgress";
+	this.progressBar.className = "progressBar progressBarInProgress";
 	this.progressBar.style.width = "0%";
 	
 	this.appear();	
@@ -97,28 +99,28 @@ FileProgress.prototype.reset = function () {
 
 FileProgress.prototype.setProgress = function (percentage) {
 	this.fileProgressElement.className = "progressContainer green";
-	this.progressBar.className = "progressBarInProgress";
+	this.progressBar.className = "progressBar progressBarInProgress";
 	this.progressBar.style.width = percentage + "%";
 
 	this.appear();	
 };
 FileProgress.prototype.setComplete = function () {
 	this.fileProgressElement.className = "progressContainer blue";
-	this.progressBar.className = "progressBarComplete";
+	this.progressBar.className = "progressBar progressBarComplete";
 	this.progressBar.style.width = "";
 
 	var oSelf = this;
 };
 FileProgress.prototype.setError = function () {
 	this.fileProgressElement.className = "progressContainer red";
-	this.progressBar.className = "progressBarError";
+	this.progressBar.className = "progressBar progressBarError";
 	this.progressBar.style.width = "";
 
 	var oSelf = this;
 };
 FileProgress.prototype.setCancelled = function () {
 	this.fileProgressElement.className = "progressContainer";
-	this.progressBar.className = "progressBarError";
+	this.progressBar.className = "progressBar progressBarError";
 	this.progressBar.style.width = "";
 
 	var oSelf = this;
